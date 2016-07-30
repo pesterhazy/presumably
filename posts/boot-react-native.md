@@ -115,6 +115,57 @@ siutation in the future.
 
 # Starting the app
 
+To start the app, you'll generally need to perform two steps:
+
+- start the ClojureScript compiler dev environment
+- start the app in the simulator
+
+Starting the ClojureScript environment is easy:
+
+```
+$ cd example
+$ boot dev
+Starting reload server on ws://localhost:8079
+Writing boot_reload.cljs...
+Writing boot_cljs_repl.cljs...
+cljs: unknown option(s): :main
+
+Starting file watcher (CTRL-C to quit)...
+
+Adding :require adzerk.boot-reload to dist.cljs.edn...
+Writing cljs-template to shim_browser_repl_bootstrap.cljs...
+Found edn files -  (#boot.tmpdir.TmpFile{:dir #object[java.io.File 0x37ea8fb0 /Users/pe/.boot/cache/tmp/Users/pe/fy/boot-react-native/example/10ie/f0sqpx], :bdir #object[java.io.File 0x30a4aebf /Users/pe/.boot/cache/tmp/Users/pe/fy/boot-react-native/example/10ie/-7kd6cy], :path dist.cljs.edn, :id cf1af63da345e0a558455fc6de495f46.1469880821000, :hash cf1af63da345e0a558455fc6de495f46, :time 1469880821000})
+Adding :require mattsum.boot-react-native.shim-browser-repl-bootstrap to dist.cljs.edn...
+Writing cljs-template to shim_boot_reload.cljs...
+Found edn files -  (#boot.tmpdir.TmpFile{:dir #object[java.io.File 0x37ea8fb0 /Users/pe/.boot/cache/tmp/Users/pe/fy/boot-react-native/example/10ie/f0sqpx], :bdir #object[java.io.File 0x30a4aebf /Users/pe/.boot/cache/tmp/Users/pe/fy/boot-react-native/example/10ie/-7kd6cy], :path dist.cljs.edn, :id 9085f304b56696c493776ef586672b32.1469880821000, :hash 9085f304b56696c493776ef586672b32, :time 1469880821000})
+Adding :require mattsum.boot-react-native.shim-boot-reload to dist.cljs.edn...
+Writing cljs-template to shim_repl_print.cljs...
+Found edn files -  (#boot.tmpdir.TmpFile{:dir #object[java.io.File 0x37ea8fb0 /Users/pe/.boot/cache/tmp/Users/pe/fy/boot-react-native/example/10ie/f0sqpx], :bdir #object[java.io.File 0x30a4aebf /Users/pe/.boot/cache/tmp/Users/pe/fy/boot-react-native/example/10ie/-7kd6cy], :path dist.cljs.edn, :id fefe467f1dd7d7123e7008c6446d3b3f.1469880821000, :hash fefe467f1dd7d7123e7008c6446d3b3f, :time 1469880821000})
+Adding :require mattsum.boot-react-native.shim-repl-print to dist.cljs.edn...
+nREPL server started on port 61171 on host 127.0.0.1 - nrepl://127.0.0.1:61171
+Adding :require adzerk.boot-cljs-repl to dist.cljs.edn...
+Writing main.cljs.edn...
+Compiling ClojureScript...
+• main.js
+Reading resource -  mattsum/boot_rn/js/goog_base.js
+Modifying  main.out/goog/base.js  using  #function[mattsum.impl.boot-helpers/append-to-file/fn--1793]
+Reading resource -  mattsum/boot_rn/js/goog_base_prepend.js
+Modifying  main.out/goog/base.js  using  #function[mattsum.impl.boot-helpers/prepend-to-file/fn--1797]
+Reading resource -  mattsum/boot_rn/js/reloading.js
+Modifying  main.out/goog/net/jsloader.js  using  #function[mattsum.impl.boot-helpers/append-to-file/fn--1793]
+Compiling {cljs-deps}... 4 changed files
+Adding /Users/pe/.boot/cache/tmp/Users/pe/fy/boot-react-native/example/10ie/-iiq3az to fileset
+Writing target dir(s)...
+2016-07-30 14:14:26.914 java[47318:680482] 14:14:26.914 WARNING:  140: This application, or a library it uses, is using the deprecated Carbon Component Manager for hosting Audio Units. Support for this will be removed in a future release. Also, this makes the host incompatible with version 3 audio units. Please transition to the API's in AudioComponent.h.
+Elapsed time: 46.486 sec
+```
+
+Once you see the `Writing target dir` message (and hear the *bing* sound), the
+ClojureScript code is compiled and the resulting JavaScript in a format that the
+React Native packager will understand.
+
+*TODO*: `react-native run-ios`
+*TODO*: `react-native ios-log`
 
 # Further reading
 
