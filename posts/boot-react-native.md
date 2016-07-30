@@ -25,11 +25,95 @@ setup running.
 As CLJSRN is built on React Native, the first step is to set up the React Native
 development environment:
 
+* Install `npm`
 * Install `react-native-cli`
 
-* Install the tools required
+You'll also need a development setup specific to the platform you want to target
 
-* Set up a simulator
+For iOS:
+
+* XCode
+
+For Android:
+
+* Android dev set up
+* Genymotion device emulator
+
+All of these steps are explained in the React Native documentation.
+
+To work with cljsrn, you'll need to install Java and Boot.
+
+Next install Boot React Native:
+
+```
+git clone https://github.com/mjmeintjes/boot-react-native.git
+cd boot-react-native
+boot inst
+```
+
+This installs latest `master` into your local maven repository.
+
+Boot React Native also comes with an example application called, logically
+enough, *SimpleExampleApp*. The app has the following basic structure:
+
+```
+ example
+├── app
+│   ├── android
+│   │   └── ... android-specific files
+│   ├── build
+│   │   └── ... build output
+│   ├── index.android.js
+│   ├── index.ios.js
+│   ├── init.js
+│   ├── ios
+│   │   └── ... iOS-specific files
+│   ├── node_modules
+│   │   └── ... react native dependencies
+│   └── package.json
+├── build.boot
+├── node_modules
+├── resources
+│   ├── dist.cljs.edn
+│   ├── externs.js
+│   ├── react.ext.js
+│   └── react.native.ext.js
+├── rn-goog-require.patch
+└── src
+    └── mattsum
+        └── simple_example/core.cljs
+```
+
+The `example/` directory includes all files relating to the ClojureScript
+project. The subdirectory `app/` contains the React Native portion of the
+infrastructure required. Again, the `ios/` and `android/` subfolders contain the
+ObjectiveC and Java code that forms the "native" shell around the React Native
+application. Hopefully you'll only need to interact with these native parts in
+rare situations, so you can focus your attention on the ClojureScript-based
+application code.
+
+Next, let's set up *SimpleExampleApp*.
+
+```
+$ cd example/app
+$ npm install
+```
+
+This installs `react-native 0.30.0` and all its dependencies. Unfortunately,
+currently Boot React Native requires a small patch to enable its live-reloading
+functionality. To apply this patch to *SimpleExampleApp*, type:
+
+```
+$ cd example
+$ patch -d app/node_modules/react-native -p1 < rn-goog-require.patch
+patching file packager/react-packager/src/JSTransformer/worker/extract-dependencies.js
+```
+
+You'll need to repeat this step every time you re-install react-native. This
+step is a bit annoying, but will hopefully be replaced by a more automatic
+siutation in the future.
+
+# Starting the app
 
 
 # Further reading
