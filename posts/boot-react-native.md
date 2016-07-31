@@ -34,7 +34,7 @@ specific to the platform you want to target.
 
 For iOS:
 
-* XCode (yes, this will only work on OS X, and yes, you'll need to install the
+* XCode, through the App Store (yes, this will only work on OS X, and yes, you'll need to install the
   whole package, IDE and all).
 
 For Android:
@@ -221,8 +221,6 @@ That's it for iOS. Thanks to the hard work of the React Native team, the process
 You can even have both Android and iOS versions of your RN app running side by
 side, with updates to your code injected in parallel to both systems in less
 than 10 seconds. How's that for a short feedback loop?
-
-TODO: screenshot
 
 # Troubleshooting
 
