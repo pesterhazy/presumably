@@ -1,4 +1,6 @@
-# Boot React Native, Part 1: up and running
+# Getting started with Boot React Native (part 1)
+
+**Part 1: up and running**
 
 Mobile applications are ClojureScript's next frontier. As a compile-to-javascript
 language, ClojureScript can run on mobile devices, targetting Facebook's
@@ -16,9 +18,10 @@ is that most of the parts of the [CLJSRN](http://cljsrn.org/) puzzle exist and w
 building apps for iOS and Android with an interactive reloading bridge brings with it
 significant tooling challenges.
 
-Boot React Native is a tool that intends to make building React Native
+[Boot React Native](https://github.com/mjmeintjes/boot-react-native) is a tool that intends to make building React Native
 applications with ClojureScript as seemless as possible. In this post, I will
-explain how to get a basic CLJSRN setup running.
+explain how Boot React Native works and how to use it to get a basic CLJSRN
+setup running.
 
 # First steps
 
