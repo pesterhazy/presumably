@@ -1,26 +1,16 @@
-# Getting started with Boot React Native
-
-Part 1: up and running
+# Getting started with Boot React Native part 1: up and running
 
 ```
 TODO:
 
 Add links
 
-All of these steps are explained in the React Native documentation. < link would be great
-
 You talk a lot about interactive dev in the intro, but you don't really demo it later on (yet?). Are you going to give a simple example now and do another post on its benefits, caveats or applications? Might be good to tease a part two there.
-
-Maybe reference the clojurians chat below troubleshooting?
-
-Installing boot is missing, this is for clojure ppl only?
-
-Add twitter link
 ```
 
 Mobile applications are ClojureScript's next frontier. As a compile-to-javascript
 language, ClojureScript can run on mobile devices, targetting Facebook's
-wonderful React Native framework. The combination is powerful: React Native is
+wonderful React Native framework. The combination is powerful: [React Native](https://facebook.github.io/react-native/) is
 comprehensive and performant, and ClojureScript adds better means of abstraction and
 great suport for interactive development.
 
@@ -41,12 +31,14 @@ explain how to get a basic CLJSRN setup running.
 # First steps
 
 As CLJSRN is built on React Native, the first step is to set up the React Native
-development environment:
+development environment. The process is explained in detail in the [RN
+documentation](https://facebook.github.io/react-native/docs/getting-started.html).
 
-* Install `npm`
-* Install `react-native-cli`
+Make sure to install the react-native CLI tool globally using npm as explained
+in the guide, as we will make extensive use of it below.
 
-You'll also need a development setup specific to the platform you want to target
+In addition to the npm dependencies, you will also need a development setup
+specific to the platform you want to target.
 
 For iOS:
 
@@ -58,12 +50,12 @@ For Android:
 * Android dev set up
 * Genymotion device emulator
 
-All of these steps are explained in the React Native documentation.
+Again refer to the [Getting Started page](https://facebook.github.io/react-native/docs/getting-started.html) for the details of your platform.
 
-Additionally, to work with CLJSRN you'll need to install Java and Boot.
-
-Having installed the base dependencies, get the latest version of Boot React
-Native:
+Next, to work with Boot React Native you will need to
+install [Java](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+and [Boot](https://github.com/boot-clj/boot). Having installed the base
+dependencies, get the latest version of Boot React Native:
 
 ```
 git clone https://github.com/mjmeintjes/boot-react-native.git
@@ -71,10 +63,12 @@ cd boot-react-native
 boot inst
 ```
 
-This installs latest `master` into your local maven repository. Make sure you're using the **latest snapshot of Boot React Native** (as of this writing, `0.3-SNAPSHOT`).
+This installs the project's latest `master` version into your local maven repository. Make sure you're using the **latest snapshot of Boot React Native** (as of this writing, `0.3-SNAPSHOT`).
 
 Boot React Native also comes with an example application called, logically
-enough, *SimpleExampleApp*. The app has the following basic structure:
+enough, *SimpleExampleApp*. *SimpleExampleApp* currently is the best starting
+point for starting a project, as it exemplifies the best practices and a
+working project structure. The app has the following basic structure:
 
 ```
 example
@@ -130,15 +124,15 @@ patching file packager/react-packager/src/JSTransformer/worker/extract-dependenc
 ```
 
 You'll need to repeat this step every time you re-install react-native. This
-step is a bit annoying, but will hopefully be replaced by a more automatic
-siutation in the future.
+manual step is a bit annoying, but will hopefully be replaced by a more automatic
+solution in the future.
 
 # Starting the app
 
 To start the app, you'll generally need to perform two steps:
 
 - start the ClojureScript compiler dev environment
-- start the app in the simulator
+- start the app in the simulator along with the RN packager
 
 Starting the ClojureScript environment is easy:
 
@@ -180,7 +174,7 @@ Writing target dir(s)...
 Elapsed time: 46.486 sec
 ```
 
-Once you see the `Writing target dir` message (and hear the *bing* sound), the
+Once you see the `Writing target dir` message (and hear a reassuring *bing* sound), the
 ClojureScript code has been compiled to a JavaScript format that the
 React Native packager will understand.
 
@@ -192,8 +186,7 @@ ininitializes the JavaScript environment and integrates it in the operating syst
 
 In earlier versions, building and running the app on iOS used to involve opening
 *XCode* and clicking the "Run" button. Fortunately, the good folks from the
-React Native project have automated away this manual step. In newer versions,
-you run
+React Native team have automated this step. In newer versions, you run
 
 ```
 cd example/app; react-native run-ios
@@ -261,10 +254,12 @@ Hopefully everything went well. But what if it didn't? Here are a few pointers:
 3. Check out the [troubleshooting guide](https://github.com/mjmeintjes/boot-react-native/wiki/Troubleshooting)
    for common problems with the dev setup.
 
-4. Check the [issues](https://github.com/mjmeintjes/boot-react-native/issues).
+4. Check the [React Native troubleshooting page](https://facebook.github.io/react-native/docs/troubleshooting.html#content).
+
+5. Check the [github issues](https://github.com/mjmeintjes/boot-react-native/issues).
    Don't hesitate to create an issue if you can't find your problem!
 
-5. Join the `#cljsrn` channel in the [Clojurians slack](http://clojurians.net/).
+6. Join the `#cljsrn` channel in the [Clojurians slack](http://clojurians.net/).
    We're friendly and happy to help.
 
 # Summary
