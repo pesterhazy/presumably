@@ -1,13 +1,5 @@
 # Getting started with Boot React Native part 1: up and running
 
-```
-TODO:
-
-Add links
-
-You talk a lot about interactive dev in the intro, but you don't really demo it later on (yet?). Are you going to give a simple example now and do another post on its benefits, caveats or applications? Might be good to tease a part two there.
-```
-
 Mobile applications are ClojureScript's next frontier. As a compile-to-javascript
 language, ClojureScript can run on mobile devices, targetting Facebook's
 wonderful React Native framework. The combination is powerful: [React Native](https://facebook.github.io/react-native/) is
@@ -123,9 +115,9 @@ $ patch -d app/node_modules/react-native -p1 < rn-goog-require.patch
 patching file packager/react-packager/src/JSTransformer/worker/extract-dependencies.js
 ```
 
-You'll need to repeat this step every time you re-install react-native. This
-manual step is a bit annoying, but will hopefully be replaced by a more automatic
-solution in the future.
+You'll need to repeat this step every time you re-install the react-native npm
+module. This manual step is a bit annoying, but will hopefully be replaced by a
+more automatic solution in the future.
 
 # Starting the app
 
@@ -196,7 +188,7 @@ This builds the ObjectiveC code into a native app bundle, opens a simulator,
 installs it in the simulator and launches the bundle in the simulator. If all
 goes well, you should see SimpleExampleApp in the simulator window. If not, please see the Troubleshooting section below.
 
-*TODO*: screenshot
+![iOS simulator](ios-sim.png)
 
 As the app starts, you'll notice another terminal window popping up. This is
 the React Native packager, a tool that works similarly to the more well-known
@@ -265,7 +257,7 @@ Hopefully everything went well. But what if it didn't? Here are a few pointers:
 # Summary
 
 This guide is the first part of a series of posts on Boot React Native. In the
-next installation, you'll learn more about building mobile apps using Reagent
-and React Native. Stay tuned!
+next installation, you'll learn more about building mobile apps interactively
+using Reagent and React Native. Stay tuned!
 
 And say hello on twitter: [@pesterhazy](https://twitter.com/pesterhazy).
