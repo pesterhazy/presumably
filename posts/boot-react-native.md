@@ -1,5 +1,17 @@
 # Getting your feet wet with boot-react-native
 
+```
+TODO:
+
+All of these steps are explained in the React Native documentation. < link would be great
+
+You talk a lot about interactive dev in the intro, but you don't really demo it later on (yet?). Are you going to give a simple example now and do another post on its benefits, caveats or applications? Might be good to tease a part two there.
+
+Maybe reference the clojurians chat below troubleshooting?
+
+Installing boot is missing, this is for clojure ppl only?
+```
+
 Mobile applications is ClojureScript's next frontier. As a compile-to-javascript
 language, ClojureScript can run on mobile devices, targetting Facebook's
 wonderful React Native framework. The combination is powerful: React Native is
@@ -57,7 +69,7 @@ Boot React Native also comes with an example application called, logically
 enough, *SimpleExampleApp*. The app has the following basic structure:
 
 ```
- example
+example
 ├── app
 │   ├── android
 │   │   └── ... android-specific files
@@ -161,8 +173,36 @@ Elapsed time: 46.486 sec
 ```
 
 Once you see the `Writing target dir` message (and hear the *bing* sound), the
-ClojureScript code is compiled and the resulting JavaScript in a format that the
+ClojureScript code has been compiled to a JavaScript format that the
 React Native packager will understand.
+
+# Opening the app
+
+Once the Boot task is running, all we need to to is to start the native app in a
+simulator. A React Native app has a small shell of custom native code that
+ininitializes the JavaScript environment and integrates it in the operating system.
+
+In earlier versions, building and running the app on iOS used to involve opening
+*XCode* and clicking the "Run" button. Fortunately, the good folks from the
+React Native project have automated away this manual step. In newer versions,
+you run
+
+```
+cd example/app; react-native run-ios
+```
+
+This builds the ObjectiveC code into a native app bundle, opens a simulator,
+installs it in the simulator and launches the bundle in the simulator. If all
+goes well, you should see SimpleExampleApp in the simulator window. If not, please see the Troubleshooting section below.
+
+*TODO*: screenshot
+
+As the app starts, you'll notice that another terminal window pops up. This is
+the React Native packager, a tool that works similarly to the more well-known
+Browserify or webpack bundler. Used with Boot React Native, the packager reads
+all the cljs-generated javascript files, scans them recursively for dependencies
+and produces a single bundled javascript file, not unlike traditional web applications. It also acts as a webserver and serves the bundle under the url http://localhost:8081/index.ios.bundle?platform=ios&dev=true&hot=false. The native app retrieves and executes this bundle.
+
 
 *TODO*: `react-native run-ios`
 *TODO*: `react-native ios-log`
