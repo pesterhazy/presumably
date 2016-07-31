@@ -1,7 +1,11 @@
-# Getting your feet wet with boot-react-native
+# Getting started with Boot React Native
+
+Part 1: up and running
 
 ```
 TODO:
+
+Add links
 
 All of these steps are explained in the React Native documentation. < link would be great
 
@@ -65,7 +69,7 @@ cd boot-react-native
 boot inst
 ```
 
-This installs latest `master` into your local maven repository.
+This installs latest `master` into your local maven repository. Make sure you're using the **latest snapshot of Boot React Native** (as of this writing, `0.3-SNAPSHOT`).
 
 Boot React Native also comes with an example application called, logically
 enough, *SimpleExampleApp*. The app has the following basic structure:
@@ -231,13 +235,38 @@ You can even have both Android and iOS versions of your RN app running side by
 side, with updates to your code injected in parallel to both systems in less
 than 10 seconds. How's that for a short feedback loop?
 
+TODO: screenshot
+
 # Troubleshooting
 
-, it is important to see what's going on in the app.
+Hopefully everything went well. But what if it didn't? Here are a few pointers:
 
-*TODO*: `react-native ios-log`
+1. The first place to check is the app log. With the simulator running, type:
 
-# Further reading
+   ```cd example/app; react-native ios-log```
 
-Please check out boot-react-native. If you run into issues, check out the
-[troubleshooting guide](https://github.com/mjmeintjes/boot-react-native/wiki/Troubleshooting).
+   or
+
+   ```cd example/app; react-native android-log```
+
+   Often the app logs will give a useful hint as to what went wrong.
+
+2. If the app cannot find the bundle, this may be because the packager hasn't
+   finished processing the javascript yet. You can see the progress in the white
+   terminal window that pops up when you call `run-ios`/`run-android`. Try
+   reloading the app after you see the red screen.
+
+3. Check out the [troubleshooting guide](https://github.com/mjmeintjes/boot-react-native/wiki/Troubleshooting)
+   for common problems with the dev setup.
+
+4. Check the [issues](https://github.com/mjmeintjes/boot-react-native/issues).
+   Don't hesitate to create an issue if you can't find your problem!
+
+5. Join the `#cljsrn` channel in the [Clojurians slack](http://clojurians.net/).
+   We're friendly and happy to help.
+
+# Summary
+
+This guide is the first part of a series of posts on Boot React Native. In the
+next installation, you'll learn more about building mobile apps using Reagent
+and React Native. Stay tuned!
