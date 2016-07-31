@@ -195,9 +195,10 @@ goes well, you should see SimpleExampleApp in the simulator window. If not, plea
 
 As the app starts, you'll notice another terminal window popping up. This is
 the React Native packager, a tool that works similarly to the more well-known
-Browserify or webpack bundler. Used with Boot React Native, the packager reads
+browserify or webpack module bundling tools. Used with Boot React Native, the packager reads
 all the cljs-generated javascript files, scans them recursively for dependencies
-and produces a single bundled javascript file, not unlike traditional web applications. It also acts as a webserver and serves the bundle under the url http://localhost:8081/index.ios.bundle?platform=ios&dev=true&hot=false.
+and produces a single bundled javascript file, not unlike what happens in single-page web applications.
+The packager also acts as a webserver and serves the bundle under the url `http://localhost:8081/index.ios.bundle?platform=ios&dev=true&hot=false`.
 
 ![React Native packager](packager.png)
 
