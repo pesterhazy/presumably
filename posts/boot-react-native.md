@@ -1,4 +1,4 @@
-# Getting started with Boot React Native (part 1)
+# Getting started with Boot React Native, Part 1
 
 **Part 1: up and running**
 
@@ -192,7 +192,7 @@ This builds the ObjectiveC code into a native app bundle, opens a simulator,
 installs it in the simulator and launches the bundle in the simulator. If all
 goes well, you should see SimpleExampleApp in the simulator window. If not, please see the Troubleshooting section below.
 
-![iOS simulator](ios-sim.png)
+![iOS simulator](media/ios-sim.png)
 
 As the app starts, you'll notice another terminal window popping up. This is
 the React Native packager, a tool that works similarly to the more well-known
@@ -201,7 +201,7 @@ all the cljs-generated javascript files, scans them recursively for dependencies
 and produces a single bundled javascript file, not unlike what happens in single-page web applications.
 The packager also acts as a webserver and serves the bundle under the url `http://localhost:8081/index.ios.bundle?platform=ios&dev=true&hot=false`.
 
-![React Native packager](packager.png)
+![React Native packager](media/packager.png)
 
 At startup, or when reloading, the native app retrieves and executes the bundle.
 As generating the bundle is computationally expensive, the packager can be a bit
