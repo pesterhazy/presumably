@@ -1,12 +1,10 @@
 ---
-name: Getting started with Boot React Native, Part 1
+title: "Getting started with Boot React Native (1)"
+subtitle: "Part 1: up and running"
 author: Paulus
 # date-published: 2016-07-31
 ---
 
-# Getting started with Boot React Native, Part 1
-
-**Part 1: up and running**
 
 Mobile applications are ClojureScript's next frontier. As a compile-to-javascript
 language, ClojureScript can run on mobile devices, targetting Facebook's
@@ -29,7 +27,7 @@ applications with ClojureScript as seemless as possible. In this post, I will
 explain how Boot React Native works and how to use it to get a basic CLJSRN
 setup running.
 
-## First steps
+### First steps
 
 As CLJSRN is built on React Native, the first step is to set up the React Native
 development environment. The process is explained in detail in the [RN
@@ -128,7 +126,7 @@ You'll need to repeat this step every time you re-install the react-native npm
 module. This manual step is a bit annoying, but will hopefully be replaced by a
 more automatic solution in the future.
 
-## Starting the app
+### Starting the app
 
 To start the app, you'll generally need to perform two steps:
 
@@ -179,7 +177,7 @@ Once you see the `Writing target dir` message (and hear a reassuring *bing* soun
 ClojureScript code has been compiled to a JavaScript format that the
 React Native packager will understand.
 
-## Running SimpleExampleApp
+### Running SimpleExampleApp
 
 Once the Boot task is running, all we need to to is to start the native app in a
 simulator. A React Native app contains a small wrapper of custom native code that
@@ -235,7 +233,7 @@ You can even have both Android and iOS versions of your RN app running side by
 side, with updates to your code injected in parallel to both systems in less
 than 10 seconds. How's that for a short feedback loop?
 
-## Troubleshooting
+### Troubleshooting
 
 Hopefully everything went well. But what if it didn't? Here are a few pointers:
 
@@ -265,7 +263,7 @@ Hopefully everything went well. But what if it didn't? Here are a few pointers:
 6. Join the `#cljsrn` channel in the [Clojurians slack](http://clojurians.net/).
    We're friendly and happy to help.
 
-## Summary
+### Summary
 
 This guide is the first part of a series of posts on Boot React Native. In the
 next installation, you'll learn more about building mobile apps interactively
