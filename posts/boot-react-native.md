@@ -1,6 +1,4 @@
-# Getting started with Boot React Native part 1: up and running
-
-TODO: add note about
+# Boot React Native, Part 1: up and running
 
 Mobile applications are ClojureScript's next frontier. As a compile-to-javascript
 language, ClojureScript can run on mobile devices, targetting Facebook's
