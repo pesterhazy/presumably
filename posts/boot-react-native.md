@@ -14,27 +14,29 @@ You talk a lot about interactive dev in the intro, but you don't really demo it 
 Maybe reference the clojurians chat below troubleshooting?
 
 Installing boot is missing, this is for clojure ppl only?
+
+Add twitter link
 ```
 
-Mobile applications is ClojureScript's next frontier. As a compile-to-javascript
+Mobile applications are ClojureScript's next frontier. As a compile-to-javascript
 language, ClojureScript can run on mobile devices, targetting Facebook's
 wonderful React Native framework. The combination is powerful: React Native is
-comprehensive and performant, and ClojureScript adds a powerful abstractions and
+comprehensive and performant, and ClojureScript adds better means of abstraction and
 great suport for interactive development.
 
 This last point cannot be stressed enough. Sophisticated UIs, as required in
 mobile applications, are best built interactively, with a short feedback cycle.
-As a LISP, ClojureScript is in a great position to make programmers creative and
+As a LISP, ClojureScript is in a great position to make programmers more creative and
 productive for app development.
 
-So can we build React Native apps in ClojureScript today? The good news
-is that most of the parts of the CLJSRN puzzle exist and work well. The bad news:
-building apps for iOS and Android with interactive reloading brings with it
+So can we build React Native apps with ClojureScript today? The good news
+is that most of the parts of the [CLJSRN](http://cljsrn.org/) puzzle exist and work well. The bad news:
+building apps for iOS and Android with an interactive reloading bridge brings with it
 significant tooling challenges.
 
-Boot React Native is a tool that intends to make it easy for
-developers to get started. In this post, I will explain how to get a basic CLJSRN
-setup running.
+Boot React Native is a tool that intends to make building React Native
+applications with ClojureScript as seemless as possible. In this post, I will
+explain how to get a basic CLJSRN setup running.
 
 # First steps
 
@@ -58,7 +60,7 @@ For Android:
 
 All of these steps are explained in the React Native documentation.
 
-Additionally, to work with cljsrn you'll need to install Java and Boot.
+Additionally, to work with CLJSRN you'll need to install Java and Boot.
 
 Having installed the base dependencies, get the latest version of Boot React
 Native:
@@ -270,3 +272,5 @@ Hopefully everything went well. But what if it didn't? Here are a few pointers:
 This guide is the first part of a series of posts on Boot React Native. In the
 next installation, you'll learn more about building mobile apps using Reagent
 and React Native. Stay tuned!
+
+And say hello on twitter: [@pesterhazy](https://twitter.com/pesterhazy).
