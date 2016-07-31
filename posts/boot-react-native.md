@@ -29,7 +29,7 @@ building apps for iOS and Android with interactive reloading brings with it
 significant tooling challenges.
 
 Boot React Native is a tool that intends to make it easy for
-developers to get started. In this post, I'll explain how to get a basic CLJSRN
+developers to get started. In this post, I will explain how to get a basic CLJSRN
 setup running.
 
 # First steps
@@ -44,7 +44,8 @@ You'll also need a development setup specific to the platform you want to target
 
 For iOS:
 
-* XCode
+* XCode (yes, this will only work on OS X, and yes, you'll need to install the
+  whole package, IDE and all).
 
 For Android:
 
@@ -53,9 +54,10 @@ For Android:
 
 All of these steps are explained in the React Native documentation.
 
-To work with cljsrn, you'll need to install Java and Boot.
+Additionally, to work with cljsrn you'll need to install Java and Boot.
 
-Next install Boot React Native:
+Having installed the base dependencies, get the latest version of Boot React
+Native:
 
 ```
 git clone https://github.com/mjmeintjes/boot-react-native.git
@@ -176,7 +178,7 @@ Once you see the `Writing target dir` message (and hear the *bing* sound), the
 ClojureScript code has been compiled to a JavaScript format that the
 React Native packager will understand.
 
-# Opening the app
+# Running SimpleExampleApp
 
 Once the Boot task is running, all we need to to is to start the native app in a
 simulator. A React Native app has a small shell of custom native code that
@@ -197,14 +199,42 @@ goes well, you should see SimpleExampleApp in the simulator window. If not, plea
 
 *TODO*: screenshot
 
-As the app starts, you'll notice that another terminal window pops up. This is
+As the app starts, you'll notice another terminal window popping up. This is
 the React Native packager, a tool that works similarly to the more well-known
 Browserify or webpack bundler. Used with Boot React Native, the packager reads
 all the cljs-generated javascript files, scans them recursively for dependencies
-and produces a single bundled javascript file, not unlike traditional web applications. It also acts as a webserver and serves the bundle under the url http://localhost:8081/index.ios.bundle?platform=ios&dev=true&hot=false. The native app retrieves and executes this bundle.
+and produces a single bundled javascript file, not unlike traditional web applications. It also acts as a webserver and serves the bundle under the url http://localhost:8081/index.ios.bundle?platform=ios&dev=true&hot=false.
 
+At startup, or when reloading, the native app retrieves and executes the bundle.
+As generating the bundle is computationally expensive, the packager can be a bit
+slow. With ClojureScript builds, the initial bundling step can take up to 70
+seconds. Unfortunately, this can be longer than the app's timeout, so if the app
+reports that the bundle could not be retrieved, reload the app to give the
+packager a bit more time. The good news is that the packager caches files it has
+already compiled, so that subsequent reloads should be much faster, usually
+completing in less than 10 s.
 
-*TODO*: `react-native run-ios`
+Hopefully you should see the app now and can interact with it by clicking on the
+button. More excitingly, you can change
+`example/src/mattsum/simple_example/core.cljs`
+(try altering the "welcome" string). After saving, the ClojureScript compiler
+will kick in. This will cause a reload event in the app to be triggered and the
+string to be updated in real time. As you can see, the app's state is kept
+intact during reloads, while the app's behavior is updated - a powerful feature for interactive development.
+
+That's it for iOS. Thanks to the hard work of the React Native team, the process is similar for Android:
+
+* Start the Genymotion emulator
+* `cd example/app; rnative run-android`
+
+You can even have both Android and iOS versions of your RN app running side by
+side, with updates to your code injected in parallel to both systems in less
+than 10 seconds. How's that for a short feedback loop?
+
+# Troubleshooting
+
+, it is important to see what's going on in the app.
+
 *TODO*: `react-native ios-log`
 
 # Further reading
