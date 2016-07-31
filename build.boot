@@ -12,6 +12,7 @@
 (deftask dev
   []
   (comp (serve :resource-root "public")
+        (repl :server true)
         (watch)
         (markdown)
         (render :renderer 'site.core/page)))

@@ -3,5 +3,10 @@
 
 (defn page [data]
   (hp/html5
-   [:div {:style "max-width: 900px; margin: 40px auto;"}
-    (-> data :entry :content)]))
+   [:head
+    (hp/include-css "/vendor/basscss@8.0.1.min.css")
+    (hp/include-css "/css/style.css")]
+   [:body
+    [:div.max-width-3.mx-auto
+     [:div.clearfix
+      (-> data :entry :content)]]]))
