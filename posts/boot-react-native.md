@@ -1,5 +1,7 @@
 # Getting started with Boot React Native part 1: up and running
 
+TODO: add note about
+
 Mobile applications are ClojureScript's next frontier. As a compile-to-javascript
 language, ClojureScript can run on mobile devices, targetting Facebook's
 wonderful React Native framework. The combination is powerful: [React Native](https://facebook.github.io/react-native/) is
@@ -40,7 +42,7 @@ For iOS:
 For Android:
 
 * Android dev set up
-* Genymotion device emulator
+* Genymotion device emulator (free for personal use)
 
 Again refer to the [Getting Started page](https://facebook.github.io/react-native/docs/getting-started.html) for the details of your platform.
 
@@ -173,12 +175,13 @@ React Native packager will understand.
 # Running SimpleExampleApp
 
 Once the Boot task is running, all we need to to is to start the native app in a
-simulator. A React Native app has a small shell of custom native code that
+simulator. A React Native app contains a small wrapper of custom native code that
 ininitializes the JavaScript environment and integrates it in the operating system.
 
-In earlier versions, building and running the app on iOS used to involve opening
-*XCode* and clicking the "Run" button. Fortunately, the good folks from the
-React Native team have automated this step. In newer versions, you run
+In earlier versions, building and running an app on iOS involved opening *XCode*
+and clicking the "Run" button. Fortunately, the good people of the React Native
+team have automated this step so that everything can be triggered from the
+command line. Starting with Boot React Native 0.3, you can simply run:
 
 ```
 cd example/app; react-native run-ios
@@ -195,6 +198,8 @@ the React Native packager, a tool that works similarly to the more well-known
 Browserify or webpack bundler. Used with Boot React Native, the packager reads
 all the cljs-generated javascript files, scans them recursively for dependencies
 and produces a single bundled javascript file, not unlike traditional web applications. It also acts as a webserver and serves the bundle under the url http://localhost:8081/index.ios.bundle?platform=ios&dev=true&hot=false.
+
+![React Native packager](packager.png)
 
 At startup, or when reloading, the native app retrieves and executes the bundle.
 As generating the bundle is computationally expensive, the packager can be a bit
