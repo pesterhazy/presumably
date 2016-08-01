@@ -9,10 +9,18 @@
 (require '[io.perun :refer :all]
          '[pandeiro.boot-http :refer [serve]])
 
+(deftask build []
+  (comp (markdown)
+        (render :renderer 'site.core/page)))
+
+(deftask publish
+  []
+  (comp (build)
+        (target)))
+
 (deftask dev
   []
   (comp (serve :resource-root "public")
         (repl :server true)
         (watch)
-        (markdown)
-        (render :renderer 'site.core/page)))
+        (build)))
