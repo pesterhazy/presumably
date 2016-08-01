@@ -4,19 +4,33 @@
  :dependencies '[[perun "0.3.0" :scope "test"]
                  [org.clojure/clojure "1.8.0"]
                  [pandeiro/boot-http "0.7.0"]
+                 [confetti/confetti "0.1.1"]
                  [hiccup "1.0.5"]])
 
 (require '[io.perun :refer :all]
-         '[pandeiro.boot-http :refer [serve]])
+         '[pandeiro.boot-http :refer [serve]]
+         '[confetti.boot-confetti :refer [sync-bucket]])
 
 (deftask build []
   (comp (markdown)
         (render :renderer 'site.core/page)))
 
-(deftask publish
+(deftask publish-local
+  "Publish to target/"
   []
   (comp (build)
         (target)))
+
+(deftask publish
+  "Publish to S3"
+  []
+  (comp (build)
+        (sift :include #{#"^public/"})
+        (sift :move {#"^public/" ""})
+        (sync-bucket :bucket "presumably-de-sitebucket-i2nzci1gpkw3"
+                     :prune false ;; careful when setting this to true
+                     :access-key (System/getenv "AWS_ACCESS_KEY_ID")
+                     :secret-key (System/getenv "AWS_SECRET_KEY"))))
 
 (deftask dev
   []
