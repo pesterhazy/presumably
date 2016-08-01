@@ -69,33 +69,7 @@ enough, *SimpleExampleApp*. *SimpleExampleApp* currently is the best starting
 point for starting a project, as it exemplifies the best practices and a
 working project structure. The app has the following basic structure:
 
-```
-example
-├── app
-│   ├── android
-│   │   └── ... android-specific files
-│   ├── build
-│   │   └── ... build output
-│   ├── index.android.js
-│   ├── index.ios.js
-│   ├── init.js
-│   ├── ios
-│   │   └── ... iOS-specific files
-│   ├── node_modules
-│   │   └── ... react native dependencies
-│   └── package.json
-├── build.boot
-├── node_modules
-├── resources
-│   ├── dist.cljs.edn
-│   ├── externs.js
-│   ├── react.ext.js
-│   └── react.native.ext.js
-├── rn-goog-require.patch
-└── src
-    └── mattsum
-        └── simple_example/core.cljs
-```
+![tree](media/tree.png)
 
 The `example/` directory includes all files relating to the ClojureScript
 project. The subdirectory `app/` contains the React Native portion of the
