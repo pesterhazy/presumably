@@ -100,6 +100,14 @@ You'll need to repeat this step every time you re-install the react-native npm
 module. This manual step is a bit annoying, but will hopefully be replaced by a
 more automatic solution in the future.
 
+If you see
+
+```
+Reversed (or previously applied) patch detected!  Assume -R? [n]
+```
+
+then the patch has already been applied and it should work fine.
+
 ### Starting the app
 
 To start the app, you'll generally need to perform two steps:

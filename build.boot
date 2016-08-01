@@ -29,6 +29,7 @@
         (sift :move {#"^public/" ""})
         (sync-bucket :bucket "presumably-de-sitebucket-i2nzci1gpkw3"
                      :prune false ;; careful when setting this to true
+                     :cloudfront-id (or (System/getenv "CLOUDFRONT_ID") (throw (ex-info "Set CLOUDFRONT_ID env var" {})))
                      :access-key (System/getenv "AWS_ACCESS_KEY_ID")
                      :secret-key (System/getenv "AWS_SECRET_KEY"))))
 
