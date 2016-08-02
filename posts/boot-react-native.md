@@ -228,13 +228,13 @@ Hopefully everything went well. But what if it didn't? Here are a few pointers:
 
 1. The first place to check is the app log. With the simulator running, type:
 
-   ```cd example/app; react-native log-ios```
+        cd example/app; react-native log-ios
 
-   or
+    or
 
-   ```cd example/app; react-native log-android```
+        cd example/app; react-native log-android
 
-   Often the app logs will give a useful hint as to what went wrong.
+    Often the app logs will give a useful hint as to what went wrong.
 
 2. If the app cannot find the bundle, this may be because the packager hasn't
    finished processing the javascript yet. You can see the progress in the white
