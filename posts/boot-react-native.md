@@ -206,10 +206,17 @@ will kick in. This will cause a reload event in the app to be triggered and the
 string to be updated in real time. As you can see, the app's state is kept
 intact during reloads, while the app's behavior is updated - a powerful feature for interactive development.
 
+Boot React Native's reload machanism is provided by
+[Boot Reload](https://github.com/adzerk-oss/boot-reload). This is separate and
+different from the
+["Live reload" and "Hot reload" mechanisms](https://facebook.github.io/react-native/docs/debugging.html)
+that ship with React Native. For Boot Reload to work properly, these two options
+need to be disabled in the in-app dev menu.
+
 That's it for iOS. Thanks to the hard work of the React Native team, the process is similar for Android:
 
 * Start the Genymotion emulator
-* `cd example/app; rnative run-android`
+* `cd example/app; react-native run-android`
 
 You can even have both Android and iOS versions of your RN app running side by
 side, with updates to your code injected in parallel to both systems in less
