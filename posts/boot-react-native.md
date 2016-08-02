@@ -257,5 +257,3 @@ Hopefully everything went well. But what if it didn't? Here are a few pointers:
 This guide is the first part of a series of posts on Boot React Native. In the
 next installation, you'll learn more about building mobile apps interactively
 using Reagent and React Native. Stay tuned!
-
-And say hello on twitter: [@pesterhazy](https://twitter.com/pesterhazy).

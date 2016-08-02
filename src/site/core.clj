@@ -12,7 +12,8 @@
     (hp/include-css "/vendor/basscss@8.0.1.min.css")
     (hp/include-css "/vendor/highlight.css")
 
-    (hp/include-js "/vendor/highlight.js")]
+    (hp/include-js "/vendor/highlight.js")
+    [:script "hljs.initHighlightingOnLoad();"]]
    [:body
     [:div.max-width-3.mx-auto
      [:div.clearfix
@@ -20,6 +21,7 @@
         [:h1 title])
       (when subtitle
         [:h2 subtitle])
-      [:div content]]]
-
-    [:script "hljs.initHighlightingOnLoad();"]]))
+      [:div content]
+      [:hr]
+      [:p.mt2 "This is " [:i "presumably for side-effects"] ", a blog by Paulus Esterhazy about Clojure and more."]
+      [:p "Don't forget to say hello on twitter: " [:a {:href "https://twitter.com/pesterhazy"} "@pesterhazy"]]]]]))
