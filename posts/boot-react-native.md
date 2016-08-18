@@ -87,8 +87,14 @@ $ npm install
 ```
 
 This installs `react-native 0.30.0` and all its dependencies. Unfortunately,
-currently Boot React Native requires a small patch to enable its live-reloading
-functionality. To apply this patch to *SimpleExampleApp*, type:
+currently Boot React Native requires a small patch for the `react-native` module
+to enable its live-reloading functionality. This patch, `rn-goog-require.patch`,
+is automatically applied when you run `boot dev` in `example/`, and you can also
+apply it by calling `boot patch-rn`. Remember to run `npm install` first.
+
+Don't worry, you can apply this patch multiple times; it's idempotent.
+
+In case you want to apply this patch manually, type:
 
 ```
 $ cd example
