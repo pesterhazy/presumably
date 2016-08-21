@@ -2,7 +2,6 @@
 title: "Getting started with Boot React Native (1)"
 subtitle: "Part 1: up and running"
 author: Paulus
-# date-published: 2016-07-31
 ---
 
 

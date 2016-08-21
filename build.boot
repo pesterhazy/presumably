@@ -11,8 +11,10 @@
          '[pandeiro.boot-http :refer [serve]]
          '[confetti.boot-confetti :refer [sync-bucket]])
 
-(deftask build []
+(deftask build
+  [i include-drafts bool "Include drafts?"]
   (comp (markdown)
+        (if include-drafts identity (draft))
         (render :renderer 'site.core/page)))
 
 (deftask publish-local
@@ -35,6 +37,7 @@
 
 (deftask dev
   []
+  (task-options! build {:include-drafts true})
   (comp (serve :resource-root "public")
         (repl :server true)
         (watch)

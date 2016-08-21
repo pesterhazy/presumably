@@ -2,7 +2,7 @@
 title: "Getting started with Boot React Native (2)"
 subtitle: "Part 2"
 author: Paulus
-# date-published: 2016-07-31
+draft: true
 ---
 
 React Native apps in ClojureScript is fun. As I explained in part 1 of this

@@ -5,7 +5,16 @@ body {
     font-size: 1.25em;
 }
 
-h1 {
+div.header {
+    font-family: 'Josefin Sans';
+    font-size: 1.3em;
+    text-align: right;
+    margin-bottom: 3em;
+    line-height: 1.2;
+}
+
+h1,h2,h3,h4,h5 {
+    font-family: 'Josefin Sans';
     line-height: 1.2;
 }
 

@@ -11,6 +11,7 @@
     (hp/include-css "/css/style.css")
     (hp/include-css "/vendor/basscss@8.0.1.min.css")
     (hp/include-css "/vendor/highlight.css")
+    (hp/include-css "https://fonts.googleapis.com/css?family=Josefin+Sans")
 
     (hp/include-js "/vendor/highlight.js")
     [:script "hljs.initHighlightingOnLoad();"]
@@ -24,6 +25,7 @@
    [:body
     [:div.content.mx-auto
      [:div.clearfix
+      [:div.header "presumably for side effects" [:br] "a blog about clojure"]
       (when title
         [:h1 title])
       (when subtitle
