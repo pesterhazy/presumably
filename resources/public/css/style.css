@@ -5,7 +5,15 @@ body {
     font-size: 1.25em;
 }
 
+h1 {
+    line-height: 1.2;
+}
+
 .content {
     max-width: 600px;
     line-height: 1.6;
 }
+
+a { color: inherit; text-decoration: none; }
+.content a { background: yellow; }
+.content a:hover { background: none; }
