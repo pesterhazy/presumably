@@ -3,8 +3,10 @@
 
 (def default-title "Presumably for side-effects")
 
-(defn page [{{:keys [title subtitle content]} :entry
+(defn page [{{:keys [title subtitle content draft published]} :entry
              :as data}]
+  (when (and (not draft) (not published))
+    (println "WARNING: non-draft entry is lacking published key"))
   (hp/html5
    [:head
     [:title (or title default-title)]
@@ -25,12 +27,15 @@
    [:body
     [:div.content.mx-auto
      [:div.clearfix
-      [:div.header "presumably for side effects" [:br] "a blog about clojure"]
+      [:div.header "presumably for side effects" [:br] "a blog about clojure &c."]
       (when title
         [:h1 title])
       (when subtitle
         [:h2 subtitle])
+      (when published
+        [:div.date "published " published])
       [:div content]
-      [:hr]
-      [:p.mt2 "This is " [:i "presumably for side-effects"] ", a blog by Paulus Esterhazy about Clojure and more."]
-      [:p "Don't forget to say hello on twitter: " [:a {:href "https://twitter.com/pesterhazy"} "@pesterhazy"]]]]]))
+      [:hr.rule]
+      [:p.mt2 "This is " [:i "presumably for side-effects"]
+       ", a blog by Paulus Esterhazy. "
+       "Don't forget to say hello " [:a {:href "https://twitter.com/pesterhazy"} "on twitter"] " or " [:a {:href "mailto:pesterhazy@gmail.com"} "by email"]]]]]))
