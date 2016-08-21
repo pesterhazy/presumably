@@ -22,7 +22,7 @@
   ga('create', 'UA-81846608-1', 'auto');
   ga('send', 'pageview');"]]
    [:body
-    [:div.max-width-3.mx-auto
+    [:div.content.mx-auto
      [:div.clearfix
       (when title
         [:h1 title])

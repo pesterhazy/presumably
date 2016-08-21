@@ -1,1 +1,11 @@
 /* */
+
+body {
+    font-family: Georgia, serif;
+    font-size: 1.25em;
+}
+
+.content {
+    max-width: 600px;
+    line-height: 1.6;
+}
