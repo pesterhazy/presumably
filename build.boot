@@ -14,8 +14,11 @@
 (deftask build
   [i include-drafts bool "Include drafts?"]
   (comp (markdown)
+        (permalink)
+        (canonical-url)
         (if include-drafts identity (draft))
-        (render :renderer 'site.core/page)))
+        (render :renderer 'site.core/page)
+        (collection :renderer 'site.core/index :page "index.html")))
 
 (deftask publish-local
   "Publish to target/"

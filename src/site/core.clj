@@ -3,6 +3,22 @@
 
 (def default-title "Presumably for side-effects")
 
+(defn parse-date [s]
+  (.parse (java.text.SimpleDateFormat. "yyyy-MM-dd") s))
+
+(defn pretty-date [i]
+  (.format (java.text.SimpleDateFormat. "MMM d, yy") i))
+
+
+(defn index [{:keys [entries]}]
+  (pr-str entries
+            (map (fn [{:keys [short-filename title published]}]
+                   (let [t (some->> published
+                                    parse-date
+                                    pretty-date)]
+                     [t]))
+                 entries)))
+
 (defn page [{{:keys [title subtitle content draft published]} :entry
              :as data}]
   (when (and (not draft) (not published))
