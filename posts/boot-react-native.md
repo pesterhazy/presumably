@@ -59,7 +59,7 @@ dependencies, get the latest version of Boot React Native:
 ```
 git clone https://github.com/mjmeintjes/boot-react-native.git
 cd boot-react-native
-boot inst
+boot build
 ```
 
 This installs the project's latest `master` version into your local maven repository. Make sure you're using the **latest snapshot of Boot React Native** (as of this writing, `0.3-SNAPSHOT`).
