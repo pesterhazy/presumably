@@ -1,23 +1,24 @@
 (ns example.table
   (:require [clojure.pprint]))
 
-[:table
- [:thead
-  [:th "name"] [:th "country"] [:th "date"]]
- [:tbody
-  [:tr
-   [:td "Descartes"] [:td "France"] [:td "1596"]]
-  [:td
-   ;; ...
-   ]]]
+(comment
+  [:table
+   [:thead
+    [:th "name"] [:th "country"] [:th "date"]]
+   [:tbody
+    [:tr
+     [:td "Descartes"] [:td "France"] [:td "1596"]]
+    [:td
+     ;; ...
+     ]]])
 
 (defn row-ui [cols m]
-  [:tr (map (partial get m) cols)])
+  [:tr (map (fn [col] [:td (get m col)]) cols)])
 
 (defn table-ui [cols rel]
   [:table
    [:thead
-    (map name cols)]
+    (map (fn [col] [:th (name col)]) cols)]
    [:tbody
     (map (partial row-ui cols) rel)]])
 
@@ -36,5 +37,5 @@
   (clojure.pprint/print-table philosopher-cols philosophers))
 
 (defn gadget []
-  (table-ui philosopher-cols
-            philosophers))
+  (clojure.pprint/pprint (table-ui philosopher-cols
+                                   philosophers)))

@@ -86,4 +86,81 @@ FIXME: screenshot
 
 ## Vectors and sequences
 
-So much for the code, but why does this work?
+So much for the code, but why does this work? Reagent adds to React the
+convenience of expressing components as simple ClojureScript functions.
+As table-ui does not deal with state, it contains only a render function. In
+reagent-speak this is a Form-1 component.
+
+When the component is rendered, the Hiccup values returned by the cljs function
+is converted into hierarchy React elements, React's internal representation of
+the DOM. To see how this works, we can call the function from the REPL. Here's
+what it returns:
+
+```
+[:table
+ [:thead ([:th "name"] [:th "country"] [:th "date"])]
+ [:tbody
+  ([:tr ([:td "Descartes"] [:td "France"] [:td 1596])]
+   [:tr ([:td "Quine"] [:td "U.S.A."] [:td 1908])])]]
+```
+
+Notice that this is not quite the same as what we intended. Compare the header
+to our original plan:
+
+```
+[:thead [:th "name"] [:th "country"] [:th "date"]]
+```
+
+The generated markup is wrapped in a pair of parentheses, which in Clojure
+signifies a sequence (or list, which has similar properties). A quick look at
+the code explains this easily: `map` returns a single value, a sequence. We
+could modify table-ui to build the markup explicitly:
+
+```
+(into [:thead]
+      (map (fn [col] [:th (name col)]) cols))
+```
+
+And yet, the original, more concise code works. Why?
+
+The answer is that Reagent (and before it, Hiccup) anticipated this usage and,
+in the course of transforming hiccup syntax to React elements, automatically
+expands non-vector sequences into the enclosing elements.
+
+So table-ui works as originally written. It also has the consequence that row-ui
+does not actually function as a React component; it is evaluated and its result
+spliced into the `:tbody` element.
+
+## Gotchas
+
+This is a convenient shortcut, but like many conveniences, there's a price.
+First, in Clojure vectors implement the sequence interface, and a vector can
+often be exchanged transparently in place of sequences and vice versa. But here
+you need to keep in mind that Reagent confers to vectors (but not to sequences)
+the special significance of representing components or DOM elements.
+
+So simply converting the sequence won't work:
+
+```
+(into [:thead]
+      (vec (map (fn [col] [:th (name col)]) cols)))
+```
+
+Reagent will try to interpret a vector of vectors as a component. This cannot
+work, as a vector is not a valid component specifier.
+
+The second gotcha is that, while `into` explicitly realizes the lazy sequence,
+leaving the sequence unrealized is dangerous when you rely on ratoms being
+dereferenced in the course of its realization. The effect of this issue is that
+everything will seem to work, but the component will not be rerendered when the
+state changes.
+
+Fortunately the fix is simply to wrap the `map` (or `for`) call in `doall`, to
+force its realization before the render function returns:
+
+```
+(into [:thead]
+      (doall (map (fn [col] [:th (name col)]) cols)))
+```
+
+Finally, there's a non-gotcha to report.
