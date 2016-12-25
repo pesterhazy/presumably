@@ -2,7 +2,7 @@
  :source-paths #{"src" "posts"}
  :resource-paths #{"resources"}
  :dependencies '[[perun "0.3.0" :scope "test"]
-                 [org.clojure/clojure "1.8.0"]
+                 [org.clojure/clojure "1.9.0-alpha14"]
                  [pandeiro/boot-http "0.7.0"]
                  [confetti/confetti "0.1.1"]
                  [hiccup "1.0.5"]])

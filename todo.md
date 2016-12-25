@@ -1,0 +1,3 @@
+- add HTML example?
+- gotchas: realizing lazy sequences
+- namespaced keys
