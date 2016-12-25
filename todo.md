@@ -1,9 +1,9 @@
 - add HTML example?
-- link to form-1 component
 - check React elements (and link to)
 - check that the code example works
 - link to github examples
 - sync with table.cljc
+- fix thead
 
 tooling
 

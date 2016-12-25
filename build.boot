@@ -1,14 +1,16 @@
 (set-env!
- :source-paths #{"src" "posts"}
+ :source-paths #{"src" "posts" "example-src"}
  :resource-paths #{"resources"}
  :dependencies '[[perun "0.3.0" :scope "test"]
                  [org.clojure/clojure "1.8.0" :scope "provided"]
                  [org.clojure/tools.nrepl "0.2.12"] ;; why do we need this?
+                 [org.clojure/clojurescript "1.9.293"]
                  [pandeiro/boot-http "0.7.3"]
                  [adzerk/boot-cljs "1.7.228-2"]
                  [adzerk/boot-reload "0.4.13"]
                  [confetti/confetti "0.1.4"]
                  [fipp "0.6.7" :scope "provided"]
+                 [reagent "0.6.0"]
                  [hiccup "1.0.5"]])
 
 (require '[io.perun :refer :all]
@@ -47,7 +49,7 @@
   (comp
    (repl :server true)
    (watch)
-   (reload)
+   (reload :asset-path "public" :on-jsload 'example.core/on-jsload)
    (build)
    (cljs)
    (serve :resource-root "public")))
