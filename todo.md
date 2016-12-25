@@ -4,3 +4,7 @@
 - check that the code example works
 - link to github examples
 - sync with table.cljc
+
+tooling
+
+- only include app.js in dev mode
