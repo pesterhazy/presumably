@@ -191,5 +191,7 @@ element is nil; in this case it will try to call nil, with a predictable result.
 
 ## Further Reading
 
+Expect part two soon!
+
 - [Hiccup Tips](http://www.lispcast.com/hiccup-tips)
 - [Using vectors instead of lists](https://github.com/Day8/re-frame/wiki/Using-%5B%5D-instead-of-%28%29)
