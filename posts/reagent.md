@@ -27,10 +27,9 @@ the air of mystery sourrounding Reagent by explaining its underlying concepts.
 
 ## Building a table
 
-In this first post, we'll answer a simple question: how to build a table with
-Reagent. React requires tables to be properly structured, including thead and
-tbody elements, so we know what the hiccup representation of the DOM should
-look like:
+This first focusses on the example of building an HTML table with Reagent. React
+requires tables to be properly structured, including thead and tbody elements,
+so we know what the hiccup representation of the DOM should look like:
 
 ```clojure
 [:table
