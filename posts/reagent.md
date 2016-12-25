@@ -33,14 +33,15 @@ so we know what the hiccup representation of the DOM should look like:
 
 ```clojure
 [:table
- [:thead
-  [:th "name"] [:th "country"] [:th "date"]]
- [:tbody
-  [:tr
-   [:td "Descartes"] [:td "France"] [:td "1596"]]
-  [:td
-   ;; ...
-   ]]]
+   [:thead
+    [:tr
+     [:th "name"]] [:th "country"] [:th "date"]]
+   [:tbody
+    [:tr
+     [:td "Descartes"] [:td "France"] [:td "1596"]]
+    [:tr
+     ;; ...
+     ]]]
 ```
 
 In good Clojure tradition, we start with a data structure:
@@ -72,7 +73,7 @@ example.table=> (clojure.pprint/print-table philosopher-cols philosophers)
 
 Next, we can build a component that takes the same arguments as print-table:
 
-```
+```clojure
 (defn table-ui [cols rel]
   [:table
    [:thead
@@ -92,7 +93,7 @@ function for individual rows is simple:
 
 Voila, we can see the result in the browser:
 
-FIXME: screenshot
+<img src="/media/philosophers.png">
 
 ## Vectors and sequences
 
@@ -106,7 +107,7 @@ function is converted into a hierarchy of React elements, React's internal
 representation of the DOM. To see how what exactly Reagent sees, we can call the
 function from the REPL. Here's what it returns:
 
-```
+```clojure
 [:table
  [:thead ([:th "name"] [:th "country"] [:th "date"])]
  [:tbody
@@ -117,7 +118,7 @@ function from the REPL. Here's what it returns:
 Notice that this is not quite the same as what we intended. Compare the header
 to our draft above:
 
-```
+```clojure
 [:thead [:th "name"] [:th "country"] [:th "date"]]
 ```
 
@@ -126,7 +127,7 @@ signifies a sequence (or list, which has similar properties). A quick look at
 the code explains this easily: map returns a single value, a sequence. We
 could modify table-ui to build the intended markup explicitly:
 
-```
+```clojure
 (into [:thead]
       (map (fn [col] [:th (name col)]) cols))
 ```
@@ -151,7 +152,7 @@ the special significance of representing components or DOM elements.
 
 So converting the result to a vector breaks rendering:
 
-```
+```clojure
 (into [:thead]
       (vec (map (fn [col] [:th (name col)]) cols)))
 ```
@@ -168,7 +169,7 @@ state changes.
 Fortunately the fix is simply to wrap the `map` (or `for`) call in `doall`to
 force its realization before the render function returns:
 
-```
+```clojure
 (into [:thead]
       (doall (map (fn [col] [:th (name col)]) cols)))
 ```
@@ -177,7 +178,7 @@ Happily, there's also a non-gotcha to report. Suppose you want to hide some
 philosophers, based on their date of birth. A convenient shortcurt is simply to return
 nil for rows to be ignored:
 
-```
+```clojure
 (defn row-ui [cols m]
   (when (>= date 1900)
     [:tr (map (fn [col] [:td (get m col)]) cols)]))
