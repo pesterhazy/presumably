@@ -16,6 +16,7 @@
     (hp/include-css "https://fonts.googleapis.com/css?family=Josefin+Sans")
 
     (hp/include-js "/vendor/highlight.js")
+    (hp/include-js "/js/app.js")
     [:script "hljs.initHighlightingOnLoad();"]
     [:script "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

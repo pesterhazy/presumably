@@ -2,9 +2,11 @@
  :source-paths #{"src" "posts"}
  :resource-paths #{"resources"}
  :dependencies '[[perun "0.3.0" :scope "test"]
-                 [org.clojure/clojure "1.9.0-alpha14" :scope "provided"]
+                 [org.clojure/clojure "1.8.0" :scope "provided"]
                  [org.clojure/tools.nrepl "0.2.12"] ;; why do we need this?
-                 [pandeiro/boot-http "0.7.6"]
+                 [pandeiro/boot-http "0.7.3"]
+                 [adzerk/boot-cljs "1.7.228-2"]
+                 [adzerk/boot-reload "0.4.13"]
                  [confetti/confetti "0.1.4"]
                  [fipp "0.6.7" :scope "provided"]
                  [hiccup "1.0.5"]])
@@ -12,6 +14,8 @@
 (require '[io.perun :refer :all]
          '[pandeiro.boot-http :refer [serve]]
          '[confetti.boot-confetti :refer [sync-bucket]])
+(require '[adzerk.boot-reload :refer [reload]])
+(require '[adzerk.boot-cljs :refer [cljs]])
 
 (deftask build
   [i include-drafts bool "Include drafts?"]
@@ -40,7 +44,10 @@
 (deftask dev
   []
   (task-options! build {:include-drafts true})
-  (comp (serve :resource-root "public")
-        (repl :server true)
-        (watch)
-        (build)))
+  (comp
+   (repl :server true)
+   (watch)
+   (reload)
+   (build)
+   (cljs)
+   (serve :resource-root "public")))

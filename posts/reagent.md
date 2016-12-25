@@ -2,12 +2,13 @@
 title: "Reagent mysteries"
 subtitle: "Part 1: Vectors and Sequences"
 author: Paulus
+draft: true
 ---
 
-<div style="background-color: #777; color: white; padding: 30px">This is an unpublished draft</div>
+<div style="background-color: #aaa; color: white; padding: 30px">This is an unpublished draft</div>
 
-Reagent is a popular, practical ClojureScript wrapper for React, but is it
-mysterious? Its popularity is easily explained. It uses [hiccup
+Reagent is a popular, practical ClojureScript wrapper for React. Its popularity
+is easily explained. It uses [hiccup
 syntax](https://github.com/weavejester/hiccup/wiki/Syntax) as an elegenat way to
 describe the DOM as a hierarchy of React components, where each component is a
 simple ClojureScript function. Furthermore, to aid tracking the efficient
@@ -18,7 +19,7 @@ At the same time, Reagent is practical in that, wherever its model is too
 restrictive, it gives the programmer the escape hatches and efficiency hacks
 necessary to build fast real-world applications.
 
-Reagent is a magical tool, but is it also myterious? It's true that its
+Reagent is a magical tool, but does that make it mysterious? It's true that its
 abstractions, while useful and often conductive to cleaner code, can sometimes
 also be leaky. As a result, knowledge of the implementation is helpful to figure
 out how things work. In this series of blog posts, I will attempt to dispell
@@ -187,3 +188,8 @@ The upshot is that Reagent is a good sport and will ignore any child elements th
 evaluate to nil, a feature that is turns out to be useful in building UIs. The
 exception to this is when Reagent tries to interpret a vector whose first
 element is nil; in this case it will try to call nil, with a predictable result.
+
+## Further Reading
+
+- [Hiccup Tips](http://www.lispcast.com/hiccup-tips)
+- [Using vectors instead of lists](https://github.com/Day8/re-frame/wiki/Using-%5B%5D-instead-of-%28%29)
