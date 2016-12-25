@@ -98,7 +98,7 @@ FIXME: screenshot
 
 So much for the code, but how does it work? Reagent adds to React the
 convenience of expressing components as simple ClojureScript functions. As
-table-ui has not state to handle, it consists only of a render function. In
+table-ui has no state, it consists only of a render function. In
 Reagent-speak this is a [Form-1 Component](https://github.com/Day8/re-frame/wiki/Creating-Reagent-Components#form-1-a-simple-function).
 
 When the component is rendered, the hiccup structure returned by the cljs
