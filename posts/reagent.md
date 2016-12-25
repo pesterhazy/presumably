@@ -1,5 +1,5 @@
 Reagent is a popular, practical ClojureScript wrapper for React, but is it
-mysterious?. Its popularity is easily explained. It uses Hiccup syntax as an
+mysterious?. Its popularity is easily explained. It uses hiccup syntax as an
 elegenat way to describe the DOM as a hierarchy of React components, where each
 component is a simple ClojureScript function. Furthermore, to aid tracking the
 efficient re-rendering of scenes, it introduces ratoms as an extension of
@@ -9,17 +9,18 @@ At the same time, Reagent is practical in that, wherever its model is too
 restrictive, it gives the programmer the espace hatches and efficiency hacks to
 build fast real-world applications.
 
-And yet it's true: Reagent's abstractions, while useful and often helpful, are
-sometimes leaky. As a result, sometimes knowledge of the implementation is
-required to know what's going on. Reagent may look mysterious. In this series of
-blog posts, I will attempt to dispell this air of mystery by explaining the
-underlying concepts.
+Reagent is magical, and yet it's true that Reagent's abstractions, while useful
+and often helpful, are sometimes also leaky. As a result, sometimes knowledge of
+the implementation is helpful to find out how things work. Reagent may look
+mysterious. In this series of blog posts, I will attempt to dispell this air of
+mystery by explaining the underlying concepts.
 
 ## Building a table
 
-How do you build a table with Reagent? React requires tables to be properly
-structured, including `thead` and `tbody` elements, so we know what the hiccup
-representation of the DOM should look like:
+This first installation tackles a simple question: how to build a table with
+Reagent. React requires tables to be properly structured, including thead and
+tbody elements, so we know what the hiccup representation of the DOM should
+look like:
 
 ```clojure
 [:table
@@ -60,7 +61,7 @@ example.table=> (clojure.pprint/print-table philosopher-cols philosophers)
 |     Quine |   U.S.A. |  1908 |
 ```
 
-Next, we can build a component that takes the same arguments as `print-table`:
+Next, we can build a component that takes the same arguments as print-table:
 
 ```
 (defn table-ui [cols rel]
@@ -72,7 +73,7 @@ Next, we can build a component that takes the same arguments as `print-table`:
 
 ```
 
-The `-ui` suffix is a hint that we're dealing with a render function. The render
+The -ui suffix is a hint that we're dealing with a render function. The render
 function for individual rows is simple:
 
 ```clojure
@@ -89,9 +90,9 @@ FIXME: screenshot
 So much for the code, but why does this work? Reagent adds to React the
 convenience of expressing components as simple ClojureScript functions.
 As table-ui does not deal with state, it contains only a render function. In
-reagent-speak this is a Form-1 component.
+Reagent-speak this is a Form-1 component.
 
-When the component is rendered, the Hiccup values returned by the cljs function
+When the component is rendered, the hiccup values returned by the cljs function
 is converted into hierarchy React elements, React's internal representation of
 the DOM. To see how this works, we can call the function from the REPL. Here's
 what it returns:
@@ -113,23 +114,23 @@ to our original plan:
 
 The generated markup is wrapped in a pair of parentheses, which in Clojure
 signifies a sequence (or list, which has similar properties). A quick look at
-the code explains this easily: `map` returns a single value, a sequence. We
-could modify table-ui to build the markup explicitly:
+the code explains this easily: map returns a single value, a sequence. We
+could modify table-ui to build the intended markup explicitly:
 
 ```
 (into [:thead]
       (map (fn [col] [:th (name col)]) cols))
 ```
 
-And yet, the original, more concise code works. Why?
+And yet, our initial, more concise attemp works. Why?
 
-The answer is that Reagent (and before it, Hiccup) anticipated this usage and,
+The answer is that Reagent (and before it, hiccup) anticipated this usage and,
 in the course of transforming hiccup syntax to React elements, automatically
 expands non-vector sequences into the enclosing elements.
 
 So table-ui works as originally written. It also has the consequence that row-ui
 does not actually function as a React component; it is evaluated and its result
-spliced into the `:tbody` element.
+spliced into the tbody element.
 
 ## Gotchas
 
@@ -155,7 +156,7 @@ dereferenced in the course of its realization. The effect of this issue is that
 everything will seem to work, but the component will not be rerendered when the
 state changes.
 
-Fortunately the fix is simply to wrap the `map` (or `for`) call in `doall`, to
+Fortunately the fix is simply to wrap the `map` (or `for`) call in `doall`to
 force its realization before the render function returns:
 
 ```
@@ -165,7 +166,7 @@ force its realization before the render function returns:
 
 Happily, there's also a non-gotcha to report. Suppose you want to hide some
 philosophers, based on their date of birth. A convenient shortcurt is simply to return
-`nil` for rows to be ignored:
+nil for rows to be ignored:
 
 ```
 (defn row-ui [cols m]
@@ -174,6 +175,6 @@ philosophers, based on their date of birth. A convenient shortcurt is simply to 
 ```
 
 The upshot is that Reagent is a good sport and will ignore any child elements that
-evaluate to `nil`, a feature that is turns out to be useful in building UIs. The
+evaluate to nil, a feature that is turns out to be useful in building UIs. The
 exception to this is when Reagent tries to interpret a vector whose first
 element is nil; in this case it will try to call nil, with a predictable result.

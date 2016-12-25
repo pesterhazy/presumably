@@ -2,9 +2,10 @@
  :source-paths #{"src" "posts"}
  :resource-paths #{"resources"}
  :dependencies '[[perun "0.3.0" :scope "test"]
-                 [org.clojure/clojure "1.9.0-alpha14"]
-                 [pandeiro/boot-http "0.7.0"]
-                 [confetti/confetti "0.1.1"]
+                 [org.clojure/clojure "1.9.0-alpha14" :scope "provided"]
+                 [pandeiro/boot-http "0.7.6"]
+                 [confetti/confetti "0.1.4"]
+                 [fipp "0.6.7" :scope "provided"]
                  [hiccup "1.0.5"]])
 
 (require '[io.perun :refer :all]

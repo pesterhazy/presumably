@@ -1,8 +1,6 @@
 - add HTML example?
 - link to form-1 component
-- consistent capitalization
-- consistent backticks/no backticks
-- check React elements
+- check React elements (and link to)
 - check that the code example works
 - link to github examples
 - sync with table.cljc
