@@ -1,10 +1,8 @@
 - add HTML example?
-- handling nils
-- gotchas: realizing lazy sequences
-- namespaced keys
 - link to form-1 component
 - consistent capitalization
 - consistent backticks/no backticks
 - check React elements
 - check that the code example works
 - link to github examples
+- sync with table.cljc

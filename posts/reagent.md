@@ -163,4 +163,17 @@ force its realization before the render function returns:
       (doall (map (fn [col] [:th (name col)]) cols)))
 ```
 
-Finally, there's a non-gotcha to report.
+Happily, there's also a non-gotcha to report. Suppose you want to hide some
+philosophers, based on their date of birth. A convenient shortcurt is simply to return
+`nil` for rows to be ignored:
+
+```
+(defn row-ui [cols m]
+  (when (>= date 1900)
+    [:tr (map (fn [col] [:td (get m col)]) cols)]))
+```
+
+The upshot is that Reagent is a good sport and will ignore any child elements that
+evaluate to `nil`, a feature that is turns out to be useful in building UIs. The
+exception to this is when Reagent tries to interpret a vector whose first
+element is nil; in this case it will try to call nil, with a predictable result.
