@@ -1,19 +1,28 @@
+---
+title: "Reagent mysteries"
+subtitle: "Part 1: Vectors and Sequences"
+author: Paulus
+---
+
+<div style="background-color: #777; color: white; padding: 30px">This is an unpublished draft</div>
+
 Reagent is a popular, practical ClojureScript wrapper for React, but is it
-mysterious?. Its popularity is easily explained. It uses hiccup syntax as an
-elegenat way to describe the DOM as a hierarchy of React components, where each
-component is a simple ClojureScript function. Furthermore, to aid tracking the
-efficient re-rendering of scenes, it introduces ratoms as an extension of
-Clojure's atom abstraction, a powerful addition to React's props mechanism.
+mysterious? Its popularity is easily explained. It uses [hiccup
+syntax](https://github.com/weavejester/hiccup/wiki/Syntax) as an elegenat way to
+describe the DOM as a hierarchy of React components, where each component is a
+simple ClojureScript function. Furthermore, to aid tracking the efficient
+re-rendering of scenes, it introduces ratoms as an extension of Clojure's atom
+abstraction, a powerful addition to React's props mechanism.
 
 At the same time, Reagent is practical in that, wherever its model is too
-restrictive, it gives the programmer the espace hatches and efficiency hacks to
-build fast real-world applications.
+restrictive, it gives the programmer the escape hatches and efficiency hacks
+necessary to build fast real-world applications.
 
-Reagent is magical, and yet it's true that Reagent's abstractions, while useful
-and often helpful, are sometimes also leaky. As a result, sometimes knowledge of
-the implementation is helpful to find out how things work. Reagent may look
-mysterious. In this series of blog posts, I will attempt to dispell this air of
-mystery by explaining the underlying concepts.
+Reagent is a magical tool, but is it also myterious? It's true that its
+abstractions, while useful and often conductive to cleaner code, can sometimes
+also be leaky. As a result, knowledge of the implementation is helpful to figure
+out how things work. In this series of blog posts, I will attempt to dispell
+the air of mystery sourrounding Reagent by explaining its underlying concepts.
 
 ## Building a table
 
@@ -50,7 +59,7 @@ In good Clojure tradition, we start with a data structure:
 ```
 
 Each row is a map of attribute to value. Because we chose a common format, we
-can print this structure in the cljs repl using `clojure.core/print-table`:
+can print this structure straight away in the cljs REPL using clojure.core/print-table:
 
 ```
 example.table=> (clojure.pprint/print-table philosopher-cols philosophers)
@@ -81,21 +90,21 @@ function for individual rows is simple:
   [:tr (map (partial get m) cols)])
 ```
 
-We can see the result in the browser:
+Voila, we can see the result in the browser:
 
 FIXME: screenshot
 
 ## Vectors and sequences
 
-So much for the code, but why does this work? Reagent adds to React the
-convenience of expressing components as simple ClojureScript functions.
-As table-ui does not deal with state, it contains only a render function. In
-Reagent-speak this is a Form-1 component.
+So much for the code, but how does it work? Reagent adds to React the
+convenience of expressing components as simple ClojureScript functions. As
+table-ui has not state to handle, it consists only of a render function. In
+Reagent-speak this is a [Form-1 Component](https://github.com/Day8/re-frame/wiki/Creating-Reagent-Components#form-1-a-simple-function).
 
-When the component is rendered, the hiccup values returned by the cljs function
-is converted into hierarchy React elements, React's internal representation of
-the DOM. To see how this works, we can call the function from the REPL. Here's
-what it returns:
+When the component is rendered, the hiccup structure returned by the cljs
+function is converted into a hierarchy of React elements, React's internal
+representation of the DOM. To see how what exactly Reagent sees, we can call the
+function from the REPL. Here's what it returns:
 
 ```
 [:table
@@ -106,7 +115,7 @@ what it returns:
 ```
 
 Notice that this is not quite the same as what we intended. Compare the header
-to our original plan:
+to our draft above:
 
 ```
 [:thead [:th "name"] [:th "country"] [:th "date"]]
@@ -140,15 +149,15 @@ often be exchanged transparently in place of sequences and vice versa. But here
 you need to keep in mind that Reagent confers to vectors (but not to sequences)
 the special significance of representing components or DOM elements.
 
-So simply converting the sequence won't work:
+So converting the result to a vector breaks rendering:
 
 ```
 (into [:thead]
       (vec (map (fn [col] [:th (name col)]) cols)))
 ```
 
-Reagent will try to interpret a vector of vectors as a component. This cannot
-work, as a vector is not a valid component specifier.
+Reagent will try to interpret a vector of vectors as a component but a vector is
+neither a keyword nor a render function (the only valid component specifiers).
 
 The second gotcha is that, while `into` explicitly realizes the lazy sequence,
 leaving the sequence unrealized is dangerous when you rely on ratoms being

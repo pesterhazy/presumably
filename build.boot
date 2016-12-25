@@ -3,6 +3,7 @@
  :resource-paths #{"resources"}
  :dependencies '[[perun "0.3.0" :scope "test"]
                  [org.clojure/clojure "1.9.0-alpha14" :scope "provided"]
+                 [org.clojure/tools.nrepl "0.2.12"] ;; why do we need this?
                  [pandeiro/boot-http "0.7.6"]
                  [confetti/confetti "0.1.4"]
                  [fipp "0.6.7" :scope "provided"]
