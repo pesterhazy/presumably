@@ -93,6 +93,35 @@ Voila, we can see the result in the browser:
 
 <img src="/media/philosophers.png">
 
+## Lists and keys
+
+You may have noticed that row-ui attaches a `key` prop to the tr element.
+Although this uses the normal syntax for attaching DOM attributes like `style`,
+the `key` attribute
+[has special meaning](https://facebook.github.io/react/docs/lists-and-keys.html).
+React's diffing algorithm uses this attribute as a hint to reidentify an element
+during a re-render operation. In any list or table, each child needs to have a
+key unique in its context. In essenece, you need to pick a primary key for your
+collection.
+
+In practical terms, you can leave out list keys during the exploration phase.
+Everything will work, except that you will see warnings in your browser console.
+Reagent will complain:
+
+> Warning: Every element in a seq should have a unique :key: ([:th "name"]
+> [:th "country"] [:th "date"]) (in example.reagent.root > example.reagent.table_ui)
+
+and so will React:
+
+> Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of `example.reagent.table_ui`. See https://fb.me/react-warning-keys for more information.
+>     in th (created by example.reagent.table_ui)
+>     in example.reagent.table_ui (created by example.reagent.root)
+>     in div (created by example.reagent.root)
+>     in example.reagent.root
+
+If you see these messages, you know it's time to assign each `tr`, `td` or `li` a key
+(normally a keyword, string or number).
+
 ## Vectors and sequences
 
 So much for the code, but how does it work? Reagent adds to React the
