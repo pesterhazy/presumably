@@ -33,7 +33,7 @@ so we know what the hiccup representation of the DOM should look like:
 [:table
    [:thead
     [:tr
-     [:th "name"]] [:th "country"] [:th "date"]]
+     [:th "name"] [:th "country"] [:th "date"]]]
    [:tbody
     [:tr
      [:td "Descartes"] [:td "France"] [:td "1596"]]
