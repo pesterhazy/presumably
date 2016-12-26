@@ -51,12 +51,9 @@ In good Clojure tradition, we start with a data structure:
   [:name :country :date])
 
 (def philosophers
-  [{:name "Descartes"
-    :country "France"
-    :date 1596}
-   {:name "Quine"
-    :country "U.S.A."
-    :date 1908}])
+  [{:name "Descartes" :country "France" :date 1596}
+   {:name "Kant" :country "Prussia" :date 1724}
+   {:name "Quine" :country "U.S.A." :date 1908}])
 ```
 
 Each row is a map of attribute to value. Because we chose a common format, we
@@ -68,6 +65,7 @@ example.table=> (clojure.pprint/print-table philosopher-cols philosophers)
 |     :name | :country | :date |
 |-----------+----------+-------|
 | Descartes |   France |  1596 |
+|      Kant |  Prussia |  1724 |
 |     Quine |   U.S.A. |  1908 |
 ```
 
@@ -77,7 +75,7 @@ Next, we can build a component that takes the same arguments as print-table:
 (defn table-ui [cols rel]
   [:table
    [:thead
-    (map name cols)]
+    [:tr (map (fn [col] [:th {:key col} (name col)]) cols)]]
    [:tbody
     (map (partial row-ui cols) rel)]])
 
@@ -88,7 +86,7 @@ function for individual rows is simple:
 
 ```clojure
 (defn row-ui [cols m]
-  [:tr (map (partial get m) cols)])
+  [:tr {:key (:name m)} (map (fn [col] [:td {:key col} (get m col)]) cols)])
 ```
 
 Voila, we can see the result in the browser:
@@ -109,17 +107,32 @@ function from the REPL. Here's what it returns:
 
 ```clojure
 [:table
- [:thead ([:th "name"] [:th "country"] [:th "date"])]
+ [:thead
+  [:tr
+   ([:th {:key :name} "name"]
+    [:th {:key :country} "country"]
+    [:th {:key :date} "date"])]]
  [:tbody
-  ([:tr ([:td "Descartes"] [:td "France"] [:td 1596])]
-   [:tr ([:td "Quine"] [:td "U.S.A."] [:td 1908])])]]
+  ([:tr
+    {:key "Descartes"}
+    ([:td {:key :name} "Descartes"]
+     [:td {:key :country} "France"]
+     [:td {:key :date} 1596])]
+   [:tr
+    {:key "Kant"}
+    ([:td {:key :name} "Kant"]
+     [:td {:key :country} "Prussia"]
+     [:td {:key :date} 1724])]
+   ; ...
+   )]]
 ```
 
-Notice that this is not quite the same as what we intended. Compare the header
-to our draft above:
+Notice that this is not quite the same as what we intended initially. Compare
+the header to our draft above:
 
 ```clojure
-[:thead [:th "name"] [:th "country"] [:th "date"]]
+[:thead
+  [:tr [:th "name"] [:th "country"] [:th "date"]]]
 ```
 
 The generated markup is wrapped in a pair of parentheses, which in Clojure
@@ -128,8 +141,9 @@ the code explains this easily: map returns a single value, a sequence. We
 could modify table-ui to build the intended markup explicitly:
 
 ```clojure
-(into [:thead]
-      (map (fn [col] [:th (name col)]) cols))
+[:thead
+  (into [:tr]
+        (map (fn [col] [:th {:key col} (name col)]) cols))]
 ```
 
 And yet, our initial, more concise attemp works. Why?
@@ -153,8 +167,9 @@ the special significance of representing components or DOM elements.
 So converting the result to a vector breaks rendering:
 
 ```clojure
-(into [:thead]
-      (vec (map (fn [col] [:th (name col)]) cols)))
+[:thead
+  (into [:tr]
+        (vec (map (fn [col] [:th {:key col} (name col)]) cols)))]
 ```
 
 Reagent will try to interpret a vector of vectors as a component but a vector is
@@ -170,8 +185,9 @@ Fortunately the fix is simply to wrap the `map` (or `for`) call in `doall`to
 force its realization before the render function returns:
 
 ```clojure
-(into [:thead]
-      (doall (map (fn [col] [:th (name col)]) cols)))
+[:thead
+  (into [:tr]
+        (doall (map (fn [col] [:th {:key col} (name col)]) cols)))]
 ```
 
 Happily, there's also a non-gotcha to report. Suppose you want to hide some
@@ -181,7 +197,7 @@ nil for rows to be ignored:
 ```clojure
 (defn row-ui [cols m]
   (when (>= date 1900)
-    [:tr (map (fn [col] [:td (get m col)]) cols)]))
+    [:tr {:key (:name m)} (map (fn [col] [:td {:key col} (get m col)]) cols)]))
 ```
 
 The upshot is that Reagent is a good sport and will ignore any child elements that

@@ -30,15 +30,9 @@
   [:name :country :date])
 
 (def philosophers
-  [{:name "Descartes"
-    :country "France"
-    :date 1596}
-   {:name "Kant"
-    :country "Prussia"
-    :date 1724}
-   {:name "Quine"
-    :country "U.S.A."
-    :date 1908}])
+  [{:name "Descartes" :country "France" :date 1596}
+   {:name "Kant" :country "Prussia" :date 1724}
+   {:name "Quine" :country "U.S.A." :date 1908}])
 
 (defn root []
   [:div
