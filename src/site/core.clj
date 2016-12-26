@@ -26,7 +26,9 @@
    [:body
     [:div.content.mx-auto
      [:div.clearfix
-      [:div.header "presumably for side effects" [:br] "a blog about clojure &c."]
+      [:div.header [:a {:href "/"} "presumably for side effects"]
+       [:br]
+       "a blog about clojure &c."]
       [:div body]
       [:hr.rule]
       [:p.mt2 "This is " [:i "presumably for side-effects"]

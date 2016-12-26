@@ -5,8 +5,6 @@ author: Paulus
 draft: true
 ---
 
-<div style="background-color: #aaa; color: white; padding: 30px">This is an unpublished draft</div>
-
 Reagent is a popular, practical ClojureScript wrapper for React. Its popularity
 is easily explained. It uses [hiccup
 syntax](https://github.com/weavejester/hiccup/wiki/Syntax) as an elegenat way to
@@ -178,7 +176,7 @@ could modify table-ui to build the intended markup explicitly:
 And yet, our initial, more concise attemp works. Why?
 
 The answer is that Reagent (and before it, hiccup) anticipated this usage and,
-in the course of transforming hiccup syntax to React elements, automatically
+in the course of transforming hiccup syntax to [React elements](https://facebook.github.io/react/blog/2015/12/18/react-components-elements-and-instances.html), automatically
 expands non-vector sequences into the enclosing elements.
 
 So table-ui works as originally written. It also has the consequence that row-ui

@@ -10,7 +10,7 @@ div.header {
     font-size: 1.3em;
     text-align: right;
     margin-bottom: 3em;
-    line-height: 1.2;
+    line-height: 1.4;
 }
 
 .date {
@@ -38,9 +38,12 @@ h3 {
     line-height: 1.6;
 }
 
-a { color: inherit; text-decoration: none; }
+a {
+    color: inherit;
+    text-decoration: none;
+}
 .content a { background: yellow; }
-.content a:hover { background: none; }
+.content a:hover { background: #ffcc00; }
 
 code { font-size: smaller; }
 
