@@ -175,13 +175,12 @@ could modify table-ui to build the intended markup explicitly:
 
 And yet, our initial, more concise attemp works. Why?
 
-The answer is that Reagent (and before it, hiccup) anticipated this usage and,
+The answer is that Reagent (and before it, hiccup) anticipates this usage and,
 in the course of transforming hiccup syntax to [React elements](https://facebook.github.io/react/blog/2015/12/18/react-components-elements-and-instances.html), automatically
 expands non-vector sequences into the enclosing elements.
 
-So table-ui works as originally written. It also has the consequence that row-ui
-does not actually function as a React component; it is evaluated and its result
-spliced into the tbody element.
+This also means that row-ui does not actually function as a React component; it
+is evaluated and its result spliced into the tbody element.
 
 ## Gotchas
 
