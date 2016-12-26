@@ -1,7 +1,7 @@
 (set-env!
  :source-paths #{"src" "posts" "example-src"}
  :resource-paths #{"resources"}
- :dependencies '[[perun "0.3.0" :scope "test"]
+ :dependencies '[[perun "0.4.0-SNAPSHOT" :scope "test"] ;; need to install from git, version on clojars is not sufficient
                  [org.clojure/clojure "1.8.0" :scope "provided"]
                  [org.clojure/tools.nrepl "0.2.12"] ;; why do we need this?
                  [org.clojure/clojurescript "1.9.293"]
@@ -14,17 +14,19 @@
                  [reagent "0.6.0"]
                  [hiccup "1.0.5"]])
 
-(require '[io.perun :refer :all]
+(require '[io.perun :refer [markdown render draft print-meta]]
          '[pandeiro.boot-http :refer [serve]]
          '[confetti.boot-confetti :refer [sync-bucket]])
 (require '[adzerk.boot-reload :refer [reload]])
 (require '[adzerk.boot-cljs :refer [cljs]])
 
 (deftask build
-  [i include-drafts bool "Include drafts?"]
+  [i include-drafts bool "Include drafts?"
+   d development? bool "Dev mode?"]
   (comp (markdown)
         (if include-drafts identity (draft))
-        (render :renderer 'site.core/page)))
+        (render :renderer 'site.core/page
+                :meta {:development? development?})))
 
 (deftask publish-local
   "Publish to target/"
@@ -46,7 +48,8 @@
 
 (deftask dev
   []
-  (task-options! build {:include-drafts true})
+  (task-options! build {:include-drafts true
+                        :development? true})
   (comp
    (repl :server true)
    (watch)
