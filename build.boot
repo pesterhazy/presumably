@@ -9,7 +9,7 @@
                  [adzerk/boot-cljs "1.7.228-2"]
                  [adzerk/boot-reload "0.4.13"]
                  [weasel "0.7.0"]
-                 [confetti/confetti "0.1.4"]
+                 [confetti/confetti "0.1.1"]
                  [fipp "0.6.7" :scope "provided"]
                  [reagent "0.6.0"]
                  [hiccup "1.0.5"]])
