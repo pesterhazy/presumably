@@ -3,8 +3,8 @@
 
 (def default-title "Presumably for side-effects")
 
-(defn page [{{:keys [title subtitle content draft published]} :entry
-             {:keys [development?]} :meta
+(defn page [{:keys [development?]}
+            {{:keys [title subtitle content draft published]} :entry
              :as data}]
   (when (and (not draft) (not published))
     (println "WARNING: non-draft entry is lacking published key"))
@@ -42,3 +42,10 @@
       [:p.mt2 "This is " [:i "presumably for side-effects"]
        ", a blog by Paulus Esterhazy. "
        "Don't forget to say hello " [:a {:href "https://twitter.com/pesterhazy"} "on twitter"] " or " [:a {:href "mailto:pesterhazy@gmail.com"} "by email"]]]]]))
+
+
+(defn page-dev [m]
+  (page {:development? true} m))
+
+(defn page-prod [m]
+  (page {:development? false} m))
