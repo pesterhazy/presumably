@@ -14,7 +14,8 @@
                  [reagent "0.6.0"]
                  [hiccup "1.0.5"]])
 
-(require '[io.perun :refer [markdown render draft print-meta]]
+(require '[io.perun :refer [markdown render draft
+                            collection print-meta]]
          '[pandeiro.boot-http :refer [serve]]
          '[confetti.boot-confetti :refer [sync-bucket]])
 (require '[adzerk.boot-reload :refer [reload]])
@@ -25,7 +26,9 @@
    d development? bool "Dev mode?"]
   (comp (markdown)
         (if include-drafts identity (draft))
-        (render :renderer (if development? 'site.core/page-dev 'site.core/page-prod))))
+        (render :renderer (if development? 'site.core/page-dev 'site.core/page-prod))
+        (collection :renderer (if development? 'site.core/index-dev 'site.core/index-prod)
+                    :page "index.html")))
 
 (deftask publish-local
   "Publish to target/"
