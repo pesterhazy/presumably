@@ -1,10 +1,14 @@
 (ns example.core
   (:require [clojure.pprint]
             [reagent.core :as r]
-            [clojure.browser.repl :as repl]
+            [weasel.repl :as repl]
             [example.reagent]))
 
 (enable-console-print!)
+
+(defn ^:export repl []
+  (when-not (repl/alive?)
+    (repl/connect "ws://localhost:9753" :verbose true)))
 
 (defn init []
   (r/render-component [example.reagent/root]
@@ -12,8 +16,3 @@
 
 (defn on-jsload []
   (init))
-
-;; (defonce conn2
-;;   (do
-;;     (js/console.log "Conencting to REPL")
-;;     (repl/connect "http://localhost:9595/repl")))
