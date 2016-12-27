@@ -62,9 +62,8 @@
   [:div
    [:h2 "Contents"]
    [:ul
-    [:li [:a {:href "/boot-react-native.html"} "Getting Started with Boot React Native"]]
     [:li [:a {:href "/reagent.html"} "Reagent Mysteries"]]
-    ]])
+    [:li [:a {:href "/boot-react-native.html"} "Getting Started with Boot React Native"]]]])
 
 (defn index [opts data]
   (layout opts
