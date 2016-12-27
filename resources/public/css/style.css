@@ -42,8 +42,21 @@ a {
     color: inherit;
     text-decoration: none;
 }
-.content a { background: yellow; }
-.content a:hover { background: #ffcc00; }
+.content a {
+    background: yellow;
+    color: inherit;
+    box-shadow:3px 0 0 yellow, -3px 0 0 yellow;
+    padding: 2px 0;
+    margin:0 3px;
+}
+
+.content a:hover {
+    background: #ffff70;
+    color: inherit;
+    box-shadow:3px 0 0 #ffff70, -3px 0 0 #ffff70;
+    padding: 2px 0;
+    margin:0 3px;
+}
 
 code { font-size: smaller; }
 
