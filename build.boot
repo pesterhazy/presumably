@@ -8,6 +8,7 @@
                  [pandeiro/boot-http "0.7.3"]
                  [adzerk/boot-cljs "1.7.228-2"]
                  [adzerk/boot-reload "0.4.13"]
+                 [samestep/boot-refresh "0.1.0" :scope "test"]
                  [weasel "0.7.0"]
                  [confetti/confetti "0.1.1"]
                  [fipp "0.6.7" :scope "provided"]
@@ -20,6 +21,7 @@
          '[confetti.boot-confetti :refer [sync-bucket]])
 (require '[adzerk.boot-reload :refer [reload]])
 (require '[adzerk.boot-cljs :refer [cljs]])
+(require '[samestep.boot-refresh :refer [refresh]])
 
 (deftask build
   [i include-drafts bool "Include drafts?"
@@ -55,7 +57,9 @@
   (comp
    (repl :server true)
    (watch)
+   (notify :audible true)
    (reload :asset-path "public" :on-jsload 'example.core/on-jsload)
+   (refresh)
    (build)
    (cljs)
    (serve :resource-root "public")))
