@@ -35,3 +35,5 @@ exclamation mark convention
 using vars
 
 ## on-jsload
+
+## React exceptions
