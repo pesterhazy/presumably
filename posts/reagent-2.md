@@ -57,7 +57,7 @@ rerenders components when:
 
 But if you only change code, neither of those events occur. Consequently you
 need to re-render the scene manually. With Reagent, as with React, this is done
-simply by re-mounting the root component, i.e. by re-running `render-component`.
+simply by re-mounting the root component, i.e. by re-running `r/render`.
 
 With boot and boot-reload,
 [set the on-jsload property](https://github.com/martinklepsch/tenzing/blob/242a30595f63a541b8ada8bd7be0b489ccf522a2/resources/leiningen/new/tenzing/build.boot#L38)
@@ -76,25 +76,51 @@ The solution is simple. If your code looks like this:
 (defn root []
    [:div "Where the magic happens"])
 
-(r/render-component [root]
+(r/render [root]
                     (.getElementById js/document "container")))
 ```
 
 wrap the component in an anonymous function instead:
 
 ```
-(r/render-component (fn [] [root])
+(r/render (fn [] [root])
                     (.getElementById js/document "container")))
 ```
 
+## dereffing atoms
+
+If state updates don't trigger re-renders, one common reason is that you're
+accessing the atom instead of its contents.
+
+This problem is compounded by the fact that `get` in Clojure(Script) doesn't
+throw if you pass it an atom. Compare:
+
+```
+cljs.user=> (def !state (atom {:loading true}))
+#'cljs.user/!state
+
+cljs.user=> (get !state :loading)
+nil ;; D'OH!
+
+cljs.user=> (get @!state :loading)
+true
+```
+
+Call this a design choice, or call it an oversight that cannot be fixed without
+introducing a breaking a change. In any case, if state doesn't propagate, check
+every usage of your state atom -- may you forgot the `@` symbol.
+
+One typographic convention that can help here -- admittedly not a very common
+one -- is to always prefix variables names for atoms with an exclamation mark:
+
+```(let [state @!state] ...)```
+
+If you follow this convention, any use of `!state` not in the context of `@`
+(`deref`), `swap!` or `reset!` looks suspicious.
+
 ## defonce and ratom
 
-If state updates don't trigger re-renders, one common reason is that the var
-actually refers to an atom, not a ratom.
-
 Also defonce
-
-## dereffing atoms
 
 (get !state :foo)
 
