@@ -233,9 +233,7 @@ element is nil; in this case it will try to call nil, with a predictable result.
 
 ## Further Reading
 
-Expect part two soon!
-
-The full source of this example is available [here](https://github.com/pesterhazy/presumably/blob/master/example-src/example/reagent.cljs#L1).
+Click [here](reagent-2.html) for part two of this series. The full source of this example is available [here](https://github.com/pesterhazy/presumably/blob/master/example-src/example/reagent.cljs#L1).
 
 - [Hiccup Tips](http://www.lispcast.com/hiccup-tips)
 - [Using vectors instead of lists](https://github.com/Day8/re-frame/wiki/Using-%5B%5D-instead-of-%28%29)
