@@ -8,7 +8,7 @@ published: Dec 30, 2016
 One of Reagent's best features is that it enables a reloading-enabled workflow.
 After opening your app in the browser, you can edit a source file and, after a
 few seconds, explore the change in the running browser session. Importantly, the
-app's state is preserved accross reloads. Especially when building UIs, this can
+app's state is preserved across reloads. Especially when building UIs, this can
 be a powerful development tool:
 
 > Creators need an immediate connection to what they're creating. [Bret Victor,
@@ -16,7 +16,7 @@ be a powerful development tool:
 
 In general, there are two goals:
 
-- Relooding should be *reliable*. After making a change, you need to be able
+- Reloading should be *reliable*. After making a change, you need to be able
   rely on those changes taking effect. If there are any errors or warnings along
   the way, you should be notified clearly.
 
@@ -70,7 +70,7 @@ With leiningen and figwheel, you can do the same by simply rendering the compone
 
 ## The root-component doesn't update
 
-Code changes in your root component are somtimes not picked up after reloading.
+Code changes in your root component are sometimes not picked up after reloading.
 The solution is simple. If your code looks like this:
 
 ```clojure
@@ -134,7 +134,7 @@ I often accidentally write
 (defonce !state (atom {}))
 ```
 
-and forget to refer `reagent.core/atom` as `atom` in the namespace declartion.
+and forget to refer `reagent.core/atom` as `atom` in the namespace declaration.
 For this reason, I prefer explicitly specifying the qualified function
 name `r/atom`:
 
@@ -146,7 +146,7 @@ name `r/atom`:
 ```
 
 Finally, make sure you're using defonce, not def, to define the variable.
-Otherwise, each realod will reset the atom to its initial state.
+Otherwise, each reload will reset the atom to its initial state.
 
 ## Laziness
 
@@ -166,7 +166,7 @@ Unfortunately, if an exception
 React) render function, React messes up, essentially leaving the entire
 component tree in a corrupted state. The reasons behind this are ultimately due
 to issues with JavaScript exception handling, but this behavior is obviously
-anoying in a reloading-based workflow.
+annoying in a reloading-based workflow.
 
 The good news is that the React developers are aware of
 [this issue](https://github.com/facebook/react/issues/2461) and have introduced

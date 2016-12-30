@@ -7,7 +7,7 @@ published: Dec 26, 2016
 
 Reagent is a popular, practical ClojureScript wrapper for React. Its popularity
 is easily explained. It uses [hiccup
-syntax](https://github.com/weavejester/hiccup/wiki/Syntax) as an elegenat way to
+syntax](https://github.com/weavejester/hiccup/wiki/Syntax) as an elegant way to
 describe a DOM tree as a hierarchy of React components, where each component is a
 simple ClojureScript function. Furthermore, to aid tracking the efficient
 re-rendering of scenes, it introduces ratoms as an extension of Clojure's atom
@@ -20,12 +20,12 @@ necessary to build fast real-world applications.
 Reagent is some magical features, but does that make it mysterious? It's true that its
 abstractions, while useful and often conductive to cleaner code, can sometimes
 also be leaky. As a result, knowledge of the implementation is helpful to figure
-out how things work. In this series of blog posts, I will attempt to dispell
-the air of mystery sourrounding Reagent by explaining its underlying concepts.
+out how things work. In this series of blog posts, I will attempt to dispel
+the air of mystery surrounding Reagent by explaining its underlying concepts.
 
 ## Building a table
 
-This first focusses on the example of building an HTML table with Reagent. React
+This first focuses on the example of building an HTML table with Reagent. React
 requires tables to be properly structured, including thead and tbody elements,
 so we know what the hiccup representation of the DOM should look like:
 
@@ -99,7 +99,7 @@ the `key` attribute
 [has special meaning](https://facebook.github.io/react/docs/lists-and-keys.html).
 React's diffing algorithm uses this attribute as a hint to reidentify an element
 during a re-render operation. In any list or table, each child needs to have a
-key unique in its context. In essenece, you need to pick a primary key for your
+key unique in its context. In essence, you need to pick a primary key for your
 collection.
 
 In practical terms, you can leave out list keys during the exploration phase.
@@ -173,7 +173,7 @@ could modify table-ui to build the intended markup explicitly:
         (map (fn [col] [:th {:key col} (name col)]) cols))]
 ```
 
-And yet, our initial, more concise attemp works. Why?
+And yet, our initial, more concise attempt works. Why?
 
 The answer is that Reagent (and before it, hiccup) anticipates this usage and,
 in the course of transforming hiccup syntax to [React elements](https://facebook.github.io/react/blog/2015/12/18/react-components-elements-and-instances.html), automatically
@@ -204,7 +204,7 @@ neither a keyword nor a render function (the only valid component specifiers).
 The second gotcha is that, while `into` explicitly realizes the lazy sequence,
 leaving the sequence unrealized is dangerous when you rely on ratoms being
 dereferenced in the course of its realization. The effect of this issue is that
-everything will seem to work, but the component will not be rerendered when the
+everything will seem to work, but the component will not be re-rendered when the
 state changes.
 
 Fortunately the fix is simply to wrap the `map` (or `for`) call in `doall`to
@@ -217,7 +217,7 @@ force its realization before the render function returns:
 ```
 
 Happily, there's also a non-gotcha to report. Suppose you want to hide some
-philosophers, based on their date of birth. A convenient shortcurt is simply to return
+philosophers, based on their date of birth. A convenient shortcut is simply to return
 nil for rows to be ignored:
 
 ```clojure
