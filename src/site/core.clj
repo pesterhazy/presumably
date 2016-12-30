@@ -62,8 +62,9 @@
   [:div
    [:h2 "Contents"]
    [:ul
-    [:li [:a {:href "/reagent.html"} "Reagent Mysteries"] " " [:span "(Dec 26, 2016)"]
-     [:li [:a {:href "/boot-react-native.html"} "Getting Started with Boot React Native"] " " [:span "(Aug 2, 2016)"]]]]])
+    [:li [:a {:href "/reagent-2.html"} "Reagent Mysteries (2): Reloading"] " " [:span "(Dec 30, 2016)"]]
+    [:li [:a {:href "/reagent.html"} "Reagent Mysteries (1): Vectors and Sequences"] " " [:span "(Dec 26, 2016)"]]
+    [:li [:a {:href "/boot-react-native.html"} "Getting Started with Boot React Native"] " " [:span "(Aug 2, 2016)"]]]])
 
 (defn index [opts data]
   (layout opts
