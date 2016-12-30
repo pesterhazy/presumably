@@ -39,7 +39,7 @@ boot -d seancorfield/boot-new new -t tenzing -a +reagent -n my-test
 - [chestnut](https://github.com/plexus/chestnut), based on leiningen and figwheel
 
    ```
-lein new chestnut my-test +reagent
+lein new chestnut my-test --reagent
    ```
 
 Either of these projects should provide you with a reliable and fast reloading
@@ -90,13 +90,13 @@ wrap the component in an anonymous function instead:
 ## dereffing atoms
 
 If state updates don't trigger re-renders, one common reason is that you're
-accessing the atom instead of its contents.
+accessing the ratom instead of its contents.
 
 This problem is compounded by the fact that `get` in Clojure(Script) doesn't
 throw if you pass it an atom. Compare:
 
 ```
-cljs.user=> (def !state (atom {:loading true}))
+cljs.user=> (defonce !state (r/atom {:loading true}))
 #'cljs.user/!state
 
 cljs.user=> (get !state :loading)
@@ -118,15 +118,31 @@ one -- is to always prefix variables names for atoms with an exclamation mark:
 If you follow this convention, any use of `!state` not in the context of `@`
 (`deref`), `swap!` or `reset!` looks suspicious.
 
-## defonce and ratom
+## ratoms and defonce
 
-Also defonce
+Speaking of state, did you check that your `!state` is actually contained in a
+ratom? Remember, a ratom is like a clojure.core/atom, except that it
+automatically remembers whether it was dereffed in each render function and, if
+so, marks that function as requiring a re-render when the ratom is swapped.
 
-(get !state :foo)
+But it's easy to write
 
-(get @!state :foo)
+```
+(defonce !state (atom {}))
+```
 
-exclamation mark convention
+and to forget to include `reagent.core/atom` as atom. For this reason, I
+recommend always explicitly specifying `r/atom`:
+
+```
+(ns my-test.core
+  (:require [reagent.core :as r]))
+
+(defonce !state (r/atom {}))
+```
+
+Finally, make sure you're using defonce, not def, to define the variable.
+Otherwise, each realod will reset the atom to its initial state.
 
 ## React exceptions
 
