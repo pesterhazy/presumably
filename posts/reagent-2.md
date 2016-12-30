@@ -21,7 +21,7 @@ In general, there are two goals:
   the way, you should be notified clearly.
 
 - The edit/compile/test cycle should be *fast*. You want to wait for changes
-  for a few seconds at a maximum. Any delays threaten to break the Victor's Immediate
+  for a few seconds at a maximum. Any delays threaten to break Victor's Immediate
   Feedback principle.
 
 Getting started, the first hurdle to overcome is tooling. Often when newcomers
