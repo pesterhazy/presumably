@@ -72,7 +72,7 @@ With leiningen and figwheel, you can do the same by simply rendering the compone
 Code changes in your root component are somtimes not picked up after reloading.
 The solution is simple. If your code looks like this:
 
-```
+```clojure
 (defn root []
    [:div "Where the magic happens"])
 
@@ -82,7 +82,7 @@ The solution is simple. If your code looks like this:
 
 wrap the component in an anonymous function instead:
 
-```
+```clojure
 (r/render (fn [] [root])
                     (.getElementById js/document "container")))
 ```
@@ -113,7 +113,9 @@ every usage of your state atom -- may you forgot the `@` symbol.
 One typographic convention that can help here -- admittedly not a very common
 one -- is to always prefix variables names for atoms with an exclamation mark:
 
-```(let [state @!state] ...)```
+```clojure
+(let [state @!state] ...)
+```
 
 If you follow this convention, any use of `!state` not in the context of `@`
 (`deref`), `swap!` or `reset!` looks suspicious.
@@ -125,16 +127,16 @@ ratom? Remember, a ratom is like a clojure.core/atom, except that it
 automatically remembers whether it was dereffed in each render function and, if
 so, marks that function as requiring a re-render when the ratom is swapped.
 
-But it's easy to write
+I often accidentally write
 
-```
+```clojure
 (defonce !state (atom {}))
 ```
 
-and to forget to include `reagent.core/atom` as atom. For this reason, I
-recommend always explicitly specifying `r/atom`:
+and forget to include `reagent.core/atom` as atom in the namespace declartion.
+For this reason, I recommend always explicitly specifying `r/atom`:
 
-```
+```clojure
 (ns my-test.core
   (:require [reagent.core :as r]))
 
@@ -144,6 +146,23 @@ recommend always explicitly specifying `r/atom`:
 Finally, make sure you're using defonce, not def, to define the variable.
 Otherwise, each realod will reset the atom to its initial state.
 
-## React exceptions
+## Exceptions in React
 
-## multimethods
+Sometimes things go wrong. Like any dynamic language, ClojureScript has Null
+Pointer Exceptions in the shape of the inimitable truism `undefined in not a
+function`. Normally, you'll just fix the bug, save your file and expect the
+issue to be fixed in the running browser window.
+
+Unfortunately, if an exception
+[occurs in a Reagent](https://github.com/reagent-project/reagent/issues/272) (or
+React) render function, React messes up, essentially leaving the entire
+component tree in a corrupted state. The reasons behind this are ultimately due
+to issues with JavaScript exception handling, but this behavior is obviously
+anoying in a reloading-based workflow.
+
+The good news is that the React developers are aware of
+[this issue](https://github.com/facebook/react/issues/2461) and have introduced
+error barriers as a new feature to keep render exception from corrupting the
+tree. If you want to try this experimental feature introduced in React 0.15 in a
+Reagent project, try
+the code in [this gist](https://gist.github.com/pesterhazy/d163a8b3f1f1c6a0dac235858776c14b).
