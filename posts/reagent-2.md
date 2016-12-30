@@ -118,8 +118,8 @@ names for atoms with an exclamation mark:
 (let [state @!state] ...)
 ```
 
-If you follow this convention, any use of `!state` not in the vicinity of `@`
-(`deref`), `swap!` or `reset!` looks suspicious.
+If you follow this convention, any use of `!state` not in the vicinity of @,
+deref, swap! or reset! looks suspicious.
 
 ## Ratoms and defonce
 
@@ -134,8 +134,9 @@ I often accidentally write
 (defonce !state (atom {}))
 ```
 
-and forget to include `reagent.core/atom` as atom in the namespace declartion.
-For this reason, I recommend always explicitly specifying `r/atom`:
+and forget to refer `reagent.core/atom` as `atom` in the namespace declartion.
+For this reason, I prefer explicitly specifying the qualified function
+name `r/atom`:
 
 ```clojure
 (ns my-test.core
