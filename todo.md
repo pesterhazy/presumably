@@ -1,0 +1,2 @@
+- better slugs
+- redirect legacy urls
