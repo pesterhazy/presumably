@@ -43,14 +43,48 @@ lein new chestnut my-test +reagent
    ```
 
 Either of these projects should provide you with a reliable and fast reloading
-mechanism. But what if things go wrong? Below is a list of the common issues:
+mechanism. But what if things go wrong? Below is a list of the common issues.
 
-## root-component doesn't update
+## Code changes don't have any effect
 
-recommended:
+You're making a change to a render function, and yet your web app doesn't
+update? The reason may be that React doesn't get notified of the changes. Reagent
+rerenders components when:
+
+- component state changes
+- props change
+- a ratom changes
+
+But if you only change code, neither of those events occur. Consequently you
+need to re-render the scene manually. With Reagent, as with React, this is done
+simply by re-mounting the root component, i.e. by re-running `render-component`.
+
+With boot and boot-reload,
+[set the on-jsload property](https://github.com/martinklepsch/tenzing/blob/242a30595f63a541b8ada8bd7be0b489ccf522a2/resources/leiningen/new/tenzing/build.boot#L38)
+of the `reload` task to a function that [re-mounts the root](https://github.com/martinklepsch/tenzing/blob/b9fb8f596005d5dce36468f4880453f74fecf421/resources/leiningen/new/tenzing/app.cljs#L3).
+
+With leiningen and figwheel, you can do the same by simply rendering the component
+[inside the core namespace](https://github.com/plexus/chestnut/blob/fa2764cfeb3bd0df80a244dbb8cc47f29b903c2d/src/leiningen/new/chestnut/src/cljs/chestnut/core_reagent.cljs#L11).
+
+
+## The root-component doesn't update
+
+Code changes in your root component are somtimes not picked up after reloading.
+The solution is simple. If your code looks like this:
 
 ```
-(fn [] [root])
+(defn root []
+   [:div "Where the magic happens"])
+
+(r/render-component [root]
+                    (.getElementById js/document "container")))
+```
+
+wrap the component in an anonymous function instead:
+
+```
+(r/render-component (fn [] [root])
+                    (.getElementById js/document "container")))
 ```
 
 ## defonce and ratom
@@ -67,8 +101,6 @@ Also defonce
 (get @!state :foo)
 
 exclamation mark convention
-
-## on-jsload
 
 ## React exceptions
 
