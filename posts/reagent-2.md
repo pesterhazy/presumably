@@ -11,24 +11,39 @@ few seconds, explore the change in the running browser session. Importantly, the
 app's state is preserved accross reloads. Especially when building UIs, this can
 be a powerful development tool.
 
-How to build a reloading workflow: tenzing or chestnut
+> Creators need an immediate connection to what they're creating. [Bret Victor,
+> Inventing on Principle](http://blog.ezyang.com/2012/02/transcript-of-inventing-on-principleb/)
 
-## defonce and ratom
+We have two goals:
 
-If state updates don't trigger re-renders, one common reason is that the var
-actually refers to an atom, not a ratom.
+- Relaoding should be *reliable*. After making a change, you need to be able
+  rely on those changes taking effect. If there are any errors or warnings along
+  the way, you should be notified clearly.
 
-Also defonce
+- The edit/compile/test cycle needs to be *fast*. You want to wait for changes
+  for a few seconds, maximum. Any delays threaten to break the Victor's Immediate
+  Feedback principle.
 
-## multimethods
+Getting started, the first hurdle to overcome is tooling. Often when people have
+issues with ClojureScript, tooling may be the issue. Fortunately, these days
+it's relatively straight-forward to get started with a project template. Working
+with reagent, I recommend two projects that have reloading enabled out of the box:
 
-## dereffing atoms
+- [tenzing](https://github.com/martinklepsch/tenzing), based on boot and
+  `boot-reload` (which displays figwheel-like in-browser warnings)
 
-(get !state :foo)
+   ```
+boot -d seancorfield/boot-new new -t tenzing -a +reagent -n my-test
+   ```
 
-(get @!state :foo)
+- [chestnut](https://github.com/plexus/chestnut), based on leiningen and figwheel
 
-exclamation mark convention
+   ```
+lein new chestnut my-test +reagent
+   ```
+
+Either of these projects should provide you with a reliable and fast reloading
+mechanism. But what if things go wrong? Below is a list of the common issues:
 
 ## root-component doesn't update
 
@@ -38,6 +53,23 @@ recommended:
 (fn [] [root])
 ```
 
+## defonce and ratom
+
+If state updates don't trigger re-renders, one common reason is that the var
+actually refers to an atom, not a ratom.
+
+Also defonce
+
+## dereffing atoms
+
+(get !state :foo)
+
+(get @!state :foo)
+
+exclamation mark convention
+
 ## on-jsload
 
 ## React exceptions
+
+## multimethods
