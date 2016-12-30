@@ -32,7 +32,11 @@ exclamation mark convention
 
 ## root-component doesn't update
 
-using vars
+recommended:
+
+```
+(fn [] [root])
+```
 
 ## on-jsload
 
