@@ -77,15 +77,14 @@ The solution is simple. If your code looks like this:
 (defn root []
    [:div "Where the magic happens"])
 
-(r/render [root]
-                    (.getElementById js/document "container")))
+(r/render [root] (.getElementById js/document "container")))
 ```
 
 wrap the component in an anonymous function instead:
 
 ```clojure
 (r/render (fn [] [root])
-                    (.getElementById js/document "container")))
+          (.getElementById js/document "container")))
 ```
 
 ## Dereffing atoms
