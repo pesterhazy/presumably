@@ -25,7 +25,7 @@
       (clojure.string/replace " " "-")
       (clojure.string/replace #"[^a-z0-9-]" "")))
 
-(defn update-file [{:keys [slug title subtitle] :as fi}]
+(defn update-title [{:keys [slug title subtitle] :as fi}]
   (let [new-title (str title (when subtitle (str ". " subtitle)))
         new-slug (-> new-title clojure.string/trim slugify)]
     (boot.util/dbug "%s -> %s\n" (pr-str new-title) new-slug)
@@ -39,7 +39,15 @@
   (with-pre-wrap fileset
     (let [files (filter identity (pm/get-meta fileset))
           updated-files (->> files
-                             (map update-file))]
+                             (map update-title))]
       (perun/report-debug "slug" "generated slugs" (map :slug updated-files))
       (perun/report-info "slug" "added slugs to %s files" (count updated-files))
+      (pm/set-meta fileset updated-files))))
+
+(deftask remove-draft
+  []
+  (with-pre-wrap fileset
+    (let [files (filter identity (pm/get-meta fileset))
+          updated-files (->> files
+                             (map #(cond-> % (:draft %) (dissoc :content :include-atom :include-rss))))]
       (pm/set-meta fileset updated-files))))

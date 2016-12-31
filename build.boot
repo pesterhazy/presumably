@@ -20,7 +20,7 @@
 (require '[io.perun :refer [markdown render draft
                             collection print-meta
                             atom-feed permalink]]
-         '[site.title-slug :refer [title-slug]]
+         '[site.title-slug :refer [title-slug remove-draft]]
          '[io.perun.meta :as pm]
          '[io.perun.core :as perun]
          '[pandeiro.boot-http :refer [serve]]
@@ -44,9 +44,9 @@
   [i include-drafts bool "Include drafts?"
    d development? bool "Dev mode?"]
   (comp (markdown)
+        (if include-drafts identity (remove-draft))
         (title-slug)
         (permalink :permalink-fn permalink-fn)
-        (if include-drafts identity (draft))
         (render :renderer (if development? 'site.core/page-dev 'site.core/page-prod))
         (collection :renderer (if development? 'site.core/index-dev 'site.core/index-prod)
                     :page "index.html")
