@@ -1,5 +1,5 @@
 ---
-title: "Reagent mysteries"
+title: "Reagent Mysteries"
 subtitle: "Part 2: Reloading?"
 author: Paulus
 uuid: f90de6b8-562e-4b9d-b65c-acbf155335da

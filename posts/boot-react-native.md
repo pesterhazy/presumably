@@ -1,6 +1,6 @@
 ---
-title: "Getting started with Boot React Native"
-subtitle: "Part 1: up and running"
+title: "Getting Started with Boot React Native"
+subtitle: "Part 1: Up and Running"
 author: Paulus
 uuid: 28144761-c68c-4c4a-8aa9-c69b2508be2e
 date-published: 2016-08-02

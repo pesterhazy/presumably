@@ -1,5 +1,5 @@
 ---
-title: "Reagent mysteries"
+title: "Reagent Mysteries"
 uuid: c2afa5ba-cc99-488d-a342-b307f3497c43
 subtitle: "Part 1: Vectors and Sequences"
 author: Paulus

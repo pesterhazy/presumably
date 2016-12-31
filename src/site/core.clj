@@ -37,7 +37,6 @@
    [:h2 "Contents"]
    [:ul
     (doall (map (fn [{:keys [draft full-title permalink date-published] :as entry}]
-                  (prn (dissoc entry :content))
                   [:li
                    [:a {:href permalink} full-title]
                    " "
