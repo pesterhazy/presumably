@@ -1,7 +1,7 @@
 (set-env!
  :source-paths #{"src" "posts" "example-src"}
  :resource-paths #{"resources"}
- :dependencies '[[perun "0.3.0" :scope "test"]
+ :dependencies '[[perun "0.4.0-SNAPSHOT" :scope "test"]
                  [org.clojure/clojure "1.8.0" :scope "provided"]
                  [org.clojure/tools.nrepl "0.2.12"] ;; why do we need this?
                  [org.clojure/clojurescript "1.9.293"]
@@ -16,12 +16,21 @@
                  [hiccup "1.0.5"]])
 
 (require '[io.perun :refer [markdown render draft
-                            collection print-meta]]
+                            collection print-meta
+                            atom-feed]]
          '[pandeiro.boot-http :refer [serve]]
          '[confetti.boot-confetti :refer [sync-bucket]])
 (require '[adzerk.boot-reload :refer [reload]])
 (require '[adzerk.boot-cljs :refer [cljs]])
 (require '[samestep.boot-refresh :refer [refresh]])
+
+;; ---
+
+(defn post? [{:keys [path] :as m}]
+  (not (#{"public/index.html"} (:path m))))
+
+;; ---
+
 
 (deftask build
   [i include-drafts bool "Include drafts?"
@@ -30,7 +39,11 @@
         (if include-drafts identity (draft))
         (render :renderer (if development? 'site.core/page-dev 'site.core/page-prod))
         (collection :renderer (if development? 'site.core/index-dev 'site.core/index-prod)
-                    :page "index.html")))
+                    :page "index.html")
+        (atom-feed :filterer post?
+                   :site-title "presumably for side-effects"
+                   :description "A blog by Paulus Esterhazy"
+                   :base-url "https://presumably.de/")))
 
 (deftask publish-local
   "Publish to target/"

@@ -15,6 +15,9 @@
     (hp/include-js "/vendor/highlight.js")
     (when development?
       (hp/include-js "/js/app.js"))
+    [:link {:rel "alternate"
+            :type "application/atom+xml"
+            :href "/atom.xml?type=news"}]
     [:script "hljs.initHighlightingOnLoad();"]
     [:script "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -26,7 +29,7 @@
    [:body
     [:div.content.mx-auto
      [:div.clearfix
-      [:div.header [:a {:href "/"} "presumably for side effects"]
+      [:div.header [:a {:href "/"} "presumably for side-effects"]
        [:br]
        "a blog about clojure &c."]
       [:div body]

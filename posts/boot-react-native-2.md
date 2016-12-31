@@ -2,6 +2,7 @@
 title: "Getting started with Boot React Native (2)"
 subtitle: "Part 2"
 author: Paulus
+uuid: 82b528d8-bca7-474f-917d-03bd6b05e594
 draft: true
 ---
 

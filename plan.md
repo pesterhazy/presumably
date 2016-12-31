@@ -1,6 +1,7 @@
 tech
 
-- padding in headings (anchor tags)
+- beautiful slugs
+- redirect old URLs
 - RSS feed
 
 posts

@@ -1,2 +1,5 @@
+- atom: fix dates
+- atom: fix titles
+- atom; check drafts are excluded in prod
 - better slugs
 - redirect legacy urls
