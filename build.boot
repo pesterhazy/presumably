@@ -31,8 +31,8 @@
 
 ;; ---
 
-(defn post? [{:keys [path] :as m}]
-  (not (#{"public/index.html"} (:path m))))
+(defn post? [{:keys [path content]}]
+  (and content (not (#{"public/index.html"} path))))
 
 ;; ---
 
