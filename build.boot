@@ -14,11 +14,15 @@
                  [clj-time "0.13.0"]
                  [fipp "0.6.7" :scope "provided"]
                  [reagent "0.6.0"]
+
                  [hiccup "1.0.5"]])
 
 (require '[io.perun :refer [markdown render draft
                             collection print-meta
-                            atom-feed]]
+                            atom-feed permalink]]
+         '[site.title-slug :refer [title-slug]]
+         '[io.perun.meta :as pm]
+         '[io.perun.core :as perun]
          '[pandeiro.boot-http :refer [serve]]
          '[confetti.boot-confetti :refer [sync-bucket]])
 (require '[adzerk.boot-reload :refer [reload]])
@@ -33,10 +37,15 @@
 ;; ---
 
 
+(defn permalink-fn [{:keys [slug]}]
+  (str "/" slug ".html"))
+
 (deftask build
   [i include-drafts bool "Include drafts?"
    d development? bool "Dev mode?"]
   (comp (markdown)
+        (title-slug)
+        (permalink :permalink-fn permalink-fn)
         (if include-drafts identity (draft))
         (render :renderer (if development? 'site.core/page-dev 'site.core/page-prod))
         (collection :renderer (if development? 'site.core/index-dev 'site.core/index-prod)

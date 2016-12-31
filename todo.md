@@ -1,5 +1,7 @@
 - atom: fix dates
 - atom: fix titles
 - atom; check drafts are excluded in prod
+- fix BRN titles
+- auto-generate contents
 - better slugs
 - redirect legacy urls
