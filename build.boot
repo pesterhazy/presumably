@@ -61,6 +61,11 @@
   (comp (build)
         (target)))
 
+(deftask update-redirects
+  []
+  (with-pass-thru _
+    (boot.util/dosh "bash" "util/update-redirects")))
+
 (deftask publish
   "Publish to S3"
   []
@@ -68,10 +73,11 @@
         (sift :include #{#"^public/"})
         (sift :move {#"^public/" ""})
         (sync-bucket :bucket "presumably-de-sitebucket-i2nzci1gpkw3"
-                     :prune true ;; careful when setting this to true
+                     :prune true
                      :cloudfront-id (or (System/getenv "CLOUDFRONT_ID") (throw (ex-info "Set CLOUDFRONT_ID env var" {})))
                      :access-key (System/getenv "AWS_ACCESS_KEY_ID")
-                     :secret-key (System/getenv "AWS_SECRET_KEY"))))
+                     :secret-key (System/getenv "AWS_SECRET_KEY"))
+        (update-redirects)))
 
 (deftask dev
   []

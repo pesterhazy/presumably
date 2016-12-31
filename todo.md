@@ -5,3 +5,4 @@
 - auto-generate contents
 - better slugs
 - redirect legacy urls
+- error document

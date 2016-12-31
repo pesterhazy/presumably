@@ -8,14 +8,14 @@
 (defn fmt-date [date]
   (tf/unparse (tf/formatter "MMM dd, YYYY") (to/from-date date)))
 
-(defn page-content [{{:keys [title subtitle content draft
+(defn page-content [{{:keys [main-title subtitle content draft
                              date-published]} :entry
                      :as data}]
   (when (and (not draft) (not date-published))
     (println "WARNING: non-draft entry is lacking :date-published key"))
   [:div
-   (when title
-     [:h1 title])
+   (when main-title
+     [:h1 main-title])
    (when subtitle
      [:h2 subtitle])
    (when date-published
@@ -36,9 +36,9 @@
   [:div
    [:h2 "Contents"]
    [:ul
-    (doall (map (fn [{:keys [draft full-title permalink date-published] :as entry}]
+    (doall (map (fn [{:keys [draft title permalink date-published] :as entry}]
                   [:li
-                   [:a {:href permalink} full-title]
+                   [:a {:href permalink} title]
                    " "
                    (if draft
                      [:span "(draft)"]

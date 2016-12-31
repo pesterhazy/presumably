@@ -26,12 +26,13 @@
       (clojure.string/replace #"[^a-z0-9-]" "")))
 
 (defn update-file [{:keys [slug title subtitle] :as fi}]
-  (let [full-title (str title (when subtitle (str ". " subtitle)))
-        new-slug (-> full-title clojure.string/trim slugify)]
-    (boot.util/dbug "%s -> %s\n" (pr-str full-title) new-slug)
+  (let [new-title (str title (when subtitle (str ". " subtitle)))
+        new-slug (-> new-title clojure.string/trim slugify)]
+    (boot.util/dbug "%s -> %s\n" (pr-str new-title) new-slug)
     (assoc fi
-           :slug (or slug new-slug)
-           :full-title full-title)))
+           :title new-title
+           :main-title title
+           :slug (or slug new-slug))))
 
 (deftask title-slug
   []
