@@ -3,7 +3,7 @@ title: "Reagent mysteries"
 uuid: c2afa5ba-cc99-488d-a342-b307f3497c43
 subtitle: "Part 1: Vectors and Sequences"
 author: Paulus
-published: Dec 26, 2016
+date-published: 2016-12-26
 ---
 
 Reagent is a popular, practical ClojureScript wrapper for React. Its popularity

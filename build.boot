@@ -11,6 +11,7 @@
                  [samestep/boot-refresh "0.1.0" :scope "test"]
                  [weasel "0.7.0"]
                  [confetti/confetti "0.1.5-alpha"]
+                 [clj-time "0.13.0"]
                  [fipp "0.6.7" :scope "provided"]
                  [reagent "0.6.0"]
                  [hiccup "1.0.5"]])

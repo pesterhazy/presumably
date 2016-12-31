@@ -3,7 +3,7 @@ title: "Reagent mysteries"
 subtitle: "Part 2: Reloading?"
 author: Paulus
 uuid: f90de6b8-562e-4b9d-b65c-acbf155335da
-published: Dec 30, 2016
+date-published: 2016-12-30
 ---
 
 One of Reagent's best features is that it enables a reloading-enabled workflow.

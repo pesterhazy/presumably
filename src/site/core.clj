@@ -1,5 +1,12 @@
 (ns site.core
-  (:require [hiccup.page :as hp]))
+  (:require [hiccup.page :as hp]
+            [clj-time.core :as tc]
+            [clj-time.coerce :as to]
+            [clj-time.format :as tf]
+            ))
+
+(defn fmt-date [date]
+  (tf/unparse (tf/formatter "MMM dd, YYYY") (to/from-date date)))
 
 (def default-title "Presumably for side-effects")
 
@@ -40,10 +47,11 @@
   )
 
 (defn page [opts
-            {{:keys [title subtitle content draft published]} :entry
+            {{:keys [title subtitle content draft
+                     date-published]} :entry
              :as data}]
-  (when (and (not draft) (not published))
-    (println "WARNING: non-draft entry is lacking published key"))
+  (when (and (not draft) (not date-published))
+    (println "WARNING: non-draft entry is lacking :date-published key"))
   (layout opts
           {:title title
            :body [:div
@@ -51,8 +59,8 @@
                     [:h1 title])
                   (when subtitle
                     [:h2 subtitle])
-                  (when published
-                    [:div.date "published " published])
+                  (when date-published
+                    [:div.date "published " (fmt-date date-published)])
                   [:div content]]}))
 
 (defn page-dev [m]
