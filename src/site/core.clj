@@ -36,12 +36,15 @@
   [:div
    [:h2 "Contents"]
    [:ul
-    (doall (map (fn [{:keys [title permalink date-published] :as entry}]
-                  [:li [:a {:href permalink} title] " " [:span "(" (fmt-date date-published) ")"]])
-                entries))
-    [:li [:a {:href "/reagent-2.html"} "Reagent Mysteries (2): Reloading"] " " [:span "(Dec 30, 2016)"]]
-    [:li [:a {:href "/reagent.html"} "Reagent Mysteries (1): Vectors and Sequences"] " " [:span "(Dec 26, 2016)"]]
-    [:li [:a {:href "/boot-react-native.html"} "Getting Started with Boot React Native"] " " [:span "(Aug 2, 2016)"]]]])
+    (doall (map (fn [{:keys [draft full-title permalink date-published] :as entry}]
+                  (prn (dissoc entry :content))
+                  [:li
+                   [:a {:href permalink} full-title]
+                   " "
+                   (if draft
+                     [:span "(draft)"]
+                     [:span "(" (fmt-date date-published) ")"])])
+                entries))]])
 
 (defn index [opts data]
   (layout/layout opts
