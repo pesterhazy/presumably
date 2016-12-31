@@ -1,8 +1,6 @@
 tech
 
-- beautiful slugs
-- redirect old URLs
-- RSS feed
+- error document
 
 posts
 
