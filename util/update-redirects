@@ -18,6 +18,6 @@ cd "$proot"
 src=data/moved.html
 dest=s3://presumably-de-sitebucket-i2nzci1gpkw3
 
-redir /boot-react-native.html /getting-started-with-boot-react-native-part-1-up-and-running.html
-redir /reagent.html /reagent-mysteries-part-1-vectors-and-sequences.html
-redir /reagent-2.html /reagent-mysteries-part-2-reloading.html
+redir boot-react-native.html /getting-started-with-boot-react-native-part-1-up-and-running.html
+redir reagent.html /reagent-mysteries-part-1-vectors-and-sequences.html
+redir reagent-2.html /reagent-mysteries-part-2-reloading.html
