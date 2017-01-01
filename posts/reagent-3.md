@@ -41,15 +41,15 @@ element:
 ```clojure
 (defn video-ui []
   (let [!video (atom nil)] ;; clojure.core/atom
-    (fn [{:keys [src]}]
+    (function [{:keys [src]}]
       [:div
        [:div
         [:video {:src src
                  :style {:width 400}
-                 :ref (fn [el]
+                 :ref (function [el]
                         (reset! !video el))}]]
        [:div
-        [:button {:on-click (fn []
+        [:button {:on-click (function []
                               (when-let [video @!video] ;; not nil?
                                 (if (.-paused video)
                                   (.play video)
@@ -57,7 +57,7 @@ element:
          "Toogle"]]])))
 ```
 
-When the rendering fn is called initially, the video DOM node has not been
+When the rendering function is called initially, the video DOM node has not been
 created yet. By passing the special `ref` prop to a component, you tell React
 that you want to be notified once the DOM node has been created. Conveniently,
 the anonmymous function receives as its argument the backing instance. A useful
@@ -78,10 +78,11 @@ A few notes on the implementation:
 
 - The component is implemented as a
   [Form-2 component](https://github.com/Day8/re-frame/wiki/Creating-Reagent-Components#form-2--a-function-returning-a-function).
-  In this style, props need to be specified as arguments to the inner (render)
-  fn. The outer (component-creating) fn often does not care about the props. As
-  in JavaScript you can call functions with the wrong arity, we simply leave out
-  the `src` prop in the declaration.
+  In this style, props need to be specified as arguments to the inner
+  (rendering) function. The outer (component-creating) function often does not
+  need to see the props. Using the fact that JavaScript allows you to call
+  functions with the wrong arity, we simply leave out the `src` prop in the
+  declaration.
 
 - Earlier versions of React only supported string refs. Callback refs,
   introduced in recent versions of React, are elegant and a better fit for
