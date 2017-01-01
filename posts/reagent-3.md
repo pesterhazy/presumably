@@ -6,23 +6,23 @@ author: Paulus
 draft: true
 ---
 
-So you're using React and still want to manipulate the DOM. You heard the
-warnings, you know it will wreak havoc with your karma, but you couldn't care less. Now
-what?
+So you're using functional React and yet you still want to manipulate the DOM.
+You ignored the warnings, you know it will mess with your karma. Now what?
 
-In truth, of course, there are legitimate reasons for doing just that. Sometimes
-you need to circumvent React for performance reasons.
+In truth, of course, there are legitimate reasons for reaching into the DOM.
+Sometimes you need to circumvent React for performance reasons. But a more
+common reason is that some DOM elements have an inherently imperative API. For
+example, the HTML5 `<video>` element has methods, `.play` and `.pause`, that
+change playback status.
 
-Some DOM elements have an imperative API. For example, the HTML5 `<video>`
-element has methods, like `.play` and `.pause`, that you can call to interact with the
-video. These are methods of the DOM element. However, when you're building a
-component in React, you don't usually get into contact with the DOM itself.
-Instead, React components figure in an internal data structure that mirrors the
-hierarchy of the DOM.
+These are methods of the DOM element. However, when you're building a component
+in React, you don't usually touch the DOM itself. Instead, React components
+figure in an internal data structure that mirrors the hierarchy of the DOM but
+isolates you from its details.
 
 This hierarchy of React elements, containing only immmutable values, is what
-powers React's simplicity. However, pausing a video invariably involves mutating
-state in some form.
+makes React's so simple to reason about. However, there's no way around the fact
+that pausing a video invariably involves mutating state in some form.
 
 React's core abstraction is the component. A component class, of course, can be
 instantiated many times on any given page. The concrete representation of the
