@@ -6,9 +6,10 @@ author: Paulus
 draft: true
 ---
 
-So you're using React, enjoying its functional abstractions and
+So you're enjoying React with its functional abstractions and
 uni-directional data flow. And yet you still crave direct DOM manipulation. You
 ignore the warnings, you know it will mess with your karma. Now what?
+
 
 In truth, of course, there are legitimate reasons for reaching into the DOM.
 Sometimes you need to circumvent React for performance reasons. But a more
@@ -21,7 +22,7 @@ in React, you don't usually touch the DOM itself. Instead, React components
 figure in an internal data structure that mirrors the hierarchy of the DOM but
 shields you from its details.
 
-This hierarchy of React elements, containing only immmutable values, is what
+This hierarchy of React elements, containing only immutable values, is what
 makes React's so simple to reason about. Still there's no denying
 that pausing a video will inevitably involve mutating state in some form.
 
@@ -60,7 +61,7 @@ element:
 When the rendering function is called initially, the video DOM node has not been
 created yet. By passing the special `ref` prop to a component, you tell React
 that you want to be notified once the DOM node has been created. Conveniently,
-the anonmymous function receives as its argument the backing instance. A useful
+the anonymous function receives as its argument the backing instance. A useful
 pattern is to store the reference to the node in an atom for later use.
 
 Note that the ref callback is called twice in the component's lifetime, when the
@@ -73,7 +74,7 @@ appropriate method on the DOM node.
 A few notes on the implementation:
 
 - We use a clojure.core/atom instead of a ratom to store the ref, as we don't
-  deref the atom in the render function or want the component to rerender when
+  deref the atom in the render function or want the component to re-render when
   the video node is created.
 
 - The component is implemented as a
@@ -86,7 +87,7 @@ A few notes on the implementation:
 
 - Earlier versions of React only supported string refs. Callback refs,
   introduced in recent versions of React, are elegant and a better fit for
-  freagent, so you should prefer them where you can. String refs and the related
+  reagent, so you should prefer them where you can. String refs and the related
   [findDOMNode](https://facebook.github.io/react/docs/react-dom.html#finddomnode)
   or
   [r/dom-node](http://blog.ducky.io/reagent-docs/0.6.0-alpha2/reagent.core.html#var-dom-node)
@@ -101,13 +102,15 @@ A few notes on the implementation:
 
 ## Further Reading
 
+The code for this example is available [on github](https://github.com/pesterhazy/presumably/blob/master/example-src/example/refs.cljs#L5).
+
 React comes with good documentation on [refs](https://facebook.github.io/react/docs/refs-and-the-dom.html) and
 [backing instances](https://facebook.github.io/react/blog/2015/12/18/react-components-elements-and-instances.html).
 
 For an in-depth explanation of React component from a ClojureScript perspective,
 the [Lambda Island
 episode on React](https://lambdaisland.com/episodes/react-app-clojurescript) is
-excellent (paywalled, but with a free trial available).
+excellent (paywalled but with a free trial available).
 
 [React From Zero](https://github.com/kay-is/react-from-zero) is a useful step-by-step
 guide to React's concepts in JavaScript
