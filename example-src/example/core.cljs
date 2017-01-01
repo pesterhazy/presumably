@@ -2,7 +2,8 @@
   (:require [clojure.pprint]
             [reagent.core :as r]
             [weasel.repl :as repl]
-            [example.reagent]))
+            [example.reagent]
+            [example.refs]))
 
 (enable-console-print!)
 
@@ -11,7 +12,7 @@
     (repl/connect "ws://localhost:9753" :verbose true)))
 
 (defn init []
-  (r/render-component [example.reagent/root]
+  (r/render-component [example.refs/root]
                       (.getElementById js/document "container")))
 
 (defn on-jsload []

@@ -10,4 +10,7 @@ posts
 - How to set up a timer in a reagent component
   - different approaches (def atom, let binding)
 
+- 3rd party React components
+  - [:> nativeComp {:key "value"}]
+
 direnv as an ide
