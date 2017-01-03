@@ -3,7 +3,7 @@ title: "Reagent Mysteries"
 subtitle: "Part 3: Manipulating the DOM"
 uuid: e2a369b7-b5ef-4206-a85b-751834440dc2
 author: Paulus
-draft: true
+date-published: 2017-01-03
 ---
 
 So you're enjoying React with its functional abstractions and uni-directional
@@ -41,7 +41,7 @@ the backing instance associated with a video elemento? The answer is to attach a
 ```clojure
 (defn video-ui []
   (let [!video (atom nil)] ;; clojure.core/atom
-    (function [{:keys [src]}]
+    (fn [{:keys [src]}]
       [:div
        [:div
         [:video {:src src
@@ -49,7 +49,7 @@ the backing instance associated with a video elemento? The answer is to attach a
                  :ref (function [el]
                         (reset! !video el))}]]
        [:div
-        [:button {:on-click (function []
+        [:button {:on-click (fn []
                               (when-let [video @!video] ;; not nil?
                                 (if (.-paused video)
                                   (.play video)
