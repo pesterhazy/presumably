@@ -1,2 +1,4 @@
 - klipsify
 - zanzibah
+
+- reference PropTypes
