@@ -23,6 +23,6 @@
 
 (defn root []
   [:div
-   [:> (r/reactify-component title-ul-ui) {:title "peoplez"}
+   [:> (r/reactify-component title-ul-ui) {:title "people"}
     [:li "Smith"]
     [:li "Hinz"]]])

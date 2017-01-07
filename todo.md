@@ -8,3 +8,5 @@
 - better example
 - sync with example code
 - mention printing out props
+- add links
+- spell checking

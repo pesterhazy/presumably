@@ -6,22 +6,32 @@ author: Paulus
 draft: true
 ---
 
-ReactDOM.render -- essentially React's single public API function -- renders a component based on a set of props passed to it. After a pure transformation these inputs, expanding components recursively until it hits bedrock, it constructs a tree of elements ready to be rendered to the DOM. Through immutable props, data flows from parent to children. A simple outline, but thereby hangs a tale.
+ReactDOM.render -- essentially React's single public API function -- renders a
+root component based on a set of props passed to it. After a series of
+transformation of these inputs and expanding components recursively until it hits bedrock, render constructs a tree of elements ready to be mounted in the DOM. Through immutable props, data flows from parent to children. A simple outline, but thereby hangs a tale.
 
 Every component receives as its single argument a JavaScript Object called
 _props_. Each prop is a (usually) immutable value associated with a key. Props
 can be anything you wish: strings, numbers, objects or, commonly, callback
-functions.
+functions. Plain React uses [JSX syntax](https://facebook.github.io/react/docs/jsx-in-depth.html) to pass props:
 
-Whereas a React component receives named props, Reagent components are more
-flexible.
+```
+<MyUI {name: "Smith", age: 72}>
+```
+
+The Reagent equivalent is just as readable: 
+
+```clojure
+(defn root []
+  [my-ui {:name "Smith" :age 72}])
+```
+
+Here's one way to define the component:
 
 ```clojure
 (defn my-ui [{:keys [name age]}]
   [:div "Mr. " name " is " age " years old"])
 
-(defn root []
-  [my-ui {:name "Smith" :age 72}])
 ```
 
 In fact, if you instantiate a plain React component, this is the only way to
@@ -31,7 +41,8 @@ instantiate a component:
 [component {:prop1 :val1, :prop2 :val2 ...} child1 child2 ...}]
 ```
 
-A Reagent component, on the other hand, is a simple ClojureScript function and, as such, can take any positional arguments.
+Whereas a React component always receives named props, Reagent components are
+more flexible. A Reagent component is a simple ClojureScript function and, as such, can take any positional arguments.
 
 ```clojure
 (defn my-ui* [name age]
