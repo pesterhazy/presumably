@@ -1,12 +1,12 @@
 ---
 title: "Reagent Mysteries"
-subtitle: "Part 4: Children and other props"
+subtitle: "Part 4: Children and Other Props"
 uuid: 66088d3e-a7ef-4d86-a0fb-1c4a3b97e540
 author: Paulus
 draft: true
 ---
 
-ReactDOM.render -- essentially React's single public API function -- renders a
+ReactDOM.render — essentially React's single public API function — renders a
 root component based on a set of props passed to it. After a series of
 transformation of these inputs and expanding components recursively until it hits bedrock, render constructs a tree of elements ready to be mounted in the DOM. Through immutable props, data flows from parent to children. A simple outline, but thereby hangs a tale.
 
@@ -98,3 +98,9 @@ introduced in Reagent 0.6.0:
     [:li "Smith"]
     [:li "Hinz"]]])
 ```
+
+## Further Reading
+
+- Facebook's docs on [props](https://facebook.github.io/react/docs/components-and-props.html)
+- [Props, Children & Component Lifecycle in Reagent](https://www.martinklepsch.org/posts/props-children-and-component-lifecycle-in-reagent.html)
+  explores the implications of Reagent-style props for lifecycle methods.
