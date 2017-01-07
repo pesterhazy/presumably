@@ -17,12 +17,73 @@ Whereas a React component receives named props, Reagent components are more
 flexible.
 
 ```clojure
-(defn my-ui [name age]
+(defn my-ui [{:keys [name age]}]
   [:div "Mr. " name " is " age " years old"])
 
 (defn root []
-  [my-ui "Smith" age])
+  [my-ui {:name "Smith" :age 72}])
 ```
 
-As you can see, a Reagent component is a simple ClojureScript function and, as
-such, can take any arguments.
+In fact, if you instantiate a plain React component, this is the only way to
+instantiate a component:
+
+```clojure
+[component {:prop1 :val1, :prop2 :val2 ...} child1 child2 ...}]
+```
+
+A Reagent component, on the other hand, is a simple ClojureScript function and, as such, can take any positional arguments.
+
+```clojure
+(defn my-ui* [name age]
+  [:div "Mr. " name " is " age " years old"])
+
+(defn root []
+  [my-ui* "Smith" 72])
+```
+
+If we peek under the covers, we can see that Reagent implements this by storing
+the _entire_ list of props passed to the Reagent component in a single prop
+called `argv`. Note that `argv` contains the entire Hiccup vector. Its first
+element is the function representing the component (in our case, my-ui*),
+followed by each argument ("Smith" and 72).
+
+Generally it is a good idea to follow the React convention of passing a map of
+attributes (or props) as the first argument, followed by children (if any).
+Here's an example with children:
+
+```clojure
+(defn title-ul-ui [{:keys [title]} & children]
+  [:section
+   [:h3 title]
+   (into [:ul children])])
+
+(defn root []
+  (title-ul-ui
+   {:title "people"}
+   [:li {:key 0} "Smith"]
+   [:li {:key 1} "Schmidt"]))
+```
+
+This argument format is all but suggested Reagent, which comes with convenience functions that allow you to access the props map as `(r/props (r/current-component))` and the children as `(r/children (r/current-component))` from inside the render fn. These functions will only work if the React convention is followed.
+
+The upside is that r/children also works when you're implementing a plain React
+component using Reagent using reactify-component. This is sometimes useful
+when interoperating with Reagent components. We can simulate this with the
+[`:>` shorcut](https://reagent-project.github.io/news/news060-alpha.html)
+introduced in Reagent 0.6.0:
+
+```clojure
+(defn title-ul-ui [{:keys [title]}]
+  [:div
+   [:section
+    [:h3 title]
+    (into [:ul] (r/children (r/current-component)))]])
+
+(def title-ul-ui* (r/reactify-component title-ul-ui))
+
+(defn root []
+  [:div
+  [:> title-ul-ui* {:title "people"}
+    [:li "Smith"]
+    [:li "Hinz"]]])
+```
