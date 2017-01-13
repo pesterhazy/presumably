@@ -29,7 +29,7 @@ though sometimes I want to exclude some of files, either by path or extension.
 Just use regular expressions, you say? Actually, no. Most of the time I don't
 really need the flexibility they offer, and I don't want to remember the
 confusing and inconsistent regex syntax and esacaping tricks required by the
-different Unix tools. Mostly I replace fixed strings.
+different Unix tools. Mostly I work with fixed strings.
 
 In fact some Unix tools are not Unix-y enough for my taste. A case in point, I
 don't particularly like using sed or perl for string replacement, as regex
