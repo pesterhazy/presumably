@@ -3,7 +3,7 @@ title: "Search and Replace with git"
 subtitle: "Using git xargs and rpl"
 uuid: d106120b-34de-4bc6-a1a8-16851474cc97
 author: Paulus
-draft: true
+date-published: 2017-01-13
 ---
 
 If you are like me and you see the command line as the ultimate developer
