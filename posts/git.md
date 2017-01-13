@@ -43,8 +43,8 @@ Fortunately, there is a replacement for sed that operates on fixed strings calle
 [rpl(1)](https://linux.die.net/man/1/rpl). It's widely available (`brew install
 rpl`, `apt-get install rpl`) and pretty much does one job, and does it well.
 
-What about selecting files to work on? Git and the popular `xargs` tool help
-here, but to combine the two easily I needed a new tool. So I built
+What about selecting files to work on? Git and the popular `xargs` Unix tool
+help here, but to compose the two I needed a new tool. So I built
 [git xargs](https://gist.github.com/pesterhazy/65360ed980ae0c86a4150102ca6484a0).
 
 Tiny enough to fit in a gist, git xargs only does one thing: it executes a shell command on all files in your Git repository. Here's how you use it (and remember to start with a clean `git status`):
@@ -70,4 +70,4 @@ Of course, the beauty of revision control is that you can easily see what has
 changed (`git diff`) and selectively apply or reject the changes (`git add -p`).
 If something went wrong, just revert the working directory to its previous state (`git checkout --`).
 
-Thanks to composability, there are many potential use cases for git xargs besides string replacments. Hopefully `git xargs` will prove useful to you too!
+Thanks to composability, there are many potential use cases for git xargs besides string replacments. Hopefully it will prove useful to you too!
