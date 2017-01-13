@@ -24,7 +24,7 @@ The challenges usually involves
 - replacing the string without fuss.
 
 Most of the time I just want to iterate over every file in my Git repository,
-though sometimes I want to exclude some of them, either by path or extension.
+though sometimes I want to exclude some of files, either by path or extension.
 
 Just use regular expressions, you say? Actually, no. Most of the time I don't
 really need the flexibility they offer, and I don't want to remember the
