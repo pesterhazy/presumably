@@ -7,13 +7,16 @@ draft: true
 ---
 
 ReactDOM.render — essentially React's single public API function — renders a
-root component based on a set of props passed to it. After a series of
-transformation of these inputs and expanding components recursively until it hits bedrock, render constructs a tree of elements ready to be mounted in the DOM. Through immutable props, data flows from parent to children. A simple outline, but thereby hangs a tale.
+root component based on a set of arguments -- props -- that determine the
+component's look and behavior. Through transforming inputs and expanding
+sub-nodes recursively until it hits bedrock, render constructs a tree of
+elements ready to be mounted in the DOM. In React-land data flows, in the form
+of props, from parent to children. Reagent works similarly but thereby hangs a tale.
 
 Every component receives as its single argument a JavaScript object called
-_props_. Each prop is a (hopefully) immutable value associated with a key. Props
-can be anything you wish: strings, numbers, objects or, just as commonly,
-callback functions. Plain React uses
+_props_. Each prop is a (hopefully) immutable value associated with a key. In
+principle, props can be anything you wish: strings, numbers, objects or, just as
+commonly, callback functions. Plain React uses
 [JSX syntax](https://facebook.github.io/react/docs/jsx-in-depth.html) to pass
 props, mimicking HTML:
 
