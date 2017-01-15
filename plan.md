@@ -15,12 +15,17 @@ posts
 
 - styling components
   - inline styles
+  - `:style {:font-size 17}`
+  - `:class ["btn" "btn-default"]`
 
 - Reagent and Google Closure: best friends forever?
   - Google Closure Delay, Debounce
   - PubSub
   - DateTime
   - Events
+
+- Using D3 with Reagent
+  - ... and recalcitrant
 
 - Datomic: or set
 ```
