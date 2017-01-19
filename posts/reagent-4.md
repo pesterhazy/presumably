@@ -29,13 +29,13 @@ Here's one way to define the component:
 
 ```
 
-In fact, if you instantiate a plain React component, perhaps from a third-party library, this is the only way to instantiate a component:
+In fact, if you are working with a plain React component, perhaps from a third-party library, this is the only way to instantiate a component:
 
 ```clojure
 [component {:prop1 :val1, :prop2 :val2 ...} child1 child2 ...}]
 ```
 
-React component always receives named props, but Reagent components are more flexible. A Reagent component is represented by any ClojureScript function and, as such, can take any number of positional arguments.
+React component always receive named props, but Reagent components are more flexible. A Reagent render function could be any ClojureScript function and, as such, can take any number of positional arguments.
 ```clojure
 (defn my-ui* [name age]
   [:div "Mr. " name " is " age " years old"])
@@ -46,7 +46,7 @@ React component always receives named props, but Reagent components are more fle
 
 If we peek under the covers, we can see that Reagent implements this feature by storing the _entire_ list of props passed to the Reagent component in a single prop called `argv`. Note that `argv` contains the entire Hiccup vector. Its first element is the function representing the component (in our case, my-ui*), followed by each argument ("Smith" and 72).
 
-Generally it is a good idea to follow the React convention of passing a map of attributes (or props) as the first argument, followed by children (if any). Here's an example with children:
+It is often a good idea to follow the React convention of passing a map of attributes (or props) as the first argument, followed by children (if any). Here is such an example:
 
 ```clojure
 (defn title-ul-ui [{:keys [title]} & children]
@@ -61,9 +61,9 @@ Generally it is a good idea to follow the React convention of passing a map of a
    [:li {:key 1} "Schmidt"]))
 ```
 
-This argument format is all but suggested Reagent, which comes with convenience functions that allow you to access the props map as `(r/props (r/current-component))` and the children as `(r/children (r/current-component))` from inside the render fn. These functions will only work if the React convention is followed.
+Another point in favor of this format is that Reagent comes with convenience functions that allow you to access the props map as `(r/props (r/current-component))` and the children as `(r/children (r/current-component))` from inside the render function. r/children, in particular, will only work if the props-first convention is followed.
 
-The upside is that r/children also works when you're implementing a plain React component using Reagent using reactify-component. This is sometimes useful when interoperating with Reagent components. We can simulate this with the [`:>` shorcut](https://reagent-project.github.io/news/news060-alpha.html) introduced in Reagent 0.6.0:
+Conversely r/children also works when you're implementing a plain React component in ClojureScript using reactify-component. This is sometimes useful when interoperating with Reagent components. To see how this works, we can create a plain React component and instantiate it using the [`:>` shorcut](https://reagent-project.github.io/news/news060-alpha.html) introduced in Reagent 0.6.0:
 
 ```clojure
 (defn title-ul-ui [{:keys [title]}]
