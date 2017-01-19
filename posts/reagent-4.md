@@ -32,10 +32,10 @@ Here's one way to define the component:
 In fact, if you are working with a plain React component, perhaps from a third-party library, this is the only way to instantiate a component:
 
 ```clojure
-[component {:prop1 :val1, :prop2 :val2 ...} child1 child2 ...}]
+[component {:prop1 :val1, :prop2 :val2 ...} child1 child2 ...]
 ```
 
-React component always receive named props, but Reagent components are more flexible. A Reagent render function could be any ClojureScript function and, as such, can take any number of positional arguments.
+React components always receive named props, but Reagent components are more flexible. A Reagent render function could be any ClojureScript function and, as such, can take any number of positional arguments.
 ```clojure
 (defn my-ui* [name age]
   [:div "Mr. " name " is " age " years old"])
