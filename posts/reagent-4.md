@@ -6,25 +6,15 @@ author: Paulus
 draft: true
 ---
 
-ReactDOM.render — essentially React's single public API function — renders a
-root component based on a set of arguments -- props -- that determine the
-component's look and behavior. Through transforming inputs and expanding
-sub-nodes recursively until it hits bedrock, render constructs a tree of
-elements ready to be mounted in the DOM. In React-land data flows, in the form
-of props, from parent to children. Reagent works similarly but thereby hangs a tale.
+ReactDOM.render — essentially React's single public API function — renders a root component based on a set of arguments, or props, that determine the component's look and behavior. Transforming its inputs and expanding sub-nodes recursively, render constructs a tree of elements ready to be mounted to the DOM. In React-land data flows, in the form of props, from parent to children.
 
-Every component receives as its single argument a JavaScript object called
-_props_. Each prop is a (hopefully) immutable value associated with a key. In
-principle, props can be anything you wish: strings, numbers, objects or, just as
-commonly, callback functions. Plain React uses
-[JSX syntax](https://facebook.github.io/react/docs/jsx-in-depth.html) to pass
-props, mimicking HTML:
+Reagent follow the same principles but thereby hangs a tale. In React, every component receives as its single argument a JavaScript object called _props_. Each prop is a key associated with a (hopefully) immutable value. Props can be anything you wish: strings, numbers, objects or, just as commonly, callback functions. In plain React, props are typicalled passed using the [JSX syntax](https://facebook.github.io/react/docs/jsx-in-depth.html), which looks like HTML:
 
 ```
 <MyUI name="Smith" age=72}>
 ```
 
-The Reagent equivalent is just as readable: 
+Reagent's equivalent looks similar:
 
 ```clojure
 (defn root []
@@ -39,16 +29,13 @@ Here's one way to define the component:
 
 ```
 
-In fact, if you instantiate a plain React component, this is the only way to
-instantiate a component:
+In fact, if you instantiate a plain React component, perhaps from a third-party library, this is the only way to instantiate a component:
 
 ```clojure
 [component {:prop1 :val1, :prop2 :val2 ...} child1 child2 ...}]
 ```
 
-Whereas a React component always receives named props, Reagent components are
-more flexible. A Reagent component is a simple ClojureScript function and, as such, can take any positional arguments.
-
+React component always receives named props, but Reagent components are more flexible. A Reagent component is represented by any ClojureScript function and, as such, can take any number of positional arguments.
 ```clojure
 (defn my-ui* [name age]
   [:div "Mr. " name " is " age " years old"])
@@ -57,15 +44,9 @@ more flexible. A Reagent component is a simple ClojureScript function and, as su
   [my-ui* "Smith" 72])
 ```
 
-If we peek under the covers, we can see that Reagent implements this by storing
-the _entire_ list of props passed to the Reagent component in a single prop
-called `argv`. Note that `argv` contains the entire Hiccup vector. Its first
-element is the function representing the component (in our case, my-ui*),
-followed by each argument ("Smith" and 72).
+If we peek under the covers, we can see that Reagent implements this feature by storing the _entire_ list of props passed to the Reagent component in a single prop called `argv`. Note that `argv` contains the entire Hiccup vector. Its first element is the function representing the component (in our case, my-ui*), followed by each argument ("Smith" and 72).
 
-Generally it is a good idea to follow the React convention of passing a map of
-attributes (or props) as the first argument, followed by children (if any).
-Here's an example with children:
+Generally it is a good idea to follow the React convention of passing a map of attributes (or props) as the first argument, followed by children (if any). Here's an example with children:
 
 ```clojure
 (defn title-ul-ui [{:keys [title]} & children]
@@ -82,11 +63,7 @@ Here's an example with children:
 
 This argument format is all but suggested Reagent, which comes with convenience functions that allow you to access the props map as `(r/props (r/current-component))` and the children as `(r/children (r/current-component))` from inside the render fn. These functions will only work if the React convention is followed.
 
-The upside is that r/children also works when you're implementing a plain React
-component using Reagent using reactify-component. This is sometimes useful
-when interoperating with Reagent components. We can simulate this with the
-[`:>` shorcut](https://reagent-project.github.io/news/news060-alpha.html)
-introduced in Reagent 0.6.0:
+The upside is that r/children also works when you're implementing a plain React component using Reagent using reactify-component. This is sometimes useful when interoperating with Reagent components. We can simulate this with the [`:>` shorcut](https://reagent-project.github.io/news/news060-alpha.html) introduced in Reagent 0.6.0:
 
 ```clojure
 (defn title-ul-ui [{:keys [title]}]
