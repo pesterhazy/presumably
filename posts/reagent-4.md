@@ -85,6 +85,8 @@ To summarize, React distinguishes between regular props (passed like DOM attribu
 
 By default, Reagent handles props differently. All props, including the component's children, are held in a single React prop and accessible as function arguments to the render function. As a result, Reagent components aren't drop-in replacements for plain React components. However, interop with plain React is possible by using the  functions r/reactify-component, r/as-element and r/adapt-react-class (`[:> ...]`). In interop cases, as well as during non-render lifecycle methods, props and children will be accessible through the r/props and r/children helpers.
 
+A final difference between React and Reagent is that in recent versions React has introduced the notion of PropTypes. If you specify a component's PropTypes, you can make props obligatory or optional, set default values or define the prop's value type. These runtime checks cannot be used when building Reagent components because of the differences in prop format noted above. But it's possible to encounter PropTypes when using third-party JavaScript, so it's useful to be aware of their existence.
+
 ## Further Reading
 
 - Facebook's docs on [props](https://facebook.github.io/react/docs/components-and-props.html)
