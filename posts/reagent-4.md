@@ -8,13 +8,13 @@ draft: true
 
 ReactDOM.render — essentially React's single public API function — renders a root component based on a set of arguments, or props, that determine the component's look and behavior. Transforming its inputs and expanding sub-nodes recursively, render constructs a tree of elements ready to be mounted to the DOM. In React-land data flows, in the form of props, from parent to children.
 
-Reagent follow the same principles but thereby hangs a tale. In React, every component receives as its single argument a JavaScript object called _props_. Each prop is a key associated with a (hopefully) immutable value. Props can be anything you wish: strings, numbers, objects or, just as commonly, callback functions. In plain React, props are typicalled passed using the [JSX syntax](https://facebook.github.io/react/docs/jsx-in-depth.html), which looks like HTML:
+Reagent follow the same principles but thereby hangs a tale. In React, every component receives as its single argument a JavaScript object called _props_. Each prop is a key associated with a (hopefully) immutable value. Props can be anything you wish: strings, numbers, objects or, just as commonly, callback functions. In plain React, props are typically passed by way of [JSX syntax](https://facebook.github.io/react/docs/jsx-in-depth.html), which looks like HTML:
 
 ```
-<MyUI name="Smith" age=72}>
+<MyUI name="Smith" age={72}}>
 ```
 
-Reagent's equivalent looks similar:
+Calling a component in Reagent works similarly:
 
 ```clojure
 (defn root []
@@ -78,7 +78,7 @@ Conversely r/children also works when you're implementing a plain React componen
   [:div
   [:> title-ul-ui* {:title "people"}
     [:li "Smith"]
-    [:li "Hinz"]]])
+    [:li "Taylor"]]])
 ```
 
 To summarize, React distinguishes between regular props (passed like DOM attributes in JSX) and children (passed as sub-components in the tag body). The latter are available in JavaScript as `this.props.children`, a pseudo-array that contains the sub-components.
