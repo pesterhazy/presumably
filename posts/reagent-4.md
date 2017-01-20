@@ -81,6 +81,10 @@ Conversely r/children also works when you're implementing a plain React componen
     [:li "Hinz"]]])
 ```
 
+To summarize, React distinguishes between regular props (passed like DOM attributes in JSX) and children (passed as sub-components in the tag body). The latter are available in JavaScript as `this.props.children`, a pseudo-array that contains the sub-components.
+
+By default, Reagent handles props differently. All props, including the component's children, are held in a single React prop and accessible as function arguments to the render function. As a result, Reagent components aren't drop-in replacements for plain React components. However, interop with plain React is possible by using the  functions r/reactify-component, r/as-element and r/adapt-react-class (`[:> ...]`). In interop cases, as well as during non-render lifecycle methods, props and children will be accessible through the r/props and r/children helpers.
+
 ## Further Reading
 
 - Facebook's docs on [props](https://facebook.github.io/react/docs/components-and-props.html)
