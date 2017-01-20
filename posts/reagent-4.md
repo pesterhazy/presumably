@@ -8,7 +8,7 @@ date-published: 2017-01-20
 
 ReactDOM.render — essentially React's single public API function — renders a root component based on a set of arguments, or props, that determine the component's look and behavior. Transforming its inputs and expanding sub-nodes recursively, render constructs a tree of elements ready to be mounted to the DOM. In React-land data flows, in the form of props, from parent to children.
 
-Reagent follow the same principles but thereby hangs a tale. In React, every component receives as its single argument a JavaScript object called _props_. Each prop is a key associated with a (hopefully) immutable value. Props can be anything you wish: strings, numbers, objects or, just as commonly, callback functions. In plain React, props are typically passed by way of [JSX syntax](https://facebook.github.io/react/docs/jsx-in-depth.html), which looks like XHTML:
+Reagent follows the same principles but thereby hangs a tale. In React, every component receives as its single argument a JavaScript object called _props_. Each prop is a key associated with a (hopefully) immutable value. Props can be anything you wish: strings, numbers, objects or, just as commonly, callback functions. In plain React, props are typically passed by way of [JSX syntax](https://facebook.github.io/react/docs/jsx-in-depth.html), which looks like XHTML:
 
 ```
 <MyUI name="Smith" age={72}}>
