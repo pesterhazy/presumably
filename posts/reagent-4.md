@@ -3,7 +3,7 @@ title: "Reagent Mysteries"
 subtitle: "Part 4: Children and Other Props"
 uuid: 66088d3e-a7ef-4d86-a0fb-1c4a3b97e540
 author: Paulus
-draft: true
+date-published: 2017-01-20
 ---
 
 ReactDOM.render — essentially React's single public API function — renders a root component based on a set of arguments, or props, that determine the component's look and behavior. Transforming its inputs and expanding sub-nodes recursively, render constructs a tree of elements ready to be mounted to the DOM. In React-land data flows, in the form of props, from parent to children.
