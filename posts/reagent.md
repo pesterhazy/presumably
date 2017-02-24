@@ -194,9 +194,10 @@ the special significance of representing components or DOM elements.
 So converting the result to a vector breaks rendering:
 
 ```clojure
+;; This won't work as expected:
+
 [:thead
-  (into [:tr]
-        (vec (map (fn [col] [:th {:key col} (name col)]) cols)))]
+  [:tr (vec (map (fn [col] [:th {:key col} (name col)]) cols))]]
 ```
 
 Reagent will try to interpret a vector of vectors as a component but a vector is
@@ -213,9 +214,10 @@ force its realization before the render function returns:
 
 ```clojure
 [:thead
-  (into [:tr]
-        (doall (map (fn [col] [:th {:key col} (name col)]) cols)))]
+  [:tr (doall (map (fn [col] [:th {:key col} (name col)]) cols))]]
 ```
+
+Personally I recommend using `into` over relying on `doall` for child sequences because `into` makes it obvious what hierarchy is being generated, and explicit is [better](https://www.python.org/dev/peps/pep-0020/) than implict.
 
 Happily, there's also a non-gotcha to report. Suppose you want to hide some
 philosophers, based on their date of birth. A convenient shortcut is simply to return
