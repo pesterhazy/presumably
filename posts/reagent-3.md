@@ -46,7 +46,7 @@ the backing instance associated with a video elemento? The answer is to attach a
        [:div
         [:video {:src src
                  :style {:width 400}
-                 :ref (function [el]
+                 :ref (fn [el]
                         (reset! !video el))}]]
        [:div
         [:button {:on-click (fn []
