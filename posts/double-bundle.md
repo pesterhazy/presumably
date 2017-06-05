@@ -24,15 +24,27 @@ Many if not all CLJSJS libraries consist of a bundle built using the webpack pac
 
 This raises the question - why not rely on webpack to orchestrate NPM dependencies altogether? This is the strategy I will propose in the remainder of this post.
 
-The [double bundle](https://github.com/pesterhazy/double-bundle) example projects demonstrates how to use webpack directly to use NPM dependencies in your Clojurescript project. The net effect is that the project's index.html includes two separate bundles.
+The [double bundle](https://github.com/pesterhazy/double-bundle) example projects demonstrates how to use webpack directly to use NPM dependencies in your Clojurescript project. The net effect is that the project's index.html references two separate bundles, one built by webpack and one built by the Clojurescript compiler and Google Closure compiler combo.
+
+Webpack supports exporting a single var, but we actually need to export multiple libraries as multile vars. For this reason, the webpack conig uses a special entry point, `library.js`. For each depenendency that needs to be visible from Clojurescript, the file contains a line assigning the required module to a global Javascript variable. This is not elegant, but the effect is similar to how CLJSJS works: all depenencies are avaialable as global names, e.g. `js/window.React` or `js/window.ReactDOM`.
+
+With this setup, adding a new NPM dependency is as easy running `yarn add react-datatime`, adding `window.ReactDatetime = require("react-datetime")` to `library.js` and rebuilding the bundle using `yarn build`. Having done this, you can access the library using `(goog.object/get js/window "ReactDatetime")`.
+
+What's more, any library available on NPM should work. Inter-library dependencies will be handled automatically by webpack. Because webpack is popular, chances are getting things to work will require little additional work - and problems will be easy to google.
+
+With the double-bundle approach, a few things need to be kept in mind:
+
+- The two script tags in index.html need to be in the right order - npm-bundle.js first and clojurescript-bundle.js last. For production builds, of course, there's nothing to stop you from concatenating the two bundles into a single bundle.
+- To avoid including multiple versions of react and react-dom, these two cljsjs packages should be added to the project-wide global exclusions in project.clj. (Similarly, build.boot also supports global exclusions.)
+- By removing the `cljsjs/react` dependency, we also lose the `cljsjs.react` namespace. However, libraries like Reagent require this namespace. The solution is to mock out this namespace with an empty cljs file. This is admittedly somewhat inelegant.
+
+## Summary
+
+Using the double bundle approach is powerful, as it taps into the ecosystem and accumulated wisdom of the NPM community.
 
 ## more
 
-- package.json
-- webpack.config.js
-- library.js: export multiple vars
-- example github project
-- two bundles, include the dep.js first, app.js second
+- link to package.json and webpack.config.js
 
 ## caveats
 
@@ -40,7 +52,6 @@ The [double bundle](https://github.com/pesterhazy/double-bundle) example project
 - externs, not necessary for React, components can be accessed using goog.object/get
 - related to npm-deps? no
 - two bundles but they can be concatenated
-- use surrogate namespaces for cljsjs.react
 
 ## todo
 
