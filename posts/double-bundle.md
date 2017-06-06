@@ -56,7 +56,4 @@ Using the double bundle approach is powerful, as it taps into the ecosystem and 
 ## todo
 
 - reference to baking-soda
-- send out drafts to micheal, thomas heller, martin, gadfly361
-- references to shadow-dev
-- who's behind cljsjs?
-- check that Closure actually does the concatenation
+- properly attribute cljsjs
