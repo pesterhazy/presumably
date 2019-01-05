@@ -1,18 +1,18 @@
 ---
-title: "Monrepos and the Fallacy of Scale"
+title: "Monorepos and the Fallacy of Scale"
 uuid: 9e53c9f8-8d97-4d36-9dbd-09ad725a1d29
 author: Paulus
 ---
 
-In a recent blog post, Matt Klein discusses the pros and cons - mostly cons, in his mind - of monorepos. In short: he doesn't like them, and he thinks that they are a terrible fit for most teams. I've been thinking about this question for a few years and have come to the opposite conclusion. This blog post is my attempt to articulate my thoughts on this matter.
+In a recent blog post, Matt Klein discusses the pros and cons - but frankly mostly cons, in his mind - of monorepos. The long and short of it is that he doesn't like them, and he thinks that they are not a good fit for most teams. I've been thinking about this question for a few years and have come to the opposite conclusion. This blog post is my attempt to articulate my thoughts on the utility of monorepos.
 
-While I will mostly discuss why I think the argument goes off the rails, there is also a practical upside to this. In my opinion, monorepos really are a good choice for many, many teams. I hope that the considerations laid out below will help you find the best repository layout for your team. More generally, as I hope to show critical thinking about the context will help you make the best choices for your team.
+While I will mostly discuss why I think Matt's argument goes off the rails, there is also a practical upside to this. In my opinion, monorepos really are a good choice for many, many teams. I hope that the considerations laid out below will help you find the best repository layout for your team. More generally, critical thinking about context and scale is the best tool for making this choices for your team.
 
 ---
 
-New companies usually start out with a single git repository. As more and more code is written, the question inevitably comes up whether it makes sense to separate out part of the code - a component of the system or a piece of functionaltiy that is autonomous - into a second repository. Monorepo refers to making the conscious choice not to do that. In companies adhering to this practice, all or most of its code is stored in only one repository.
+Let's begin with an empty slate. New companies usually start out with a single, empty git repository. As more and more code gets written, the question inevitably comes up whether it makes sense to separate out part of the code - a component of the system or a piece of functionaltiy that is autonomous - into a second repository. Monorepo refers to making the principled choice not to do that. In companies adhering to this practice, all or most of the code written by team members is stored in a single monolithical repository.
 
-Proponents of monorepos (among whom I count myself) argue that by keeping everything in one place and by removing barriers, Monorepos encourage sharing and simplify development. In his post, Matt argues that these benefits are merely an illusion. And he argues that they lead to tight coupling of components. Let's take these two points in turn.
+Proponents of monorepos (among whom I count myself) argue that by keeping everything in one place and by removing articial barriers, Monorepos encourage sharing and simplify development and tooling. In his post, Matt argues that these benefits are illusionary. Second, he argues that, far from helping, monorepos actually lead to tight coupling of components. Let's take these two points in turn.
 
 Does the practice of keeping all code together in one place lead to better collaboration? My experience clearly bears out that claim. I've led monorepoification efforts a few times in the past, and each time the beneifts have been innumerable. Some benefits, like easier refactoring and always having a single consistent snapshot of your view of the project, were explicit goals. But other synergy materialized in unexpected ways, like suprising instances of code reuse or infrastructure problems being reduce from hard when crossing repo boundaries to doable with a few pragmatic lines of code.
 
