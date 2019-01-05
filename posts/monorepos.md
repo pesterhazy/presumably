@@ -4,7 +4,7 @@ uuid: 9e53c9f8-8d97-4d36-9dbd-09ad725a1d29
 author: Paulus
 ---
 
-In a recent blog post, Matt Klein discusses the pros and cons - but frankly mostly cons, in his mind - of monorepos. The long and short of it is that he doesn't like them, and he thinks that they are not a good fit for most teams. I've been thinking about this question for a few years and have come to the opposite conclusion. This blog post is my attempt to articulate my thoughts on the utility of monorepos.
+In a recent blog post entitled "Monorepos: Please don’t," Matt Klein discusses the pros and cons - but frankly mostly cons, in his mind - of monorepos. The long and short of it is that he doesn't like them, and he thinks that they are not a good fit for most teams. I've been thinking about this question for a few years and have come to the opposite conclusion. This blog post is my attempt to articulate my thoughts on the utility of monorepos.
 
 While I will mostly discuss why I think Matt's argument goes off the rails, there is also a practical upside to this. In my opinion, monorepos really are a good choice for many, many teams. I hope that the considerations laid out below will help you find the best repository layout for your team. More generally, critical thinking about context and scale is the best tool for making this choices for your team.
 
@@ -54,8 +54,10 @@ Most of the readers of this post are not in a position to pick a repository layo
 
 The truth is that even though we can in some areas learn from the experience of giants like Twitter, we don't have their scale of employees or users and we may never reach it. And yet we often make choices based on the idea that we _must_ scale to be successful and so we might as well make the scalable decision today.
 
-This is a Fallacy of Scale. Very large teams are qualitatively different from small teams in many ways. This hardly needs spelling out but context really does matter - what works for Twitter, a twelve-year old company with billion dollar revenue, won't necessarily be right for your startup. What's more, the tooling that works for Twitter as of 2019 are likely not be appropriate even for Twitter itself - the same company in the first years of its existance.
+This is what I call the Fallacy of Scale. Very large teams are qualitatively different from small teams in many ways. Context matters: what works for Twitter, a twelve-year old company with billion dollar revenue, won't necessarily be right for your startup. What's more, the tooling that works for Twitter as of 2019 is unlikely to be appropriate for Twitter itself - the same company in the first years of its existance.
 
-The right way to think about architecture decision relating to scale is to make the decisions that work for your team today and in the next 12 months. Try not to be foolishly ignorant about the future, but don't try to predict it. When (if!) you get to the point where a monorepo doesn't scale anymore, you'll know it but you may not know it before you reach that point. When you get there you may decide to introduce tooling to fix specific problems, or change to a multi-repository layout. But don't make the cardinal mistake of all startups - worrying about crossing that bridge before you get to it.
+The right way to think about code layout and other architecture decision relating to scale is to find a solution that works for your team today and in the next 12 months. Without being ignorant about the near-term, but don't try to predict the future. More concretely, when - or if - you get to the point where a monorepo doesn't scale anymore, you'll have time to adjust; but you may not know what scaling issue will come up before you reach that point.
+
+When you get there you may decide to introduce tooling to fix specific problems, or change to a multi-repository layout. But don't make the cardinal mistake of startups - worrying about crossing that bridge before you get to it.
 
 Thanks to Michael Reitzenstein and Ben Lovell for reading earlier drafts of this post.
