@@ -33,3 +33,19 @@ This brings us to the Matt's second argument that monorepos lead to tight coupli
 Polyrepofication is a ham-fisted way to enforce ownership boundaries. Developers are not arguing children that need to be confined to separate rooms to prevent arguments. With sufficient communication and good practices, a monorepo will allow you to escape the red herring (which repo should this go to?) and focus on the truly important question: where should we draw the module boundaries to keep this code maintainable, understandable and changeable in the light of future requirements?
 
 In fact polyrepos have a much greater risk of making layout decisions too early. Just as you can't predict the future, you can't predict where the borders, the module boundaries, will be properly drawn 6 months from now. By making a decision now to split up repositories, you make risk making the call to too early and making it hard for yourself to reverse course.
+
+Remember we're talking about working in a team in a company. Think of the company as a single enterprise with a mission. Even as the companies pursues the mission using multiple projects, it helps to think of the every decision and every code change as a step towards the primary goal. The code base is the codification of (a large part of) the company's institutional knowledge about its project and about (what it thinks is) the best way to acheive this project.
+
+Looking at it from this perspective, a monorepo is the natural way to express the fact that all team members are collaborating on a single, if multi-faceted project. So if you can keep all of this bundled up together, identied by a SHA hash and complete with a single history, why wouldn't you?
+
+---
+
+Well, why wouldn't you? Matt's answer is that a monorepo doesn't scale. I think that this is a very common thought, albeit a misleading one, so I will focus on this justification in detail in the rest of this post.
+
+Matt points out that at Twitter, the introduction of a monorepo based on Git has caused significant performance issues, among them simple commands taking multiple minutes to complete. I fully believe that these pains were real. But does this mean that teams should reject monorepos because Git won't scale?
+
+This idea has two components. The first, that Git doesn't in principle scale for projects with 100s of participants over multiple years, is not very plausible. In fact, the Linux kernel - the project that Git was developed for initially - can be easily cloned on hopelessly underpowered German cafe broadband in a few minutes, and common repository operations are sufficiently fast. If Linux is not a successful poster child for collaborative work in a large, diverse team, what is?
+
+More generally, code repositories scale because changes are Human Scale. There's only so much typing that a few hundered developers can to over the course of a few years can do. Of course like any tool Git needs to be used correctly. But in a reasonable large team, unless you commit junk to the repository (I'm looking at you, Golang community) and only files hand-written by the team (as opposed to generated code, third-party code and binaries), you'll probably be fine.
+
+But if if that's not the case, 
