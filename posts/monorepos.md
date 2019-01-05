@@ -4,7 +4,7 @@ uuid: 9e53c9f8-8d97-4d36-9dbd-09ad725a1d29
 author: Paulus
 ---
 
-In a recent blog post entitled "Monorepos: Please don’t," Matt Klein discusses the pros and cons - but frankly mostly cons, in his mind - of monorepos. The long and short of it is that he doesn't like them, and he thinks that they are not a good fit for most teams. I've been thinking about this question for a few years and have come to the opposite conclusion. This blog post is my attempt to articulate my thoughts on the utility of monorepos.
+In a recent blog post entitled "Monorepos: Please don’t," Matt Klein [discusses](https://medium.com/@mattklein123/monorepos-please-dont-e9a279be011b) the pros and cons - but frankly mostly cons, in his mind - of monorepos. The long and short of it is that he doesn't like them, and he thinks that they are not a good fit for most teams. I've been thinking about this question for a few years and have come to the opposite conclusion. This blog post is my attempt to articulate my thoughts on the utility of monorepos.
 
 While I will mostly cover why I think Matt's argument goes off the rails, there is also a practical upside to this. In my opinion, monorepos really are a good choice for many, many teams. I hope that the considerations laid out below will help you find the best repository layout for your team. More generally, critical thinking about context and scale is the best tool for making this choices for your team.
 
