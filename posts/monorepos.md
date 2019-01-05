@@ -40,12 +40,20 @@ Looking at it from this perspective, a monorepo is the natural way to express th
 
 ---
 
-Well, why wouldn't you? Matt's answer is that a monorepo doesn't scale. I think that this is a very common thought, albeit a misleading one, so I will focus on this justification in detail in the rest of this post.
+Well, why wouldn't you go all in on monorepos? Matt's answer is that the approach doesn't scale. I think that this is a very common thought so I will focus on this - in my view incorrect - justification in detail in the rest of this post.
 
 Matt points out that at Twitter, the introduction of a monorepo based on Git has caused significant performance issues, among them simple commands taking multiple minutes to complete. I fully believe that these pains were real. But does this mean that teams should reject monorepos because Git won't scale?
 
 This idea has two components. The first, that Git doesn't in principle scale for projects with 100s of participants over multiple years, is not very plausible. In fact, the Linux kernel - the project that Git was developed for initially - can be easily cloned on hopelessly underpowered German cafe broadband in a few minutes, and common repository operations are sufficiently fast. If Linux is not a successful poster child for collaborative work in a large, diverse team, what is?
 
-More generally, code repositories scale because changes are Human Scale. There's only so much typing that a few hundered developers can to over the course of a few years can do. Of course like any tool Git needs to be used correctly. But in a reasonable large team, unless you commit junk to the repository (I'm looking at you, Golang community) and only files hand-written by the team (as opposed to generated code, third-party code and binaries), you'll probably be fine.
+More generally, code repositories grow slowly (if steadily) because change sets are Human Scale. At the end of the day, there's only so much typing that a few hundered developers can do over the course of a few years. Of course like any tool Git needs to be used within its intended scope. But in a reasonable large team, unless you commit junk to the repository (I'm looking at you, Golang community) and only track files hand-written by the team (as opposed to generated code, third-party code and binaries), you'll probably be fine with a bit of discipline and prudent use of tooling.
 
-But if if that's not the case, 
+But even if you expect to produce more code than the kernel team in the next five years, does that mean that you should reject a monorepo now? Most of the readers of this post are not in a position to pick a repository layout for very large teams.
+
+Nor is most code written by very large teams with 100s of individual contributors. Most of us, especially coming from the world of startups, work in smaller teams of <100 developers; and although some of our code will live on in near-perpetuity, a lot of our code will have a relatively short live. For the many teams that fit this description, practical problems of scale are not likely to come up any time soon. (If the monorepofication lead at Twitter is reading this, hello there! Please stop reading now as I'm talking about the rest of us.)
+
+The truth is that even though we can in some areas learn from the experience of giants like Twitter, we don't have their scale of employees or users and we may never reach it. And yet we often make choices based on the idea that we _must_ scale to be successful and so we might as well make the scalable decision today.
+
+This is a fallacy of scale. Very large teams are qualitatively different from small teams in many ways. This hardly needs spelling out but context really does matter - what works for Twitter, a twelve-year old company with billion dollar revenue, won't necessarily be right for your startup. What's more, the tooling that works for Twitter as of 2019 are likely not be appropriate even for Twitter itself - the same company in the first years of its existance.
+
+The right way to think about architecture decision relating to scale is to make the decisions that work for your team today and in the next 12 months. Try not to be foolishly ignorant about the future, but don't try to predict it. When (if!) you get to the point where a monorepo doesn't scale anymore, you'll know it but you may not know it before you reach that point. When you get there you may decide to introduce tooling to fix specific problems, or change to a multi-repository layout. But don't make the cardinal mistake of all startups - worrying about crossing that bridge before you get to it.
