@@ -58,6 +58,6 @@ This is what I call the **Fallacy of Scale**. Very large teams are qualitatively
 
 The right way to think about code layout and other architecture decisions relating to scale is to find a solution that works for your team today and in the next, say, 12 months. Without feigning ignorance about the near-term, try not to predict the future. More concretely, when - or more realistically, if - you get to the point where a monorepo doesn't scale anymore, you'll have time to adjust. But you will not know reliably what scaling issue will come up before you reach that point.
 
-Once you do encounter a real scalability hiccup you can take action based on the information about the problem - introducing tooling to fix specific problems or changing to a multi-repository setup. But don't make the cardinal mistake of startups - worrying about crossing that bridge before you get to it.
+Once you do encounter a real scalability hiccup you can take action, based on the concrete pain points, by introducing tooling to fix specific problems or by switching to a multi-repository setup. But don't make the startup's cardinal mistake: worrying about crossing that bridge before you get to it.
 
 Thanks to Michael Reitzenstein and Ben Lovell for reading earlier drafts of this post.
