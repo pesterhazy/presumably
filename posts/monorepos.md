@@ -12,7 +12,7 @@ While I will mostly cover why I think Matt's argument goes off the rails, there 
 
 Let's begin with an empty slate. New companies usually start out with a single, empty git repository. As more and more code gets written, the question inevitably comes up whether it makes sense to separate out part of the code - a component of the system or a piece of functionality that is autonomous - into a second repository. Monorepo refers to making the principled choice not to do that. In companies adhering to this practice, all or most of the code written by team members is stored in a single monolithic repository.
 
-Proponents of monorepos (among whom I count myself) argue that by keeping everything in one place and by removing artificial barriers, Monorepos encourage sharing and simplify development and tooling. In his post, Matt argues that these benefits are illusionary. Second, he argues that, far from helping, monorepos actually lead to tight coupling of components. Let's take these two points in turn.
+Proponents of monorepos (among whom I count myself) argue that by keeping everything in one place and by removing artificial barriers, monorepos encourage sharing and simplify development and tooling. In his post, Matt argues that these benefits are illusionary. Second, he argues that, far from helping, monorepos actually lead to tight coupling of components. Let's take these two points in turn.
 
 Does the practice of keeping all code together in one place lead to better collaboration? My experience clearly bears out that claim. I've led monorepofication efforts at multiple companies in the past, and each time the benefits have been innumerable. Some benefits, like easier refactoring and always having a single consistent snapshot of your view of the project, were explicit goals. But other synergy materialized in unexpected ways, like surprising opportunities of code reuse or intractable infrastructure problems involving crossing repo boundaries being reduced a few pragmatic lines of code.
 
@@ -60,4 +60,4 @@ The right way to think about code layout and other architecture decisions relati
 
 Once you do encounter a real scalability hiccup you can take action, based on the concrete pain points, by introducing tooling to fix specific problems or by switching to a multi-repository setup. But don't make the startup's cardinal mistake: worrying about crossing that bridge before you get to it.
 
-Thanks to Michael Reitzenstein and Ben Lovell for reading earlier drafts of this post.
+Thanks to Michael Reitzenstein, Ben Lovell and Misha Karpenko for reading earlier drafts of this post.
