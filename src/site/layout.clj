@@ -30,7 +30,7 @@
      [:div.clearfix
       [:div.header [:a {:href "/"} "presumably for side-effects"]
        [:br]
-       "a blog about clojure &c."]
+       "a blog about programming"]
       [:div body]
       [:hr.rule]
       [:p.mt2 "This is " [:i "presumably for side-effects"]
