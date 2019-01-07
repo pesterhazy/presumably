@@ -9,9 +9,9 @@ In a recent [blog post entitled "Monorepos: Please don’t,"](https://medium.com
 
 In this reply I will focus on where I think Matt's argument goes off the rails. Monorepos really are a good choice for many, many teams. Hopefully the reasons laid out below can help you find a good repository layout. But most of all I hope to show that critical thinking about context and scale is the best tool available for making this choice for your organization.
 
-## Benefits of monorepos
+## The benefits of monorepos
 
-In the beginning was the initial commit. New companies usually start out with a single empty git repository. As more and more code gets written, the question invariably comes up whether it makes sense to separate out part of the code - a component of the system or a modular piece of functionality - into a second repository. When we talk about monorepos, we mean the principled choice not to do that, ie. not to split repositories. In companies adhering to this practice, all the code written by employees is stored in a single monolithic repository.
+In the beginning was the... initial commit. New companies usually start out with a single empty git repository. As the project grows bigger, the question invariably comes up whether it makes sense to separate out part of the codebase - a component of the system or a modular piece of functionality - into a second repository. When we talk about monorepos, we mean the principled choice not to do that, i.e. not to split up repositories. In companies adhering to this practice, all the code written by employees is stored in a single monolithic repository.
 
 Proponents of monorepos (among whom I count myself) claim that by keeping everything in one place and by removing artificial barriers, monorepos encourage code sharing and simplify development and tooling. In his post, Matt argues that these benefits are illusionary. Second, he argues that, far from helping, monorepos actually lead to tight coupling of components. I’ll start with the first point and discuss the point about coupling further down.
 
