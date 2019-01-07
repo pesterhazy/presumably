@@ -2,7 +2,7 @@
 title: "Monorepos and the Fallacy of Scale"
 uuid: 9e53c9f8-8d97-4d36-9dbd-09ad725a1d29
 author: Paulus
-date-published: 2018-01-07
+date-published: 2018-01-08
 ---
 
 In a recent [blog post entitled "Monorepos: Please don’t,"](https://medium.com/@mattklein123/monorepos-please-dont-e9a279be011b) Matt Klein discusses the pros and cons - as it turns out, mostly cons in his view - of monorepos. The long and short of it is that he thinks that they are not a good fit for most teams. After thinking about this question for a few years I have come to the opposite conclusion.
@@ -25,7 +25,7 @@ Perhaps the suggestion for code sharing is to introduce separate utility library
 
 We're now approaching the heart of the issue. It is indubitably a good thing to explores various ways to modularize code, because finding the right answer is crucial to maintainable code, as well as one of the hardest parts of our job as programmers. But it is equally important to see that effective modularization doesn't entail separate repositories.
 
-Is a repository split the only possible module boundary? Of course not. We divide up our code into functions, files, modules, classes or namespaces all the time. And often the most natural way to do draw module boundaries at the highest level is also the simplest: keeping components, subprojects or libraries in separate subdirectories.
+Is a repository split the only possible module boundary? Of course not. We divide up our code all the time into functions, files, modules, classes or namespaces. And often the most natural way to do draw module boundaries at the highest level is also the simplest: keeping components, subprojects or libraries in separate subdirectories.
 
 Within a unified repo, a pull request will raise relevant questions during code review. Is this folder the right place to implement this feature? Is this consistent with how we do things elsewhere? Are we drawing the API boundaries along the most natural lines? Will the tests pass with this consistent snapshot of the project?
 
