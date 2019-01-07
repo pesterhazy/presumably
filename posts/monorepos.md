@@ -47,7 +47,7 @@ Looking at it from this perspective, a monorepo can be seen as the most natural 
 
 Well, if the benefits are real, why do companies reject monorepos? Matt's answer is that the approach won’t scale. I think that this - in my view ultimately misguided - assumption is common so I will focus on it in the rest of this post.
 
-Matt points out that when he worked at Twitter, the introduction of a git-based monorepo caused significant performance issues and let to simple commands taking minutes to complete. I fully believe that these pain points are real. But we're not well-advised to conclude from such anecdotes that teams should reject monorepos because git won't scale.
+Matt points out that when he worked at Twitter, the introduction of a git-based monorepo caused significant performance issues and led to simple commands taking minutes to complete. I fully believe that these pain points are real. But we shouldn't conclude from such anecdotes that git won't scale or that we should reject monorepos.
 
 It's worth breaking this idea into two parts. The first, that git doesn't in principle scale for projects with a few hundred participants over multiple years, is not generally plausible. In fact, the Linux kernel, git’s original raison d'être, can be cloned in just a few minutes on the hopelessly underpowered broadband of the Berlin coffee shop where I’m writing this post, and common repository operations are plenty fast. If Linux is not a successful poster child for collaboration in the large, then what is?
 
