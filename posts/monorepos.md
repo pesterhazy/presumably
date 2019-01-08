@@ -2,10 +2,10 @@
 title: "Monorepos and the Fallacy of Scale"
 uuid: 9e53c9f8-8d97-4d36-9dbd-09ad725a1d29
 author: Paulus
-date-published: 2018-01-08
+date-published: 2019-01-08
 ---
 
-In a recent [blog post entitled "Monorepos: Please don’t,"](https://medium.com/@mattklein123/monorepos-please-dont-e9a279be011b) Matt Klein discusses the pros and cons - as it turns out, mostly cons in his view - of monorepos. The long and short of it is that he thinks that they are not a good fit for most teams. After thinking about this question for a few years I have come to the opposite conclusion.
+In a recent [blog post entitled "Monorepos: Please don't,"](https://medium.com/@mattklein123/monorepos-please-dont-e9a279be011b) Matt Klein discusses the pros and cons - as it turns out, mostly cons in his view - of monorepos. The long and short of it is that he thinks that they are not a good fit for most teams. After thinking about this question for a few years I have come to the opposite conclusion.
 
 In this reply I will focus on where I think Matt's argument goes off the rails. Monorepos really are a good choice for many, many teams. Hopefully the reasons laid out below can help you find a good repository layout. But most of all I hope to show that critical thinking about context and scale is the best tool available for making this choice for your organization.
 
@@ -13,9 +13,9 @@ In this reply I will focus on where I think Matt's argument goes off the rails. 
 
 In the beginning was the... initial commit. New companies usually start out with a single empty git repository. As the project grows bigger, the question invariably comes up whether it makes sense to separate out part of the codebase - a component of the system or a modular piece of functionality - into a second repository. When we talk about monorepos, we mean the principled choice not to do that, i.e. not to split up repositories. In companies adhering to this practice, all the code written by employees is stored in a single monolithic repository.
 
-Proponents of monorepos (among whom I count myself) claim that by keeping everything in one place and by removing artificial barriers, monorepos encourage code sharing and simplify development and tooling. In his post, Matt argues that these benefits are illusionary. Second, he argues that, far from helping, monorepos actually lead to tight coupling of components. I’ll start with the first point and discuss the point about coupling further down.
+Proponents of monorepos (among whom I count myself) claim that by keeping everything in one place and by removing artificial barriers, monorepos encourage code sharing and simplify development and tooling. In his post, Matt argues that these benefits are illusionary. Second, he argues that, far from helping, monorepos actually lead to tight coupling of components. I'll start with the first point and discuss the point about coupling further down.
 
-Does the practice of keeping all code together in one place lead to better code sharing? In my experience that’s clearly the case. The monorepofication efforts I’ve initiated at multiple organizations with split repositories in each case produced **innumerable benefits**. Some results were explicit goals, like better greppability, ease of refactoring and a unified consistent snapshot of the project. Other synergies materialized in unexpected ways, like surprising opportunities for code reuse or intractable infrastructure problems straddling repo boundaries reduced to a few pragmatic lines of bash.
+Does the practice of keeping all code together in one place lead to better code sharing? In my experience that's clearly the case. The monorepofication efforts I've initiated at multiple organizations with split repositories in each case produced **innumerable benefits**. Some results were explicit goals, like better greppability, ease of refactoring and a unified consistent snapshot of the project. Other synergies materialized in unexpected ways, like surprising opportunities for code reuse or intractable infrastructure problems straddling repo boundaries reduced to a few pragmatic lines of bash.
 
 Looking at it from the other side, could introducing strict borders somehow make it easier to reuse logic? I think it's clear that borders can only take away from your ability to perceive opportunities to use abstractions or to unify code.
 
@@ -29,11 +29,11 @@ Is a repository split the only possible module boundary? Of course not. It's com
 
 Within a unified repo, a pull request will raise relevant questions during code review. Is this folder the right place to implement this feature? Is this consistent with how we do things elsewhere? Are we drawing the API boundaries along the most natural lines? Will the tests pass with this consistent snapshot of the project?
 
-True, touching multiple subprojects in a single commit is not always desirable. For example, updating backend and frontend components incrementally in backward-compatible ways can be the better approach. But even so, it’s useful to retain the option of cross-boundary commits for many reasons including simplicity and enforced coordination. We should have enough flexibility to ensure that such changes are not _impossible_ if the need arises.
+True, touching multiple subprojects in a single commit is not always desirable. For example, updating backend and frontend components incrementally in backward-compatible ways can be the better approach. But even so, it's useful to retain the option of cross-boundary commits for many reasons including simplicity and enforced coordination. We should have enough flexibility to ensure that such changes are not _impossible_ if the need arises.
 
 ## Monorepos as the embodiment of a unified project
 
-This leads us to Matt's second argument, the idea that monorepos cause tight coupling between components. Reducing complexity by reducing dependencies classes and namespaces is essential. So Matt is right to draw attention to worries about modularization - our goal, after all, is to keep complexity at bay. But to achieve this, there’s no need to place modules in separate repositories. Subdirectories along with conventions (which can be broken if necessary) are a better way to meet this goal.
+This leads us to Matt's second argument, the idea that monorepos cause tight coupling between components. Reducing complexity by reducing dependencies classes and namespaces is essential. So Matt is right to draw attention to worries about modularization - our goal, after all, is to keep complexity at bay. But to achieve this, there's no need to place modules in separate repositories. Subdirectories along with conventions (which can be broken if necessary) are a better way to meet this goal.
 
 If you think about it, splitting a codebase into sub-repos is a ham-fisted way to enforce ownership boundaries. Developers are not arguing children that need to be confined to separate rooms to prevent fights. With sufficient communication and good practices, a monorepo will allow you to avoid the question “which repo does this piece of code belong to?” Instead of thinking about repo boundaries - effectively a distraction - a monorepo allows you to focus on the important question: where should we draw the boundaries between modules to keep the code maintainable, understandable and malleable in the light of changing requirements?
 
@@ -45,11 +45,11 @@ Looking at it from this perspective, a monorepo can be seen as the most natural 
 
 ## But does it scale?
 
-Well, if the benefits are real, why do companies reject monorepos? Matt's answer is that the approach won’t scale. I think that this - in my view ultimately misguided - assumption is common so I will focus on it in the rest of this post.
+Well, if the benefits are real, why do companies reject monorepos? Matt's answer is that the approach won't scale. I think that this - in my view ultimately misguided - assumption is common so I will focus on it in the rest of this post.
 
 Matt points out that when he worked at Twitter, the introduction of a git-based monorepo caused significant performance issues and led to simple commands taking minutes to complete. I fully believe that these pain points are real. But we shouldn't conclude from such anecdotes that git won't scale or that we should reject monorepos.
 
-It's worth breaking this idea into two parts. The first, that git doesn't in principle scale for projects with a few hundred participants over multiple years, is not generally plausible. In fact, the Linux kernel, git’s original raison d'être, can be cloned in just a few minutes on the hopelessly underpowered broadband of the Berlin coffee shop where I’m writing this post, and common repository operations are plenty fast. If Linux is not a successful poster child for collaboration in the large, then what is?
+It's worth breaking this idea into two parts. The first, that git doesn't in principle scale for projects with a few hundred participants over multiple years, is not generally plausible. In fact, the Linux kernel, git's original raison d'être, can be cloned in just a few minutes on the hopelessly underpowered broadband of the Berlin coffee shop where I'm writing this post, and common repository operations are plenty fast. If Linux is not a successful poster child for collaboration in the large, then what is?
 
 More generally, code repositories growth is steady but slow because change sets are human scale. There's only so much furious typing that a few hundred developers can do over the course of a few years. Of course like any tool git needs to be used within its intended parameters. But in a reasonably-sized team, unless you commit junk to the repository (aka "vendoring" - I'm looking at you, [Golang community](https://github.com/moby/moby/tree/545d00e7521414f648140b5834d41a072592a484/vendor/github.com)) and only track files hand-written by the team (as opposed to generated code, third-party code and binaries), you'll probably be fine with a bit of discipline and prudent use of tooling.
 
@@ -61,7 +61,7 @@ Most readers of this post, of course, are not in a position to pick a repository
 
 The truth is that even though we can in some areas learn from the experience of giants like Twitter, we don't necessarily have their scale in terms of either employees or users and we may never reach it. And yet we often make choices based on the idea that we absolutely _must_ scale to be successful and that we need to make what we take to be the _most scalable decision_ today.
 
-This is what I call the **Fallacy of Scale**. It’s a fallacy because large teams are qualitatively different from small teams in countless ways. Context matters: what works for Twitter, a twelve-year old billion-dollar business, won't necessarily be right for your startup. What's more, the tooling that works for Twitter in 2019 wouldn't have been appropriate for Twitter itself in its early years, effectively a different company.
+This is what I call the **Fallacy of Scale**. It's a fallacy because large teams are qualitatively different from small teams in countless ways. Context matters: what works for Twitter, a twelve-year old billion-dollar business, won't necessarily be right for your startup. What's more, the tooling that works for Twitter in 2019 wouldn't have been appropriate for Twitter itself in its early years, effectively a different company.
 
 A better way to think about code layout and other architecture decisions relating to scale is to find a solution that works for your team today and in the next six months. Without feigning ignorance about the near-term, you should not try to predict the future. More concretely, when - or more realistically, if - you outscale a monorepo, that's the right time to adjust course. Before you actually reach that point, you will not know reliably what scaling issue will come up.
 

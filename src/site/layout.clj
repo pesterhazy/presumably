@@ -5,6 +5,7 @@
 (defn layout [{:keys [development?]} {:keys [title body]}]
   (hp/html5
    [:head
+    [:meta {:charset "utf-8"}]
     [:title (or title common/default-title)]
     (hp/include-css "/css/style.css")
     (hp/include-css "/vendor/basscss@8.0.1.min.css")
