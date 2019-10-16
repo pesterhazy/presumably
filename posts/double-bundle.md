@@ -12,7 +12,7 @@ So what's the best way to integrate 3rd party Javascript in a ClojureScript proj
 
 Modern websites usually include their code in the form of a bundle, essentially a concatenation of individual libraries and modules along with some glue code. For ClojureScript, the Google Closure compiler is responsible for generating this bundle. Requiring a cljsjs namespace (like `cljsjs.react`) causes the React.js to be included in the output bundle. Because the library is included as a foreign lib, Closure will not attempt to minify or shrink its contents.
 
-Essentially a convenient bridge between the Maven and NPM world, CLJSJS allows you to sepecify all your dependencies in a single file (project.clj or build.boot). However, the approach also has drawbacks:
+Essentially a convenient bridge between the Maven and NPM world, CLJSJS allows you to specify all your dependencies in a single file (project.clj or build.boot). However, the approach also has drawbacks:
 
 - Every NPM dependency used, and every update, requires manual effort to be re-packaged as a CLJSJS package.
 - CLJSJS builds separate mini-bundles in a potentially error-prone process. Care needs to be taken that every library used is marked as "external" and imported from the global namespace (window).
@@ -26,9 +26,9 @@ This raises the question - why not rely on webpack to orchestrate NPM dependenci
 
 The [double bundle](https://github.com/pesterhazy/double-bundle) example projects demonstrates how to use webpack directly to use NPM dependencies in your Clojurescript project. The net effect is that the project's index.html references two separate bundles, one built by webpack and one built by the Clojurescript compiler and Google Closure compiler combo.
 
-Webpack supports exporting a single var, but we actually need to export multiple libraries as multile vars. For this reason, the webpack conig uses a special entry point, `library.js`. For each depenendency that needs to be visible from Clojurescript, the file contains a line assigning the required module to a global Javascript variable. This is not elegant, but the effect is similar to how CLJSJS works: all depenencies are avaialable as global names, e.g. `js/window.React` or `js/window.ReactDOM`.
+Webpack supports exporting a single var, but we actually need to export multiple libraries as multiple vars. For this reason, the webpack conig uses a special entry point, `library.js`. For each dependency that needs to be visible from Clojurescript, the file contains a line assigning the required module to a global Javascript variable. This is not elegant, but the effect is similar to how CLJSJS works: all dependencies are available as global names, e.g. `js/window.React` or `js/window.ReactDOM`.
 
-With this setup, adding a new NPM dependency is as easy running `yarn add react-datatime`, adding `window.ReactDatetime = require("react-datetime")` to `library.js` and rebuilding the bundle using `yarn build`. Having done this, you can access the library using `(goog.object/get js/window "ReactDatetime")`.
+With this setup, adding a new NPM dependency is as easy running `yarn add react-datetime`, adding `window.ReactDatetime = require("react-datetime")` to `library.js` and rebuilding the bundle using `yarn build`. Having done this, you can access the library using `(goog.object/get js/window "ReactDatetime")`.
 
 What's more, any library available on NPM should work. Inter-library dependencies will be handled automatically by webpack. Because webpack is popular, chances are getting things to work will require little additional work - and problems will be easy to google.
 
