@@ -68,7 +68,7 @@ cljs.user=>
 
 After the "Opening URL http://localhost:9500" line, Figwheel will attempt to start a browser pointed at the local URL, which make take a few seconds. If this step fails, you can open the URL manually in a browser of you choice (Chrome, Firefox and Safari should all work). Although it's possible to open the URL in multiple browsers or tabs at once, at the beginning it's best to make sure only one tab opening the URL is open at the same time.
 
-Now Figwheel gives you two cool ways of getting changes into your browsers. The first way is to change the source file and to save it. You could open src/playground/core.cljs in your favoire editor and change the hello-world. Or you could do it in an unnecessarily complicated way:
+Now Figwheel gives you two exciting ways of getting changes into your browsers without hitting the reload button in your browser. The first way is to change the source file and to save it. You could open src/playground/core.cljs in your favorite editor and change the hello-world. Or you could do it in an unnecessarily complicated way:
 
 ```
 $ cat > rocks.patch
@@ -125,3 +125,16 @@ From the prompt you can also interact with the code in your application. The fol
 cljs.user=> (swap! playground.core/app-state update :text clojure.string/upper-case)
 {:text "HELLO WORLD!"}
 ```
+
+The `cljs.user` string you're seeing is the namespace you're in. You can switch the namespace and evaluate functions without having to type in the full namespace every time:
+
+```
+cljs.user=> (in-ns 'playground.core)
+
+playground.core=> (hello-world)
+[:div [:h1 "HELLO WORLD!"] [:h3 "Live reload rocks"]]
+```
+
+## What's going on here?
+
+We got pretty far fairly quickly, but as our goal is understanding, let's pause for a minute and reflect on what just happened.
