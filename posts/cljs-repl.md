@@ -68,9 +68,60 @@ cljs.user=>
 
 After the "Opening URL http://localhost:9500" line, Figwheel will attempt to start a browser pointed at the local URL, which make take a few seconds. If this step fails, you can open the URL manually in a browser of you choice (Chrome, Firefox and Safari should all work). Although it's possible to open the URL in multiple browsers or tabs at once, at the beginning it's best to make sure only one tab opening the URL is open at the same time.
 
+Now Figwheel gives you two cool ways of getting changes into your browsers. The first way is to change the source file and to save it. You could open src/playground/core.cljs in your favoire editor and change the hello-world. Or you could do it in an unnecessarily complicated way:
+
+```
+$ cat > rocks.patch
+diff --git a/src/playground/core.cljs b/src/playground/core.cljs
+index 237b5a9..ff8143f 100644
+--- a/src/playground/core.cljs
++++ b/src/playground/core.cljs
+@@ -10,21 +10,21 @@
+
+ ;; define your app data so that it doesn't get over-written on reload
+ (defonce app-state (atom {:text "Hello world!"}))
+
+ (defn get-app-element []
+   (gdom/getElement "app"))
+
+ (defn hello-world []
+   [:div
+    [:h1 (:text @app-state)]
+-   [:h3 "Edit this in src/playground/core.cljs and watch it change!"]])
++   [:h3 "Live reload rocks"]])
+
+ (defn mount [el]
+   (reagent/render-component [hello-world] el))
+
+ (defn mount-app-element []
+   (when-let [el (get-app-element)]
+     (mount el)))
+
+ ;; conditionally start your application based on the presence of an "app" element
+ ;; this is particularly helpful for testing this ns without launching the app
+```
+
+And now apply the patch
+
+```
+$ patch -p1 < rocks.patch
+patching file src/playground/core.cljs
+```
+
+You should see the string "Live reload rocks" appear on your screen.
+
+But save-and-wait-for-live-reload is not the only way to update your browser window. There's also REPL evaluation.
+
 When you see `cljs.user=>`, you can start typing Clojure forms into the prompt. Try this and watch the background color of the page change:
 
 ```
 cljs.user=> (set! (.-backgroundColor (.-style (js/document.querySelector "body"))) "#decade")
 "#decade"
+```
+
+From the prompt you can also interact with the code in your application. The following form will update what you see in your browser window:
+
+```
+cljs.user=> (swap! playground.core/app-state update :text clojure.string/upper-case)
+{:text "HELLO WORLD!"}
 ```
