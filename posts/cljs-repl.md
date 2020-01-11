@@ -108,9 +108,9 @@ $ patch -p1 < rocks.patch
 patching file src/playground/core.cljs
 ```
 
-You should see the string "Live reload rocks" appear on your screen.
+You should see the string "Live reload rocks" appear on your screen. When you reload your browser, you will also see the new string.
 
-But save-and-wait-for-live-reload is not the only way to update your browser window. There's also REPL evaluation.
+But while saving waiting for your namespace to reload is useful, it is not the only way to update your browser window. There's also REPL evaluation.
 
 When you see `cljs.user=>`, you can start typing Clojure forms into the prompt. Try this and watch the background color of the page change:
 
