@@ -9,6 +9,8 @@ Onboarding new developers to ClojureScript teams is a joy, mostly. You get to ta
 
 In this post, my goal is to explain CLJS repls in a way that I would have liked someone to explain them to me when I was starting out. But most pressing question on the newcomer's mind is how to set up. So while understanding the concepts is the goal, the path I'm taking in the post will be a guid to setting up a working REPL using figwheel main. 
 
+FIXME: what is a REPL?
+
 ## Getting started
 
 ```
@@ -16,14 +18,47 @@ clojure -Sdeps '{:deps {seancorfield/clj-new {:mvn/version "0.8.4"}}}' -m clj-ne
 
 # Generating fresh figwheel-main project.
 #    -->  To get started: Change into the 'playground.core' directory and run 'clojure -A:fig:build'
+
+mv playground.core playground # Strange name for a directory
+cd playground
 ```
 
 Well, that was easy enough!
 
+FIXME: instructions how to install cli-tools
+
+FIXME: `clj` vs `clojure`
+
+Let's take a minute to talk about tool choices. If you haven't been following Clojure's development over the last two years, the two tools used here - `clojure` and Figwheel Main - may be new to you. Starting with the latter tool, Figwheel Main is the newer version of the beloved ClojureScript tool Figwheel, which gives you three things: access to the ClojureScript compiler; seemless live reloading; and (you guessed it) a browser REPL.
+
+Other than being based on a more modern design, Figwheel Main is different from its predecessor in that while the original Figwheel was based on the Leiningen build tool, Figwheel Main builds on the Clojure CLI tools (henceforth cli tools) introduced back in 2018 (FIXME?). So what are the cli tools really? If Leiningen is a build tool and cli tools are in the same space, then surely cli tools are a build tool as well?
+
+Well, not so fast. In typical clojurist fashion, Alex Miller, the author of cli tools, has decomplected a build tool into its basic componentes. Whereas Leiningen presents as a *eierlegende Wollmilchsau*, cli tools does only one job, and does it well: it's a classpath builder. You declare which external libraries your project depends on, and cli tools go out and fetch the jars from the default Maven repositories (think NPM for JVM langauages) for you, arranging them in a Java classpath (similar to the UNIX PATH environment variable). Finally, through the `-m` switch, cli tools allow you to specify optionally what code to run as an entry point once the JVM process is running.
+
+A very simple example of this is just to run
+
 ```
-mv playground.core playground # Strange name for a directory
-cd playground
+clojure
 ```
+
+which download Clojure for you and runs the clojure.main/repl for you. We also make use of classpath construction and entry point invocation in the snippet above: we first select which dependencies we need (in this case, the `clj-new` tool) and then invoke a Clojure namespace called `clj-new.create` (or more precisely, the `-main` function located in that namespace). If you're curious what the file looks like, you can take a look like this:
+
+```
+# unzip -q -c ~/.m2/repository/seancorfield/clj-new/0.8.4/clj-new-0.8.4.jar clj_new/create.clj
+
+...
+(defn -main
+  "Bare bones entry point to create a new project from a template.
+
+  May eventually support more options."
+  [& [template-name project-name & args]]
+...
+```
+
+While cli tools is like Leiningen in constructing classpaths, it doesn't include any code to build Clojure jars. There are other tools that do that for Clojure. In our case, we're interested in running and building ClojureScript code, not clojure, of course, and the tool of our choice for this is Figwheel Main.
+
+`clj-new` is a project template generator (think yeoman or create-react-app). We only need this dependency once in the lifetime of a project, so it was fine to specify it as a command-line parameter. But now `clj-new` has created a whole barebones ClojureScript project for us. Let's take a look
+
 
 Let's do some chores
 
@@ -137,4 +172,5 @@ playground.core=> (hello-world)
 
 ## What's going on here?
 
-We got pretty far fairly quickly, but as our goal is understanding, let's pause for a minute and reflect on what just happened.
+We got to a working browser REPL fairly quickly, but let's pause for a minute and reflect on what just happened.
+
