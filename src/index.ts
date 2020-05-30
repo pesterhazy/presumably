@@ -1,14 +1,15 @@
 const util = require("util");
 const execFile = util.promisify(require("child_process").execFile);
 
-async function transform() {
+async function transform(inFile: string, outFile: string) {
   await execFile("pandoc", [
-    "--output=out/index.html",
+    "--output",
+    inFile,
     "--to=html5",
     "--data-dir",
     ".",
     "--template",
-    "presumably.html5", // FIXME
+    outFile,
     "posts/monorepos.md"
   ]);
   console.log("ok");
@@ -16,7 +17,7 @@ async function transform() {
 
 async function run() {
   try {
-    await transform();
+    await transform("posts/monorepos.md", "out/index.html");
   } catch (e) {
     console.error("Failed\n" + e.stack);
     process.exit(1);
