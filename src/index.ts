@@ -5,7 +5,10 @@ async function run() {
   await execFile("pandoc", [
     "--output=out/index.html",
     "--to=html5",
-    "--standalone",
+    "--data-dir",
+    ".",
+    "--template",
+    "presumably.html5",
     "posts/monorepos.md"
   ]);
   console.log("ok");
