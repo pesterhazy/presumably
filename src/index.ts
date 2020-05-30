@@ -1,1 +1,5 @@
-console.log("hi");
+function run() {
+  console.log("ii");
+}
+
+run();
