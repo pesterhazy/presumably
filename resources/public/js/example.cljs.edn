@@ -1,3 +1,0 @@
-{:require [example.core]
- :init-fns [example.core/init]
- :compiler-options {:asset-path "/js/example.out"}}
