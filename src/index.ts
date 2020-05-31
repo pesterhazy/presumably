@@ -1,6 +1,9 @@
 const util = require("util");
 const execFile = util.promisify(require("child_process").execFile);
 
+// FIXME: add CSS
+// FIXME: add "published"
+
 async function transform(inFile: string, outFile: string) {
   await execFile("pandoc", [
     "--output",
