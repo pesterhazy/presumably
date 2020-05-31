@@ -11,6 +11,7 @@ const flatMap = require("array.prototype.flatmap");
 import moment = require("moment");
 
 // FIXME: create index page
+// FIXME: google analytics
 // FIXME: make sure that slugs match
 
 async function init(outDir: string) {
