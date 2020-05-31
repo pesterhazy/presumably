@@ -1,0 +1,17 @@
+body {
+    font-family: Helvetica;
+}
+
+h1 {
+    font-size: 18px;
+}
+
+th, td {
+    text-align: left;
+    padding: 0.4em;
+}
+
+#container {
+    padding-left: 8px;
+    padding-top: 8px;
+}
