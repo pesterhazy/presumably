@@ -35,6 +35,6 @@
     "fast-glob": "^3.2.2",
     "gray-matter": "^4.0.2",
     "moment": "^2.26.0",
-    "slugify": "^1.4.0"
+    "slug": "^3.3.0"
   }
 }

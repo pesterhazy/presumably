@@ -5,12 +5,11 @@ const mkdir = require("fs").promises.mkdir;
 const readFile = require("fs").promises.readFile;
 const existsSync = require("fs").existsSync;
 import matter = require("gray-matter");
-const slugify = require("slugify");
+const slug = require("slug");
 const fg = require("fast-glob");
 const flatMap = require("array.prototype.flatmap");
 import moment = require("moment");
 
-// FIXME: filter out unpublished posts
 // FIXME: create index page
 // FIXME: make sure that slugs match
 
@@ -50,12 +49,13 @@ async function transform(
 async function analyze(inFile: string) {
   let s = await readFile(inFile, "utf-8");
   let { data } = matter(s);
-  let { title } = data;
+  let fullTitle = data.title;
+  if (data.subtitle) fullTitle += " " + data.subtitle;
 
   return {
-    title,
+    fullTitle: fullTitle,
     date: data["date-published"],
-    slug: slugify(data.title, { lower: true })
+    slug: slug(fullTitle)
   };
 }
 
@@ -68,8 +68,12 @@ async function run() {
     for (let input of inputs) {
       console.log(input);
       let data = await analyze(input);
-      console.log(data.date);
+      if (!data.date) {
+        console.log("Skipping unpublished");
+        continue;
+      }
       let outFile = "out/" + data.slug + ".html";
+      console.log("=> " + outFile);
       let meta: Record<string, string> = {};
       if (data.date) {
         meta.date = moment(data.date).format("DD MMM YYYY");
