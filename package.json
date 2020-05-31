@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build:live",
     "build": "tsc -p .",
-    "serve": "live-server out --no-browser",
+    "serve": "live-server out --no-browser --wait=1000",
     "build:live": "watchexec -w posts -w src -w templates -w resources -n npx ts-node src/index.ts"
   },
   "repository": {
