@@ -30,6 +30,8 @@
     "typescript": "^3.9.3"
   },
   "dependencies": {
-    "@types/rimraf": "^3.0.0"
+    "@types/rimraf": "^3.0.0",
+    "gray-matter": "^4.0.2",
+    "slugify": "^1.4.0"
   }
 }
