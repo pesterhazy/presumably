@@ -4,9 +4,6 @@ const rimraf = util.promisify(require("rimraf"));
 const mkdir = require("fs").promises.mkdir;
 const existsSync = require("fs").existsSync;
 
-// FIXME: add CSS
-// FIXME: add "published"
-
 async function init(outDir: string) {
   await rimraf(outDir);
   await mkdir(outDir);
@@ -29,7 +26,7 @@ async function transform(inFile: string, outFile: string) {
     "--template",
     "presumably.html",
     // "--metadata",
-    // "title=XFIXME",
+    // "title=XXX",
     inFile
   ]);
   console.log("ok");
