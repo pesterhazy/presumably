@@ -4,15 +4,6 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-$for(author-meta)$
-  <meta name="author" content="$author-meta$" />
-$endfor$
-$if(date-meta)$
-  <meta name="dcterms.date" content="$date-meta$" />
-$endif$
-$if(keywords)$
-  <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
-$endif$
   <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
   <style>
     $styles.html()$
@@ -21,12 +12,7 @@ $endif$
   <link rel="stylesheet" href="/vendor/basscss@8.0.1.min.css" />
   <link rel="stylesheet" href="/vendor/highlight.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans" />
-$if(math)$
-  $math$
-$endif$
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
+
 $for(header-includes)$
   $header-includes$
 $endfor$

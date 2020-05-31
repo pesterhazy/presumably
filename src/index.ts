@@ -21,7 +21,7 @@ async function transform(inFile: string, outFile: string) {
     "--template",
     "presumably.html",
     "--metadata",
-    "title=FIXME",
+    "title=XXXFIXME",
     inFile
   ]);
   console.log("ok");
