@@ -38,7 +38,7 @@ async function transform(
     ".",
     "--template",
     "presumably.html",
-    ...flatMap(Object.entries(meta), (k: string, v: string) => [
+    ...flatMap(Object.entries(meta), ([k, v]: [string, string]) => [
       "--metadata",
       k + "=" + v
     ]),
@@ -69,7 +69,7 @@ async function run() {
       let data = await analyze(input);
       let outFile = "out/" + data.slug + ".html";
       // moment(new Date()).format("DD MMM YYYY")
-      await transform(input, outFile, { "date-formatted": "asdf" });
+      await transform(input, outFile, { date: "asdf" });
     }
     console.log("All done.");
   } catch (e) {
