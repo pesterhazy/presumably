@@ -8,6 +8,7 @@ import matter = require("gray-matter");
 const slugify = require("slugify");
 const fg = require("fast-glob");
 const flatMap = require("array.prototype.flatmap");
+import moment = require("moment");
 
 // FIXME: filter out unpublished posts
 // FIXME: create index page
@@ -67,9 +68,13 @@ async function run() {
     for (let input of inputs) {
       console.log(input);
       let data = await analyze(input);
+      console.log(data.date);
       let outFile = "out/" + data.slug + ".html";
-      // moment(new Date()).format("DD MMM YYYY")
-      await transform(input, outFile, { date: "asdf" });
+      let meta: Record<string, string> = {};
+      if (data.date) {
+        meta.date = moment(data.date).format("DD MMM YYYY");
+      }
+      await transform(input, outFile, meta);
     }
     console.log("All done.");
   } catch (e) {
