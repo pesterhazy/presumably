@@ -3,6 +3,7 @@ const execFile = util.promisify(require("child_process").execFile);
 const rimraf = util.promisify(require("rimraf"));
 const mkdir = require("fs").promises.mkdir;
 const readFile = require("fs").promises.readFile;
+const writeFile = require("fs").promises.writeFile;
 const existsSync = require("fs").existsSync;
 import matter = require("gray-matter");
 const slug = require("slug");
@@ -61,15 +62,24 @@ async function analyze(inFile: string) {
   };
 }
 
-interface TocEntry {
-  fileName: string;
-  analysisData: object;
+interface AnalysisData {
+  fullTitle: string;
 }
 
-async function toc(contents: TocEntry[]) {
-  let data = ["div", ...contents.map(entry => ["div", entry.fileName])];
-  let s = hiccup.serialize(data);
-  console.log(s);
+interface TocEntry {
+  fileName: string;
+  analysisData: AnalysisData;
+}
+
+async function toc(contents: TocEntry[], outFile: string) {
+  let data = [
+    "div",
+    ...contents.map(entry => [
+      "div",
+      ["a", { href: "/" + entry.fileName }, entry.analysisData.fullTitle]
+    ])
+  ];
+  await writeFile(outFile, hiccup.serialize(data));
 }
 
 async function run() {
@@ -96,7 +106,8 @@ async function run() {
       await transform(input, outFile, meta);
       result.push({ analysisData: data, fileName });
     }
-    toc(result);
+    toc(result, "out/index.html");
+    console.log("=> " + "out/index.html");
     console.log("All done.");
   } catch (e) {
     console.error("Failed\n" + e.stack);
