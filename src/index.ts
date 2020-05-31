@@ -9,6 +9,7 @@ const slug = require("slug");
 const fg = require("fast-glob");
 const flatMap = require("array.prototype.flatmap");
 import moment = require("moment");
+import hiccup = require("@thi.ng/hiccup");
 
 // FIXME: create index page
 // FIXME: google analytics
@@ -60,6 +61,17 @@ async function analyze(inFile: string) {
   };
 }
 
+interface TocEntry {
+  fileName: string;
+  analysisData: object;
+}
+
+async function toc(contents: TocEntry[]) {
+  let data = ["div", ...contents.map(entry => ["div", entry.fileName])];
+  let s = hiccup.serialize(data);
+  console.log(s);
+}
+
 async function run() {
   try {
     let inputs = await fg(["posts/*.md"]);
@@ -84,7 +96,7 @@ async function run() {
       await transform(input, outFile, meta);
       result.push({ analysisData: data, fileName });
     }
-    console.log(JSON.stringify(result, undefined, 4));
+    toc(result);
     console.log("All done.");
   } catch (e) {
     console.error("Failed\n" + e.stack);
