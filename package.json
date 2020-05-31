@@ -8,7 +8,7 @@
     "start": "npm run build:live",
     "build": "tsc -p .",
     "serve": "live-server out --no-browser",
-    "build:live": "watchexec -w src -w templates -w resources -n npx ts-node src/index.ts"
+    "build:live": "watchexec -w posts -w src -w templates -w resources -n npx ts-node src/index.ts"
   },
   "repository": {
     "type": "git",

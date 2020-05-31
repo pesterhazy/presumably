@@ -35,7 +35,6 @@ async function transform(inFile: string, outFile: string) {
     // "title=XXX",
     inFile
   ]);
-  console.log("ok");
 }
 
 async function analyze(inFile: string) {
@@ -48,13 +47,16 @@ async function analyze(inFile: string) {
 async function run() {
   try {
     let inputs = await fg(["posts/*.md"]);
+    console.log("" + inputs.length + " inputs found");
     await init("out");
     await staticFiles("resources/public", "out");
     for (let input of inputs) {
+      console.log(input);
       let { slug } = await analyze(input);
       let outFile = "out/" + slug + ".html";
       await transform(input, outFile);
     }
+    console.log("All done.");
   } catch (e) {
     console.error("Failed\n" + e.stack);
     process.exit(1);
