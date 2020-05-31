@@ -6,6 +6,7 @@ const readFile = require("fs").promises.readFile;
 const existsSync = require("fs").existsSync;
 import matter = require("gray-matter");
 const slugify = require("slugify");
+const fg = require("fast-glob");
 
 // FIXME: make sure that slugs match
 
@@ -46,11 +47,14 @@ async function analyze(inFile: string) {
 
 async function run() {
   try {
+    let inputs = await fg(["posts/*.md"]);
     await init("out");
     await staticFiles("resources/public", "out");
-    let { slug } = await analyze("posts/monorepos.md");
-    let outFile = "out/" + slug + ".html";
-    await transform("posts/monorepos.md", outFile);
+    for (let input of inputs) {
+      let { slug } = await analyze(input);
+      let outFile = "out/" + slug + ".html";
+      await transform(input, outFile);
+    }
   } catch (e) {
     console.error("Failed\n" + e.stack);
     process.exit(1);
