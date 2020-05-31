@@ -62,6 +62,7 @@ async function analyze(inFile: string) {
 async function run() {
   try {
     let inputs = await fg(["posts/*.md"]);
+    let result = [];
     console.log("" + inputs.length + " inputs found");
     await init("out");
     await staticFiles("resources/public", "out");
@@ -72,14 +73,17 @@ async function run() {
         console.log("Skipping unpublished");
         continue;
       }
-      let outFile = "out/" + data.slug + ".html";
+      let fileName = data.slug + ".html";
+      let outFile = "out/" + fileName;
       console.log("=> " + outFile);
       let meta: Record<string, string> = {};
       if (data.date) {
         meta.date = moment(data.date).format("DD MMM YYYY");
       }
       await transform(input, outFile, meta);
+      result.push({ analysisData: data, fileName });
     }
+    console.log(JSON.stringify(result, undefined, 4));
     console.log("All done.");
   } catch (e) {
     console.error("Failed\n" + e.stack);
