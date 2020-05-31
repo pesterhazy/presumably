@@ -72,13 +72,14 @@ interface TocEntry {
 }
 
 async function toc(contents: TocEntry[], outFile: string) {
-  let data = [
+  let div = [
     "div",
     ...contents.map(entry => [
       "div",
       ["a", { href: "/" + entry.fileName }, entry.analysisData.fullTitle]
     ])
   ];
+  let data = ["html", ["body", div]];
   await writeFile(outFile, hiccup.serialize(data));
 }
 
