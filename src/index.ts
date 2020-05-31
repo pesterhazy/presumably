@@ -28,8 +28,8 @@ async function transform(inFile: string, outFile: string) {
     ".",
     "--template",
     "presumably.html",
-    "--metadata",
-    "title=XFIXME",
+    // "--metadata",
+    // "title=XFIXME",
     inFile
   ]);
   console.log("ok");
