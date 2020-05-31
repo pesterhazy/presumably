@@ -7,7 +7,10 @@ const existsSync = require("fs").existsSync;
 import matter = require("gray-matter");
 const slugify = require("slugify");
 const fg = require("fast-glob");
+const flatMap = require("array.prototype.flatmap");
 
+// FIXME: filter out unpublished posts
+// FIXME: create index page
 // FIXME: make sure that slugs match
 
 async function init(outDir: string) {
@@ -22,7 +25,11 @@ async function staticFiles(publicDir: string, outDir: string) {
   await execFile("rsync", ["-va", "resources/public/", outDir]);
 }
 
-async function transform(inFile: string, outFile: string) {
+async function transform(
+  inFile: string,
+  outFile: string,
+  meta: Record<string, string>
+) {
   await execFile("pandoc", [
     "--output",
     outFile,
@@ -31,8 +38,10 @@ async function transform(inFile: string, outFile: string) {
     ".",
     "--template",
     "presumably.html",
-    // "--metadata",
-    // "title=XXX",
+    ...flatMap(Object.entries(meta), (k: string, v: string) => [
+      "--metadata",
+      k + "=" + v
+    ]),
     inFile
   ]);
 }
@@ -40,8 +49,13 @@ async function transform(inFile: string, outFile: string) {
 async function analyze(inFile: string) {
   let s = await readFile(inFile, "utf-8");
   let { data } = matter(s);
+  let { title } = data;
 
-  return { slug: slugify(data.title, { lower: true }) };
+  return {
+    title,
+    date: data["date-published"],
+    slug: slugify(data.title, { lower: true })
+  };
 }
 
 async function run() {
@@ -52,9 +66,10 @@ async function run() {
     await staticFiles("resources/public", "out");
     for (let input of inputs) {
       console.log(input);
-      let { slug } = await analyze(input);
-      let outFile = "out/" + slug + ".html";
-      await transform(input, outFile);
+      let data = await analyze(input);
+      let outFile = "out/" + data.slug + ".html";
+      // moment(new Date()).format("DD MMM YYYY")
+      await transform(input, outFile, { "date-formatted": "asdf" });
     }
     console.log("All done.");
   } catch (e) {

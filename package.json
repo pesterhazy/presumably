@@ -31,8 +31,10 @@
   },
   "dependencies": {
     "@types/rimraf": "^3.0.0",
+    "array.prototype.flatmap": "^1.2.3",
     "fast-glob": "^3.2.2",
     "gray-matter": "^4.0.2",
+    "moment": "^2.26.0",
     "slugify": "^1.4.0"
   }
 }
