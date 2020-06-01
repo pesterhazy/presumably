@@ -79,7 +79,12 @@ async function toc(contents: TocEntry[], outFile: string) {
       ["a", { href: "/" + entry.fileName }, entry.analysisData.fullTitle]
     ])
   ];
-  let data = ["html", ["body", div]];
+  let data = template({
+    body: hiccup.serialize(div),
+    title: "FIXME",
+    subtitle: "FIXME",
+    date: "FIXME"
+  });
   await writeFile(outFile, hiccup.serialize(data));
 }
 
@@ -117,3 +122,69 @@ async function run() {
 }
 
 run();
+
+interface TemplateParams {
+  body: string;
+  title: string;
+  subtitle: string;
+  date: string;
+}
+
+function template({ body, title, subtitle, date }: TemplateParams) {
+  return [
+    "html",
+    [
+      "head",
+      ["meta", { charset: "utf-8" }],
+      ["title", title],
+      ["link", { rel: "stylesheet", href: "/css/style.css" }],
+      ["link", { rel: "stylesheet", href: "/vendor/basscss@8.0.1.min.css" }],
+      ["link", { rel: "stylesheet", href: "/vendor/highlight.css" }],
+      [
+        "link",
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css?family=Josefin+Sans"
+        }
+      ]
+    ],
+    [
+      "body",
+      [
+        "div.content.mx-auto",
+        [
+          "div.clearfix",
+          [
+            "div.header",
+            ["a", { href: "/" }, "presumably for side-effects"],
+            ["br"],
+            "a blog about programming"
+          ],
+          [
+            "div",
+            [
+              "div",
+              [
+                "header#title-block-header",
+                ["h1.title", title],
+                ["p.subtitle", subtitle],
+                ["p.date", date]
+              ],
+              body
+            ]
+          ]
+        ],
+        ["hr.rule"],
+        [
+          "p.m2",
+          "This is",
+          ["i", "presumably for side-effects"],
+          ", a blog by Paulus Esterhazy. Don't forget to say hello ",
+          ["a", { href: "https://twitter.com/pesterhazy" }, "on twitter"],
+          " or ",
+          ["a", { href: "mailto:pesterhazy@gmail.com" }, "by email"]
+        ]
+      ]
+    ]
+  ];
+}

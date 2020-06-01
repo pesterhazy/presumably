@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
-  <link rel="stylesheet" href="/css/style.css" />
-  <link rel="stylesheet" href="/vendor/basscss@8.0.1.min.css" />
-  <link rel="stylesheet" href="/vendor/highlight.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans" />
-</head>
-<body>
-<div class="content mx-auto"><div class="clearfix"><div class="header"><a href="/">presumably for side-effects</a><br>a blog about programming</div><div><div>
-$if(title)$
-<header id="title-block-header">
-<h1 class="title">$title$</h1>
-$if(subtitle)$
-<p class="subtitle">$subtitle$</p>
-$endif$
-$if(date)$
-<p class="date">published $date$</p>
-$endif$
-</header>
-$endif$
-$body$
-</div></div></div><hr class="rule"><p class="mt2">This is <i>presumably for side-effects</i>, a blog by Paulus Esterhazy. Don't forget to say hello <a href="https://twitter.com/pesterhazy">on twitter</a> or <a href="mailto:pesterhazy@gmail.com">by email</a></p></div></div>
-</body>
+    <head>
+        <meta charset="utf-8" />
+        <title>TITLE</title>
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/vendor/basscss@8.0.1.min.css" />
+        <link rel="stylesheet" href="/vendor/highlight.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans" />
+    </head>
+    <body>
+        <div class="content mx-auto">
+            <div class="clearfix">
+                <div class="header">
+                    <a href="/">presumably for side-effects</a><br />
+                    a blog about programming
+                </div>
+                <div>
+                    <div>
+                        <header id="title-block-header">
+                            <h1 class="title">TITLE</h1>
+                            <p class="subtitle">SUBTITLE</p>
+                            <p class="date">published DATE</p>
+                        </header>
+                        BODY
+                    </div>
+                </div>
+            </div>
+            <hr class="rule" />
+            <p class="mt2">This is <i>presumably for side-effects</i>, a blog by Paulus Esterhazy. Don't forget to say hello <a href="https://twitter.com/pesterhazy">on twitter</a> or <a href="mailto:pesterhazy@gmail.com">by email</a></p>
+        </div>
+    </body>
 </html>
