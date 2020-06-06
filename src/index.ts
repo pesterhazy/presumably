@@ -15,6 +15,7 @@ import hiccup = require("@thi.ng/hiccup");
 // FIXME: create index page
 // FIXME: google analytics
 // FIXME: make sure that slugs match
+// FIXME: missing dot before Using git xargs
 
 const formatDate = (date: Date) => moment(date).format("MMM DD, YYYY");
 
@@ -178,7 +179,7 @@ function template({ body, title, subtitle, date }: TemplateParams) {
         ["hr.rule"],
         [
           "p.m2",
-          "This is",
+          "This is ",
           ["i", "presumably for side-effects"],
           ", a blog by Paulus Esterhazy. Don't forget to say hello ",
           ["a", { href: "https://twitter.com/pesterhazy" }, "on twitter"],
