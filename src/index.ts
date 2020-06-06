@@ -13,6 +13,9 @@ import moment = require("moment");
 import hiccup = require("@thi.ng/hiccup");
 
 // FIXME: make sure that slugs match
+// FIXME: atom.xml
+// FIXME: double-bundle post
+// FIXME: redirects
 
 // ********************************************************************
 
