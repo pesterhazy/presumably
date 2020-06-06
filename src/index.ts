@@ -16,6 +16,8 @@ import hiccup = require("@thi.ng/hiccup");
 // FIXME: google analytics
 // FIXME: make sure that slugs match
 
+const formatDate = (date: Date) => moment(date).format("MMM DD, YYYY");
+
 async function init(outDir: string) {
   await rimraf(outDir);
   await mkdir(outDir);
@@ -49,7 +51,7 @@ async function transform(
   ]);
 }
 
-async function analyze(inFile: string) {
+async function analyze(inFile: string): Promise<AnalysisData> {
   let s = await readFile(inFile, "utf-8");
   let { data } = matter(s);
   let fullTitle = data.title;
@@ -64,6 +66,8 @@ async function analyze(inFile: string) {
 
 interface AnalysisData {
   fullTitle: string;
+  date: Date;
+  slug: string;
 }
 
 interface TocEntry {
@@ -71,13 +75,16 @@ interface TocEntry {
   analysisData: AnalysisData;
 }
 
+// FIXME: order by timestamp
+
 async function toc(contents: TocEntry[], outFile: string) {
   let div = [
     "div",
     ["h2", "Contents"],
     ...contents.map(entry => [
       "div",
-      ["a", { href: "/" + entry.fileName }, entry.analysisData.fullTitle]
+      ["a", { href: "/" + entry.fileName }, entry.analysisData.fullTitle],
+      " (" + formatDate(entry.analysisData.date) + ")"
     ])
   ];
   let data = template({
@@ -98,20 +105,20 @@ async function run() {
     await staticFiles("resources/public", "out");
     for (let input of inputs) {
       console.log(input);
-      let data = await analyze(input);
-      if (!data.date) {
+      let analysisData = await analyze(input);
+      if (!analysisData.date) {
         console.log("Skipping unpublished");
         continue;
       }
-      let fileName = data.slug + ".html";
+      let fileName = analysisData.slug + ".html";
       let outFile = "out/" + fileName;
       console.log("=> " + outFile);
       let meta: Record<string, string> = {};
-      if (data.date) {
-        meta.date = moment(data.date).format("DD MMM YYYY");
+      if (analysisData.date) {
+        meta.date = formatDate(analysisData.date);
       }
       await transform(input, outFile, meta);
-      result.push({ analysisData: data, fileName });
+      result.push({ analysisData: analysisData, fileName });
     }
     toc(result, "out/index.html");
     console.log("=> " + "out/index.html");
