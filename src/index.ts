@@ -97,9 +97,18 @@ async function toc(contents: TocEntry[], outFile: string) {
 // FIXME: title
 
 async function article(entry: TocEntry, outFile: string) {
-  let div = ["div", "XXX"];
+  let body = [
+    "div",
+    [
+      "header#title-block-header",
+      ["h1.title", entry.analysisData.fullTitle], //FIXME
+      ["p.subtitle", entry.analysisData.fullTitle],
+      ["p.date", entry.analysisData.date]
+    ],
+    entry.html
+  ];
   let data = template({
-    body: entry.html,
+    body: hiccup.serialize(body),
     title: "FIXME",
     subtitle: "FIXME", // FIXME: remove
     date: "FIXME"
