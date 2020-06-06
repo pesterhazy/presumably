@@ -74,6 +74,7 @@ interface TocEntry {
 async function toc(contents: TocEntry[], outFile: string) {
   let div = [
     "div",
+    ["h2", "Contents"],
     ...contents.map(entry => [
       "div",
       ["a", { href: "/" + entry.fileName }, entry.analysisData.fullTitle]
@@ -160,19 +161,7 @@ function template({ body, title, subtitle, date }: TemplateParams) {
             ["br"],
             "a blog about programming"
           ],
-          [
-            "div",
-            [
-              "div",
-              [
-                "header#title-block-header",
-                ["h1.title", title],
-                ["p.subtitle", subtitle],
-                ["p.date", date]
-              ],
-              body
-            ]
-          ]
+          ["div", body]
         ],
         ["hr.rule"],
         [
