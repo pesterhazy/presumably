@@ -51,6 +51,8 @@ async function analyze(inFile: string): Promise<AnalysisData> {
 
   return {
     fullTitle: fullTitle,
+    title: data.title,
+    subtitle: data.subtitle,
     date: data["date-published"],
     slug: slug(fullTitle)
   };
@@ -58,6 +60,8 @@ async function analyze(inFile: string): Promise<AnalysisData> {
 
 interface AnalysisData {
   fullTitle: string;
+  title: string;
+  subtitle: string;
   date: Date;
   slug: string;
 }
@@ -101,9 +105,9 @@ async function article(entry: TocEntry, outFile: string) {
     "div",
     [
       "header#title-block-header",
-      ["h1.title", entry.analysisData.fullTitle], //FIXME
-      ["p.subtitle", entry.analysisData.fullTitle],
-      ["p.date", entry.analysisData.date]
+      ["h1.title", entry.analysisData.title],
+      ["p.subtitle", entry.analysisData.subtitle],
+      ["p.date", formatDate(entry.analysisData.date)]
     ],
     entry.html
   ];
