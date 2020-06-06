@@ -12,10 +12,8 @@ const flatMap = require("array.prototype.flatmap");
 import moment = require("moment");
 import hiccup = require("@thi.ng/hiccup");
 
-// FIXME: create index page
 // FIXME: google analytics
 // FIXME: make sure that slugs match
-// FIXME: missing dot before Using git xargs
 
 // ********************************************************************
 
@@ -53,7 +51,7 @@ async function analyze(inFile: string): Promise<AnalysisData> {
   let s = await readFile(inFile, "utf-8");
   let { data } = matter(s);
   let fullTitle = data.title;
-  if (data.subtitle) fullTitle += " " + data.subtitle;
+  if (data.subtitle) fullTitle += ". " + data.subtitle;
 
   return {
     fullTitle: fullTitle,
