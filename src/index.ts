@@ -100,8 +100,6 @@ async function toc(contents: TocEntry[], outFile: string) {
   await writeFile(outFile, hiccup.serialize(data));
 }
 
-// FIXME: title
-
 async function article(entry: TocEntry, outFile: string) {
   let body = [
     "div",
@@ -115,7 +113,7 @@ async function article(entry: TocEntry, outFile: string) {
   ];
   let data = template({
     body: hiccup.serialize(body),
-    title: "FIXME"
+    title: entry.analysisData.title
   });
   await writeFile(outFile, hiccup.serialize(data));
 }
