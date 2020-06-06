@@ -17,6 +17,12 @@ import hiccup = require("@thi.ng/hiccup");
 // FIXME: make sure that slugs match
 // FIXME: missing dot before Using git xargs
 
+// ********************************************************************
+
+const blogTitle = "Presumably for side-effects";
+
+// ********************************************************************
+
 const formatDate = (date: Date) => moment(date).format("MMM DD, YYYY");
 
 async function init(outDir: string) {
@@ -89,7 +95,7 @@ async function toc(contents: TocEntry[], outFile: string) {
   ];
   let data = template({
     body: hiccup.serialize(div),
-    title: "FIXME"
+    title: blogTitle
   });
   await writeFile(outFile, hiccup.serialize(data));
 }
