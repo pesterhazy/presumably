@@ -172,7 +172,10 @@ function template({ body, title }: TemplateParams) {
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css?family=Josefin+Sans"
         }
-      ]
+      ],
+      "<script>hljs.initHighlightingOnLoad();</script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){\n  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\n  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\n  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');\n\n  ga('create', 'UA-81846608-1', 'auto');\n  ga('send', 'pageview');</script>",
+      '<script src="/vendor/highlight.js" type="text/javascript"></script>',
+      "<script> hljs.initHighlightingOnLoad(); </script>"
     ],
     [
       "body",
