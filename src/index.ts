@@ -12,7 +12,6 @@ const flatMap = require("array.prototype.flatmap");
 import moment = require("moment");
 import hiccup = require("@thi.ng/hiccup");
 
-// FIXME: google analytics
 // FIXME: make sure that slugs match
 
 // ********************************************************************
