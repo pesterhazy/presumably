@@ -72,8 +72,6 @@ interface TocEntry {
   analysisData: AnalysisData;
 }
 
-// FIXME: order by timestamp
-
 async function toc(contents: TocEntry[], outFile: string) {
   let div = [
     "div",
@@ -91,9 +89,7 @@ async function toc(contents: TocEntry[], outFile: string) {
   ];
   let data = template({
     body: hiccup.serialize(div),
-    title: "FIXME",
-    subtitle: "FIXME",
-    date: "FIXME"
+    title: "FIXME"
   });
   await writeFile(outFile, hiccup.serialize(data));
 }
@@ -113,9 +109,7 @@ async function article(entry: TocEntry, outFile: string) {
   ];
   let data = template({
     body: hiccup.serialize(body),
-    title: "FIXME",
-    subtitle: "FIXME", // FIXME: remove
-    date: "FIXME"
+    title: "FIXME"
   });
   await writeFile(outFile, hiccup.serialize(data));
 }
@@ -158,11 +152,9 @@ async function run() {
 interface TemplateParams {
   body: string;
   title: string;
-  subtitle: string;
-  date: string;
 }
 
-function template({ body, title, subtitle, date }: TemplateParams) {
+function template({ body, title }: TemplateParams) {
   return [
     "html",
     [
