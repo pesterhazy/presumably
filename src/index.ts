@@ -31,25 +31,16 @@ async function staticFiles(publicDir: string, outDir: string) {
   await execFile("rsync", ["-va", "resources/public/", outDir]);
 }
 
-async function transform(
-  inFile: string,
-  outFile: string,
-  meta: Record<string, string>
-) {
-  await execFile("pandoc", [
-    "--output",
-    outFile,
+async function transform(inFile: string, meta: Record<string, string>) {
+  let result = await execFile("pandoc", [
     "--to=html5",
-    "--data-dir",
-    ".",
-    "--template",
-    "presumably.html",
     ...flatMap(Object.entries(meta), ([k, v]: [string, string]) => [
       "--metadata",
       k + "=" + v
     ]),
     inFile
   ]);
+  return result.stdout;
 }
 
 async function analyze(inFile: string): Promise<AnalysisData> {
@@ -73,6 +64,7 @@ interface AnalysisData {
 
 interface TocEntry {
   fileName: string;
+  html: string;
   analysisData: AnalysisData;
 }
 
@@ -102,10 +94,23 @@ async function toc(contents: TocEntry[], outFile: string) {
   await writeFile(outFile, hiccup.serialize(data));
 }
 
+// FIXME: title
+
+async function article(entry: TocEntry, outFile: string) {
+  let div = ["div", "XXX"];
+  let data = template({
+    body: entry.html,
+    title: "FIXME",
+    subtitle: "FIXME", // FIXME: remove
+    date: "FIXME"
+  });
+  await writeFile(outFile, hiccup.serialize(data));
+}
+
 async function run() {
   try {
     let inputs = await fg(["posts/*.md"]);
-    let result = [];
+    let result: TocEntry[] = [];
     console.log("" + inputs.length + " inputs found");
     await init("out");
     await staticFiles("resources/public", "out");
@@ -123,8 +128,10 @@ async function run() {
       if (analysisData.date) {
         meta.date = formatDate(analysisData.date);
       }
-      await transform(input, outFile, meta);
-      result.push({ analysisData: analysisData, fileName });
+      let html = await transform(input, meta);
+      let entry = { analysisData: analysisData, fileName, html };
+      result.push(entry);
+      article(entry, outFile);
     }
     toc(result, "out/index.html");
     console.log("=> " + "out/index.html");
@@ -134,8 +141,6 @@ async function run() {
     process.exit(1);
   }
 }
-
-run();
 
 interface TemplateParams {
   body: string;
@@ -190,3 +195,5 @@ function template({ body, title, subtitle, date }: TemplateParams) {
     ]
   ];
 }
+
+run();
