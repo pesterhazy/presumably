@@ -106,7 +106,7 @@ async function article(entry: TocEntry, outFile: string) {
     [
       "header#title-block-header",
       ["h1.title", entry.analysisData.title],
-      ["p.subtitle", entry.analysisData.subtitle],
+      ["h2.subtitle", entry.analysisData.subtitle],
       ["p.date", "published " + formatDate(entry.analysisData.date)]
     ],
     entry.html
