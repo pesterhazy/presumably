@@ -81,11 +81,16 @@ async function toc(contents: TocEntry[], outFile: string) {
   let div = [
     "div",
     ["h2", "Contents"],
-    ...contents.map(entry => [
-      "div",
-      ["a", { href: "/" + entry.fileName }, entry.analysisData.fullTitle],
-      " (" + formatDate(entry.analysisData.date) + ")"
-    ])
+    ...[...contents]
+      .sort(
+        (a: TocEntry, b: TocEntry) =>
+          b.analysisData.date.getTime() - a.analysisData.date.getTime()
+      )
+      .map(entry => [
+        "div",
+        ["a", { href: "/" + entry.fileName }, entry.analysisData.fullTitle],
+        " (" + formatDate(entry.analysisData.date) + ")"
+      ])
   ];
   let data = template({
     body: hiccup.serialize(div),
