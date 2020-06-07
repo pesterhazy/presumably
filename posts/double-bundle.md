@@ -3,7 +3,9 @@ title: "Double Bundle"
 subtitle: "Integrating NPM dependencis into Clojurescript projects"
 uuid: a393ce8b-6032-47af-9e4a-2834e1a14cbf
 author: Paulus
+date-published: 2017-06-06
 ---
+
 Lately the Clojuresphere has been abuzz with efforts to make it easy to integrate NPM dependencies in ClojureScript projects. The reason is hardly a mystery. The NPM package repository, warts and all, contains a large amount of high-quality libraries. Access to these libraries instantly gives you leverage.
 
 NPM's original home is server-side development. These days access to NPM is important even - perhaps especially - when your ClojureScript code is targeting the web browser. Toolkits like Reagent, Rum and Om make it easy, if not trivial, to include pre-baked Javascript React components in your ClojureScript projects. Access to battle-tested components like [react-select](https://github.com/JedWatson/react-select), [react-datetime](https://github.com/YouCanBookMe/react-datetime) or frameworks like [reactstrap](https://reactstrap.github.io/) can significantly accelerate frontend development and keeps the incidental complexity of working with the DOM at bay.
@@ -37,23 +39,3 @@ With the double-bundle approach, a few things need to be kept in mind:
 - The two script tags in index.html need to be in the right order - npm-bundle.js first and clojurescript-bundle.js last. For production builds, of course, there's nothing to stop you from concatenating the two bundles into a single bundle.
 - To avoid including multiple versions of react and react-dom, these two cljsjs packages should be added to the project-wide global exclusions in project.clj. (Similarly, build.boot also supports global exclusions.)
 - By removing the `cljsjs/react` dependency, we also lose the `cljsjs.react` namespace. However, libraries like Reagent require this namespace. The solution is to mock out this namespace with an empty cljs file. This is admittedly somewhat inelegant.
-
-## Summary
-
-Using the double bundle approach is powerful, as it taps into the ecosystem and accumulated wisdom of the NPM community.
-
-## more
-
-- link to package.json and webpack.config.js
-
-## caveats
-
-- global exclusions for react
-- externs, not necessary for React, components can be accessed using goog.object/get
-- related to npm-deps? no
-- two bundles but they can be concatenated
-
-## todo
-
-- reference to baking-soda
-- properly attribute cljsjs

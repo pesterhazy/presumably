@@ -1,7 +1,5 @@
-.DS_Store
-target
-.nrepl-port
-.nrepl-history
+node_modules
+lib
 out
-twistd.pid
-x
+.log
+old
