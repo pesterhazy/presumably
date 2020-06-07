@@ -5,7 +5,7 @@ const mkdir = require("fs").promises.mkdir;
 const readFile = require("fs").promises.readFile;
 const writeFile = require("fs").promises.writeFile;
 const existsSync = require("fs").existsSync;
-import matter = require("gray-matter");
+import * as matter from "gray-matter";
 const slug = require("slug");
 const fg = require("fast-glob");
 import moment from "moment";
