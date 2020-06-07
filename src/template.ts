@@ -1,3 +1,5 @@
+import hiccup = require("@thi.ng/hiccup");
+
 interface TemplateParams {
   body: string;
   title: string;
@@ -10,6 +12,7 @@ function template({ body, title }: TemplateParams) {
       "head",
       ["meta", { charset: "utf-8" }],
       ["title", title],
+      [hiccup.COMMENT, "v=2"],
       ["link", { rel: "stylesheet", href: "/css/style.css" }],
       ["link", { rel: "stylesheet", href: "/vendor/basscss@8.0.1.min.css" }],
       ["link", { rel: "stylesheet", href: "/vendor/highlight.css" }],
