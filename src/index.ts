@@ -1,4 +1,4 @@
-const util = require("util");
+import util = require("util");
 const execFile = util.promisify(require("child_process").execFile);
 const rimraf = util.promisify(require("rimraf"));
 const mkdir = require("fs").promises.mkdir;
@@ -9,7 +9,7 @@ import matter = require("gray-matter");
 const slug = require("slug");
 const fg = require("fast-glob");
 const flatMap = require("array.prototype.flatmap");
-import moment = require("moment");
+import moment from "moment";
 import hiccup = require("@thi.ng/hiccup");
 import { Feed } from "feed";
 

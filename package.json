@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@thi.ng/hiccup": "^3.2.23",
+    "@types/moment": "^2.13.0",
     "@types/rimraf": "^3.0.0",
     "array.prototype.flatmap": "^1.2.3",
     "fast-glob": "^3.2.2",
