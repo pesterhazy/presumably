@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail && cd "$(dirname "${BASH_SOURCE[0]}")/.."
+
+aws s3 sync \
+    "$@" \
+    --acl public-read \
+    out/ s3://presumably-de-sitebucket-i2nzci1gpkw3/
