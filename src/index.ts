@@ -8,7 +8,6 @@ const existsSync = require("fs").existsSync;
 import matter = require("gray-matter");
 const slug = require("slug");
 const fg = require("fast-glob");
-const flatMap = require("array.prototype.flatmap");
 import moment from "moment";
 import hiccup = require("@thi.ng/hiccup");
 import { Feed } from "feed";
@@ -57,7 +56,7 @@ async function staticFiles(publicDir: string, outDir: string) {
 async function transform(inFile: string, meta: Record<string, string>) {
   let result = await execFile("pandoc", [
     "--to=html5",
-    ...flatMap(Object.entries(meta), ([k, v]: [string, string]) => [
+    ...Object.entries(meta).flatMap(([k, v]: [string, string]) => [
       "--metadata",
       k + "=" + v
     ]),
