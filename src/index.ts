@@ -79,7 +79,7 @@ async function analyze(inFile: string): Promise<AnalysisData> {
   };
 }
 
-async function toc(contents: Post[], outFile: string) {
+async function writeToc(contents: Post[], outFile: string) {
   let div = [
     "div",
     ["h2", "Contents"],
@@ -101,7 +101,7 @@ async function toc(contents: Post[], outFile: string) {
   await writeFile(outFile, hiccup.serialize(data));
 }
 
-async function article(post: Post, outFile: string) {
+async function writeArticle(post: Post, outFile: string) {
   let body = [
     "div",
     [
@@ -143,11 +143,11 @@ async function run() {
       let html = await transform(input, meta);
       let post = { analysisData: analysisData, fileName, html };
       result.push(post);
-      article(post, outFile);
+      writeArticle(post, outFile);
     }
-    await toc(result, "out/index.html");
+    await writeToc(result, "out/index.html");
     console.log("=> " + "out/index.html");
-    await makeFeed(result, "out/atom.xml");
+    await writeFeed(result, "out/atom.xml");
     console.log("=> " + "out/atom.xml");
     console.log("All done.");
   } catch (e) {
@@ -156,7 +156,7 @@ async function run() {
   }
 }
 
-async function makeFeed(entries: Post[], outFile: string) {
+async function writeFeed(entries: Post[], outFile: string) {
   const feed = new Feed({
     title: blogTitle,
     description: "This is my personal feed!",
