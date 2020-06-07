@@ -24,6 +24,20 @@ const baseUrl = "https://presumably.de";
 
 // ********************************************************************
 
+interface AnalysisData {
+  fullTitle: string;
+  title: string;
+  subtitle: string;
+  date: Date;
+  slug: string;
+}
+
+interface Post {
+  fileName: string;
+  html: string;
+  analysisData: AnalysisData;
+}
+
 const formatDate = (date: Date) => moment(date).format("MMM DD, YYYY");
 
 async function init(outDir: string) {
@@ -65,27 +79,13 @@ async function analyze(inFile: string): Promise<AnalysisData> {
   };
 }
 
-interface AnalysisData {
-  fullTitle: string;
-  title: string;
-  subtitle: string;
-  date: Date;
-  slug: string;
-}
-
-interface TocEntry {
-  fileName: string;
-  html: string;
-  analysisData: AnalysisData;
-}
-
-async function toc(contents: TocEntry[], outFile: string) {
+async function toc(contents: Post[], outFile: string) {
   let div = [
     "div",
     ["h2", "Contents"],
     ...[...contents]
       .sort(
-        (a: TocEntry, b: TocEntry) =>
+        (a: Post, b: Post) =>
           b.analysisData.date.getTime() - a.analysisData.date.getTime()
       )
       .map(entry => [
@@ -101,20 +101,20 @@ async function toc(contents: TocEntry[], outFile: string) {
   await writeFile(outFile, hiccup.serialize(data));
 }
 
-async function article(entry: TocEntry, outFile: string) {
+async function article(post: Post, outFile: string) {
   let body = [
     "div",
     [
       "header#title-block-header",
-      ["h1.title", entry.analysisData.title],
-      ["h2.subtitle", entry.analysisData.subtitle],
-      ["p.date", "published " + formatDate(entry.analysisData.date)]
+      ["h1.title", post.analysisData.title],
+      ["h2.subtitle", post.analysisData.subtitle],
+      ["p.date", "published " + formatDate(post.analysisData.date)]
     ],
-    entry.html
+    post.html
   ];
   let data = template({
     body: hiccup.serialize(body),
-    title: entry.analysisData.title
+    title: post.analysisData.title
   });
   await writeFile(outFile, hiccup.serialize(data));
 }
@@ -122,7 +122,7 @@ async function article(entry: TocEntry, outFile: string) {
 async function run() {
   try {
     let inputs = await fg(["posts/*.md"]);
-    let result: TocEntry[] = [];
+    let result: Post[] = [];
     console.log("" + inputs.length + " inputs found");
     await init("out");
     await staticFiles("resources/public", "out");
@@ -141,9 +141,9 @@ async function run() {
         meta.date = formatDate(analysisData.date);
       }
       let html = await transform(input, meta);
-      let entry = { analysisData: analysisData, fileName, html };
-      result.push(entry);
-      article(entry, outFile);
+      let post = { analysisData: analysisData, fileName, html };
+      result.push(post);
+      article(post, outFile);
     }
     await toc(result, "out/index.html");
     console.log("=> " + "out/index.html");
@@ -156,12 +156,7 @@ async function run() {
   }
 }
 
-interface TemplateParams {
-  body: string;
-  title: string;
-}
-
-async function makeFeed(entries: TocEntry[], outFile: string) {
+async function makeFeed(entries: Post[], outFile: string) {
   const feed = new Feed({
     title: blogTitle,
     description: "This is my personal feed!",
@@ -177,12 +172,12 @@ async function makeFeed(entries: TocEntry[], outFile: string) {
     }
   });
 
-  entries.forEach(entry => {
+  entries.forEach(post => {
     feed.addItem({
-      title: entry.analysisData.fullTitle,
-      id: baseUrl + "/" + entry.fileName,
-      link: baseUrl + "/" + entry.fileName,
-      date: entry.analysisData.date
+      title: post.analysisData.fullTitle,
+      id: baseUrl + "/" + post.fileName,
+      link: baseUrl + "/" + post.fileName,
+      date: post.analysisData.date
     });
   });
 
