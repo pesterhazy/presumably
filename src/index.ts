@@ -38,6 +38,8 @@ interface Post {
   analysisData: AnalysisData;
 }
 
+// ********************************************************************
+
 const formatDate = (date: Date) => moment(date).format("MMM DD, YYYY");
 
 async function init(outDir: string) {
@@ -79,6 +81,8 @@ async function analyze(inFile: string): Promise<AnalysisData> {
   };
 }
 
+// ********************************************************************
+
 async function writeToc(contents: Post[], outFile: string) {
   let div = [
     "div",
@@ -119,6 +123,36 @@ async function writeArticle(post: Post, outFile: string) {
   await writeFile(outFile, hiccup.serialize(data));
 }
 
+async function writeFeed(entries: Post[], outFile: string) {
+  const feed = new Feed({
+    title: blogTitle,
+    description: "This is my personal feed!",
+    id: "https://presumably.de",
+    link: "https://presumably.de",
+    copyright: "Copyright Paulus Esterhazy",
+    language: "en",
+    feedLinks: {
+      atom: "https://presumably.de/atom.xml"
+    },
+    author: {
+      name: "Paulus Esterhazy"
+    }
+  });
+
+  entries.forEach(post => {
+    feed.addItem({
+      title: post.analysisData.fullTitle,
+      id: baseUrl + "/" + post.fileName,
+      link: baseUrl + "/" + post.fileName,
+      date: post.analysisData.date
+    });
+  });
+
+  await writeFile(outFile, feed.atom1());
+}
+
+// ********************************************************************
+
 async function run() {
   try {
     let inputs = await fg(["posts/*.md"]);
@@ -154,34 +188,6 @@ async function run() {
     console.error("Failed\n" + e.stack);
     process.exit(1);
   }
-}
-
-async function writeFeed(entries: Post[], outFile: string) {
-  const feed = new Feed({
-    title: blogTitle,
-    description: "This is my personal feed!",
-    id: "https://presumably.de",
-    link: "https://presumably.de",
-    copyright: "Copyright Paulus Esterhazy",
-    language: "en",
-    feedLinks: {
-      atom: "https://presumably.de/atom.xml"
-    },
-    author: {
-      name: "Paulus Esterhazy"
-    }
-  });
-
-  entries.forEach(post => {
-    feed.addItem({
-      title: post.analysisData.fullTitle,
-      id: baseUrl + "/" + post.fileName,
-      link: baseUrl + "/" + post.fileName,
-      date: post.analysisData.date
-    });
-  });
-
-  await writeFile(outFile, feed.atom1());
 }
 
 run();
