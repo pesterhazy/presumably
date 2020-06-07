@@ -2,7 +2,6 @@
 title: "What the F!GWH33L is a ClojureScript REPL?"
 uuid: ec39917b-6828-4373-8552-380aba85a570
 author: Paulus
-date-published: 2019-01-11
 ---
 
 Onboarding new developers to ClojureScript teams is a joy, mostly. You get to talk about all the things that make it fun to write web apps in a Lisp. But when we get to the topic of REPLs - arguably the most LISP-y of topics - there's often an awkard pause. While ClojureScript REPLs are well-supported these days, it's far from obvious how they work - and how to get them to work.
