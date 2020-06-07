@@ -1,6 +1,6 @@
 ---
 title: "Double Bundle"
-subtitle: "Integrating NPM dependencis into Clojurescript projects"
+subtitle: "Integrating NPM dependencies into Clojurescript projects"
 uuid: a393ce8b-6032-47af-9e4a-2834e1a14cbf
 author: Paulus
 date-published: 2017-06-06
