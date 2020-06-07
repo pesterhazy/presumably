@@ -7,7 +7,7 @@ const writeFile = require("fs").promises.writeFile;
 const existsSync = require("fs").existsSync;
 import matter from "gray-matter";
 import slug from "slug";
-const fg = require("fast-glob");
+import fg = require("fast-glob");
 import moment from "moment";
 import hiccup = require("@thi.ng/hiccup");
 import { Feed } from "feed";
