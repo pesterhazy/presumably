@@ -11,6 +11,7 @@ const fg = require("fast-glob");
 const flatMap = require("array.prototype.flatmap");
 import moment = require("moment");
 import hiccup = require("@thi.ng/hiccup");
+import { Feed } from "feed";
 
 // FIXME: atom.xml
 // FIXME: redirects
@@ -18,6 +19,7 @@ import hiccup = require("@thi.ng/hiccup");
 // ********************************************************************
 
 const blogTitle = "Presumably for side-effects";
+const baseUrl = "https://presumably.de";
 
 // ********************************************************************
 
@@ -142,8 +144,10 @@ async function run() {
       result.push(entry);
       article(entry, outFile);
     }
-    toc(result, "out/index.html");
+    await toc(result, "out/index.html");
     console.log("=> " + "out/index.html");
+    await makeFeed(result, "out/atom.xml");
+    console.log("=> " + "out/atom.xml");
     console.log("All done.");
   } catch (e) {
     console.error("Failed\n" + e.stack);
@@ -204,6 +208,34 @@ function template({ body, title }: TemplateParams) {
       ]
     ]
   ];
+}
+
+async function makeFeed(entries: TocEntry[], outFile: string) {
+  const feed = new Feed({
+    title: blogTitle,
+    description: "This is my personal feed!",
+    id: "https://presumably.de",
+    link: "https://presumably.de",
+    copyright: "Copyright Paulus Esterhazy",
+    language: "en",
+    feedLinks: {
+      atom: "https://presumably.de/atom.xml"
+    },
+    author: {
+      name: "Paulus Esterhazy"
+    }
+  });
+
+  entries.forEach(entry => {
+    feed.addItem({
+      title: entry.analysisData.fullTitle,
+      id: baseUrl + "/" + entry.fileName,
+      link: baseUrl + "/" + entry.fileName,
+      date: entry.analysisData.date
+    });
+  });
+
+  await writeFile(outFile, feed.atom1());
 }
 
 run();
