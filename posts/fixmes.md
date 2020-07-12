@@ -1,18 +1,19 @@
 ---
-title: "A defense of FIXMEs"
+title: "A Defense of FIXMEs (and Pair Programming)"
+date-published: 2020-07-13
 ---
 
-Not long ago, a friend noticed that in the codebase I'm currently contributing to, it isn't possible to merge pull requests that contain the word "FIXME". "Why would you set up your CI that way?", he asked. My guess is that he felt that the CI rule constrained his freedom of expression. Whatever his reason, I think it's fair to ask for an explanation for this practice. Such an explanation is what I'm going to attempt here.
+Not long ago, a friend noticed that in the codebase I'm working on (at Pitch), it isn't possible to merge pull requests that contain the word "FIXME". "Why would you set up your CI that way?", he asked. He was surprised, perhaps because he felt that the CI rule constrained his freedom of expression. Whatever his reason, I think it's fair to ask for an explanation for this practice, which is what I'm going to try here.
 
-Programmers have been peppering their code with special tags like XXX, FIXME and TODO for decades, at least since the 1980s. Special comments explain reasons behind the code, for the benefit of future readers (which may include the author). Uppercse tags also stand out visually and are easily grepable; in fact, the CI rule mentioned boils down to a simple `git grep -q FIXME && exit 1`.
+Programmers have been adding their code with comments forever and have been adding special tags like XXX, FIXME and TODO for decades, at least since the 1980s. Special comments explain reasons behind the code, for the benefit of future readers (which may include the author). Uppercse tags stand out visually. And they are easily grepable; in fact, the CI rule mentioned boils down to a simple `git grep -q FIXME && exit 1`.
 
 Much like many Slack workspaces form a private mini-language out of emojis, every codebase assigns specific meaning to tags. In our case, we use TODO for code that _should_ be changed eventually, but not necessarily today. It is considered acceptable, perhaps even desirable to wait to make the improvement suggested. By contrast, a FIXME is mandatory: we consider the code unfit for merge until the problem is addressed. Our linter reflects this judgment: TODOs are given a pass, while FIXMEs fail the build.
 
 What does this convention have to recommend itself? It eases communication during the genesis of the code. "Is this a FIXME or a TODO?" you might ask, making a judgment as to the status and priority of the problem in question. And during code review, FIXMEs jump out and scream, "Ask me about this question!"
 
-But the impact of FIXMEs run deeper. And the reason can, I think, be found in how our brain works. As David Allen has pointed out (in Getting Things Done) the brain finds it hard to let go of important information. That's why Allen recommends making lists - it helps you be relaxed about your work because instead of incessantly worrying about things you might need to do but have forgotten, the brain can be sure that the task is stored in a secure place. You allow yourself to forget abut the task now, temporarily.
+But the impact of FIXMEs run deeper than that. And the reason can, I think, be found in how our brain works. As David Allen has pointed out (in Getting Things Done) the brain has considerable difficulty letting go of information it considers important, even just for a moment. That's why Allen recommends making lists - avoiding the nagging feeling in the back of your mind that you might be missing something, it helps you be relaxed about your work because instead of incessantly worrying about things you might need to do but have forgotten, the brain can be sure that the task is stored in a secure place. You allow yourself to forget abut the task now, temporarily.
 
-While working on a branch, I use FIXMEs in a similar way. When I encounter a question or a potential issue with my approach, if I can't solve it within 5 minutes or so, I'll write it down as a FIXME:
+While working on a branch, I use FIXMEs in a similar way. When I encounter a question or a potential issue with my approach, if I can't solve it within 5 minutes or so, I'll add a FIXME comment to the problematic function:
 
 ```
 // FIXME: hardcoded user-id
@@ -20,7 +21,7 @@ While working on a branch, I use FIXMEs in a similar way. When I encounter a que
 // FIXME: time cmplexity is O(n2), check if fast enough
 ```
 
-Sometimes the FIXME will concerns trivial problems - how do I get at the user-id from this function without breaking the function signature - that I just don't have the bandwith to deal with right now. Other times the issue is more substantial and will take serious thought to resolve. But later, not now - I don't want to deal with this right now.
+Sometimes the FIXME concerns a triviality - how do I get at the user-id from this function without breaking the function signature. But even trivialities require bandwidth, and I might just not have the bandwith to deal with the issue right there. Other times the issue is more substantial and will require serious thought to resolve. But later, not now - I don't want to deal with this right now.
 
 Hardcoding a value or piece of logic that is awkward to get at without refactoring is such a useful trick that it deserves emphasis. This is one of the most powerful techniques we have: wishful thinking. What if we had access to the user-id here? Well, let's just pretend that we do and hardcode the value here. This will only work for one particular user, of course, so it's far from a generic solution. But that's the point. Hardcoding a laughably specific solution will help you make progress now and explore the problem space - a generic solution will come later.
 
@@ -40,4 +41,4 @@ Second - and this happens surprisingly often - you may be able to simply delete 
 
 Finally, if all else fails, you can choose to replace the FIXME with a TODO. After considering the matter, you decide that, while the problem you identified is real, it's not a merge blocker. A TODO can remind you that this is something that should be addressed at some point. Often, filing a follow-up issue in your issue tracker will help make sure that the matter is not forgotten. Filing a follow-up for later in the project, while not always what we prefer, is a valuable tool for larger teams, where it's desirable to merge branches earlier rather than later. Excessively long-running feature branches cause unnecessary additional integration work and merge conflicts. Whather TODO-ification is an acceptable outcome will be a judgment call that depends on the specifics of your project, but when applied well, it helps you manage priorities and focus on the essentials.
 
-That's my defense of a linter rule preventing merges of code containing FIXME. FIXME-driven development helps you focus on the essentials first and conserve your congitive capacity, arguably our most precious resource.
+That's my defense then: a linter rule preventing merges of code containing the word FIXME limits your freedom of expression. But constraints help creativity. FIXME-driven development gives you freedom by helping you focus on essentials first and manage your congitive capacity, arguably our most precious resource.
