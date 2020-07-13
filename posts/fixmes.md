@@ -1,9 +1,9 @@
 ---
-title: "A Defense of FIXMEs (and Pair Programming)"
+title: "In Defense of FIXMEs (and Pair Programming)"
 date-published: 2020-07-13
 ---
 
-Not long ago, a friend noticed that in the codebase I'm working on (at Pitch), it isn't possible to merge pull requests that contain the word "FIXME". "Why would you set up your CI that way?", he asked. He was surprised, perhaps because he felt that the CI rule constrained his freedom of expression. Whatever his reason, I think it's fair to ask for an explanation for this practice, which is what I'm going to try here.
+Not long ago, a new contributor to the Pitch codebase was surprised to learn that our linter blocks merges of pull requests containing the word _FIXME_. "This rule is ill-considered", he cried, exasperated, "We are lying to ourselves - these things still need to be fixed!" He clearly felt that the CI rule was curtailing his freedom. And it's never a bad idea to ask for justification of any convention, especially if, like ours, it's unusual and enforced by CI. Here are the reasons why I think the convention is justified.
 
 Programmers have been adding their code with comments forever and have been adding special tags like XXX, FIXME and TODO for decades, at least since the 1980s. Special comments explain reasons behind the code, for the benefit of future readers (which may include the author). Uppercse tags stand out visually. And they are easily grepable; in fact, the CI rule mentioned boils down to a simple `git grep -q FIXME && exit 1`.
 
