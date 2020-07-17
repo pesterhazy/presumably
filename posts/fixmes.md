@@ -9,7 +9,7 @@ Since the dawn of programming code has included comments, and for decades - at l
 
 Annotating code with tags is common enough, but semantics vary. With time codebases tend to assign specific meanings to individual tags, much like emojis in Slack workspaces gradually acquire a definite meaning. At Pitch we tag comments as TODO when code  _should_ be changed eventually, but not necessarily today. It is considered acceptable, perhaps even desirable to wait to make the improvement suggested. By contrast, a FIXME is more stringent: code is unfit for merge until the author addresses the problem. Our automated linter codifies this judgment priority: FIXMEs fail the build, but TODOs are given a pass.
 
-# Learning to Let It Go
+# Learning to let go
 
 Tags with an agreed-upon meaning aid communication with team members while the pull request is in progress. "Is this a FIXME or a TODO?" you might ask your colleague, requesting a judgment of the status and priority of the less-than-satisfying implementation. Similarly, during code review, FIXMEs signal that the function annotated requires attention. The comment screams out, "Help! Ask me about this issue I can't make progress on!"
 
@@ -23,9 +23,9 @@ While working on a branch, I use FIXMEs in a similar way. When I encounter a stu
 // FIXME: time cmplexity is O(n2), check if fast enough
 ```
 
-Sometimes FIXMEs concern trivial matters, like the question of how to get a value, like a user-id, from inside the context of a function. But even trivialities require bandwidth, and I might just not have enough of that to deal with the issue in addition to the problem I'm trying to solve. Other times the issue is more substantial and will require serious thought to resolve. But the issue, while interesting, is off-topic relative to my current interest, and although I will need to come back to this, I'll want leave it on the side for now.
+Sometimes FIXMEs concern trivial matters, like the question of how to get a value, like a user-id, from inside the context of an existing function. But even trivialities require mental bandwidth, and I might just not have enough of that to deal with the issue in addition to the problem I'm actually trying to solve. Other times the issue is more substantial and will require serious thought to resolve. But although the issue may be interesting, it is still off-topic relative to my current interest, and although I will need to come back to this, it's often best to leave the matter to one side for now.
 
-Of the various code-wrangling maneuvers made possible by FIXMEs, hardcoding, a form of wishful thinking, is particularly useful. I frequently find while writing a function that a dependency value is awkward to retrieve without going on an extended refactoring safari. Wishful thinking, one of the most undervalued techniques in software engineering, beings with a what-if question. What if we had access to the user's id here? Well, let's just pretend that we already do by hardcoding the value here. This will only work for one particular user, of course, so it's not a generic solution - quite the opposite. But hardcoding a laughably specific "solution" will help you explore the problem space now and make progress on the design without worrying about specifics - a generic solution will come later.
+Of the various code-wrangling maneuvers made possible by FIXMEs, hardcoding, a form of wishful thinking, is my favorite. I frequently find while writing a function that a dependency value is awkward to retrieve without going on an extended refactoring safari. Wishful thinking, one of the most undervalued techniques in software engineering, beings with a what-if question. What if we had access to the user's id here? Well, let's just pretend that we already do by hardcoding the value here. This will only work for one particular user, of course, so it's not a generic solution - quite the opposite. But hardcoding a laughably specific "solution" will help you explore the problem space now and make progress on the design without worrying about specifics - a generic solution will come later.
 
 # Pair Programming and Virtual Memory
 
