@@ -9,9 +9,11 @@ Since the dawn of programming code has included comments, and for decades - at l
 
 Annotating code with tags is a common practice, but semantics vary. With time codebases tend to assign specific meanings to individual tags, much like emojis in Slack workspaces gradually acquire a definite meaning. At Pitch we tag comments as TODO when code  _should_ be changed eventually, but not necessarily today. It is considered acceptable, perhaps even desirable to wait to make the improvement suggested. By contrast, a FIXME is more stringent: code is unfit for merge until the author addresses the problem. Our automated linter codifies this judgment priority: FIXMEs fail the build, but TODOs are given a pass.
 
+# How tags help
+
 Conventions aid communication with team members while the pull request is in progress. "Is this a FIXME or a TODO?" you might ask your colleague, requesting a judgment of the status and priority of the difficulty. And during code review, FIXMEs are a signal that the function annotated requires attention. They scream, "Help! Ask me about this issue I encountered!"
 
-But the impact of FIXMEs go deeper than that. And the reason can, I think, be found in how our brain works. As David Allen has pointed out (in Getting Things Done) the brain has considerable difficulty letting go of information it considers important, even just for a moment. That's why Allen recommends making lists - avoiding the nagging feeling in the back of your mind that you might be missing something, it helps you be relaxed about your work because instead of incessantly worrying about things you might need to do but have forgotten, the brain can be sure that the task is stored in a secure place. Making a list allows you to forget abut the task now, temporarily.
+But the impact of FIXMEs goes deeper than that. And the reason can, I think, be found in how our brain works. As David Allen has pointed out (in Getting Things Done) the brain has considerable difficulty letting go of information it considers important, even just for a moment. That's why Allen recommends making lists - avoiding the nagging feeling in the back of your mind that you might be missing something, it helps you be relaxed about your work because instead of incessantly worrying about things you might need to do but have forgotten, the brain can be sure that the task is stored in a secure place. Making a list allows you to forget abut the task now, temporarily.
 
 While working on a branch, I use FIXMEs in a similar way. When I encounter a stumbling block - a problem that will lead me away from the path I'm following - I'll add a FIXME comment to the problematic function:
 
@@ -33,7 +35,7 @@ The net effect of swapping out inessentials is that you can more easily focus on
 
 I find the act of explicitly deprioritizing problems by turning them into FIXMEs liberating. Like explained Getting Things Done, this works well because your brain is prone to worrying: there's this nagging feeling that maybe you'll forget about the hardcoded value, or the quadratic complexity, and then people will be mad at you (or maybe you'll be upset about yourself). The unconscious mind will only stop worrying if it knows that the task is written down somewhere in a secure place, and you will get back to it early enough. Let it go, brain, the CI job has got your back!
 
-After swapping out the distractions, you can use your full capacity at the core of the problem you're dealing with. It will still be hard, of course, but you'll have a better shot at seeing the solution if you RAM isn't cluttered with inessential details. 
+After swapping out the distraction, you can return to applying your full mental capacity to the core problem. It will still be hard, of course, but you'll have a better shot at seeing the solution if your RAM isn't cluttered with inessential details. 
 
 Eventually of course, after you've implemented the bulk of the logic but before your branch is merged, you do need get back to the problems you snoozed so successfully. When the time comes, there are three ways to eliminate the FIXME. First, you can face the problem head-on. Refactor the code so you can access the user-id in your function, or rewrite the algorithm to be O(n) instead of O(n2).
 
