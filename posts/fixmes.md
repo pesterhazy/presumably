@@ -1,15 +1,15 @@
 ---
-title: "In Defense of FIXMEs (and Pair Programming)"
+title: "A plea for FIXMEs"
 date-published: 2020-07-13
 ---
 
 Not too long ago, a new contributor to the Pitch codebase was surprised to learn that our linter will block the merge of any pull request containing the word _FIXME_. "This rule is ill-considered", he cried out, exasperated, "We are lying to ourselves - these things still need to be fixed!" He clearly felt that the CI rule was curtailing his freedom.
 
-I'll freely admit that our convention of using FIXMEs is unusual. But simple as it is, the use of the convention can make a big impact in a team. In this post, I will explain how automatically enforced FIXMEs have helped me improve as a programmer.
+It is true that our convention of using FIXMEs is unusual. But the judicious use of a simple convention can make a big impact both on the team and individual level. In this post, I will make the case for automatically enforced FIXMEs - a tool that has helped me improve as a programmer.
 
 # The meaning of code tags
 
-Code tags are certainly no recent invention. Since the dawn of programming code has included comments, and for decades - at least since the 1980s - programmers have lent significance to tags like XXX, TODO or FIXME. Most tags are added to express that the author is not satisfied with a solution, both as a _note to self_ and for the benefit of other readers. The use of uppercase letters not only makes tags jump out visually, it also makes them easy to grep for. The contentious linter rule requires no more than a single line of shell code: `git grep FIXME && exit 1`. Ane many IDEs give you a convenient ay to browse tags.
+Code tags are certainly not a recent invention. Since the dawn of programming code has included comments, and for decades - at least since the 1980s - programmers have lent significance to tags like XXX, TODO or FIXME. Most tags are added with the intention of flagging that the author is not satisfied with a solution, both as a _note to self_ and for the benefit of other readers. The use of uppercase letters not only makes tags jump out visually, it also makes them easy to grep for. The contentious linter rule requires no more than a single line of shell code: `git grep FIXME && exit 1`. And many IDEs give you a convenient way to browse tags.
 
 While annotating code with tags is common enough, semantics vary from team to team. With time teams tend to assign specific meanings to individual tags, much like emojis in Slack workspaces gradually acquire a definite meaning. At Pitch we tag comments as TODO when code _should_ be changed eventually, though not necessarily today. It is considered acceptable, perhaps even desirable to delay the improvement suggested. A TODO is a soft sign for the future. By contrast, FIXMEs are stringent: the code is unfit for merge until the author addresses the problem. Our automated linter codifies this judgment: FIXMEs fail the build, but TODOs are given a pass.
 
