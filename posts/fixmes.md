@@ -13,7 +13,7 @@ Code tags are certainly not a recent invention. Since the dawn of programming co
 
 While annotating code with tags is common enough, semantics vary from team to team. With time teams tend to assign specific meanings to individual tags, much like emojis in Slack workspaces gradually acquire a definite meaning. At Pitch we tag comments as TODO when code _should_ be changed eventually, though not necessarily today. It is considered acceptable, perhaps even desirable to delay the improvement suggested. A TODO is a soft sign for the future. By contrast, FIXMEs are stringent: the code is unfit for merge until the author addresses the problem. Our automated linter codifies this judgment: FIXMEs fail the build, but TODOs are given a pass.
 
-Tags with an agreed-upon meaning aid communication between team members while the pull request is in progress. "Is this a FIXME or a TODO?" you might ask your colleague while pairing, requesting a judgment of the status and priority of the less-than-satisfying implementation. Similarly, during code review, an oustanding FIXME signals that the function annotated requires close attention. The comment screams out, "Help! Ask me about this issue I can't make progress on!"
+Tags with an agreed-upon meaning aid communication between team members while the pull request is in progress. "Is this a FIXME or a TODO?" you might ask your colleague while pairing, requesting a judgment and clarification of the status and priority of a solution considered less-than-satisfying. Similarly, during code review an oustanding FIXME signals that the function annotated requires close attention. The comment screams out, as it were, "Help, I'm stuck! Ask me about this issue I encountered!"
 
 # Code-wrangling maneuvers
 
