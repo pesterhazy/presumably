@@ -17,7 +17,9 @@ Tags with an agreed-upon meaning aid communication between team members while th
 
 # Code-wrangling maneuvers
 
-FIXMEs are useful during review, but they help the author as much as the reviewer, and that's where things get interesting. While working on a branch, FIXMEs figure prominently in m code-wrangling maneuvers. When I encounter a stumbling block, a consideration that will lead me away from my current path, I'll add a FIXME comment to the problematic line:
+FIXMEs are useful during review, but they can help the author as much as the reviewer, and that's where things get interesting. During the code-wrangling phase, the phase when you're actively implementing, trying things out, making small incremental improvements, I like to think of the work as a series of small changes, each resulting in a commit. Changes such Inline Function and Rename Variable (and other refactorings) are instances of a maneuver, a generic pattern that, when applied on your code, gets you one step closer to your goal.
+
+FIXMEs figure prominently in my repertoire of code-wrangling maneuvers. When I encounter a stumbling block, a consideration that will lead me away from my current path, I'll go in and add a FIXME comment to the worrisome line:
 
 ```
 // FIXME: hardcoded user-id
