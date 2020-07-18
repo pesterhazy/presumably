@@ -17,9 +17,9 @@ Tags with an agreed-upon meaning aid communication between team members while th
 
 # Code-wrangling maneuvers
 
-FIXMEs are useful during review, but they can help the author as much as the reviewer, and that's where things get more interesting. During the code-wrangling phase, the phase when I'm actively implementing, trying things out and making small incremental improvements, the work is split up into a series of small changes, each resulting in a commit. Changes such as Inline Function and Rename Variable (and other refactorings) are instances of a maneuver, a generic pattern that, when applied on your code, gets you one step closer to your goal.
+FIXMEs are useful during review, but they can help the author as much as the reviewer, and that's where things get more interesting. During the implementation or code-wrangling phase, when I'm actively writing code, trying out approaches and making small incremental improvements, the work is split up into a series of small changes, each resulting in a commit. Maneuvers can help make sense of what you're doing. Changes such as Inline Function and Rename Variable (and other refactorings) are instances of such maneuver, a generic pattern that, when applied on your code, gets you one step closer to your goal.
 
-FIXMEs figure prominently in my repertoire of code-wrangling maneuvers. When I encounter a stumbling block, a consideration that will lead me away from my current path, I'll go in and add a FIXME comment to the worrisome line:
+FIXMEs figure prominently in my repertoire of code-wrangling maneuvers. When I encounter a stumbling block, a consideration that will lead me away from my current path, I'll stare the problem in the face and walk away. But before that, I'll go in and add a comment to the worrisome section:
 
 ```
 // FIXME: hardcoded user-id
@@ -27,7 +27,7 @@ FIXMEs figure prominently in my repertoire of code-wrangling maneuvers. When I e
 // FIXME: time cmplexity is O(n2), check if fast enough
 ```
 
-Sometimes FIXMEs concern trivial matters, like the question of how to get a user-id from inside the context of an existing function. But even trivialities require attention, and I often lack the mental bandwidth to deal with the issue in addition to the main problem I'm trying to solve. Other issues are more substantial and will require serious thought to resolve. But although doing this work may be interesting, it is still off-topic relative to my current focus, and although I will need to come back to this, it's often best to leave the matter to one side for now.
+Some FIXMEs concern trivial matters, like the question of how to get a user-id from inside the context of an existing function. But even trivialities require attention, and I often lack the mental bandwidth to deal with the issue in addition to the main problem I'm trying to solve. Other issues are more substantial and will require serious thought to resolve. But although doing this work may be tempting, it is still off-topic relative to my current focus, and while I know I will need to come back to the issue, the best choice is often to leave it to one side for the moment.
 
 My favorite of all the various code-wrangling maneuvers made possible by FIXMEs is hardcoding, a form of wishful thinking. I frequently find while writing a function that a dependency value is awkward to retrieve without going on a refactoring safari. Wishful thinking begins with a what-if question. What if we had access to the id here? Well, let's just pretend that we already do by hardcoding the value here. This will only work for one particular user, of course, so it's not a generic solution - quite the opposite. But hardcoding a laughably specific solution will help you make progress on the design without worrying about details - a generic solution will come later.
 
