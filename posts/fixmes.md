@@ -42,13 +42,11 @@ switch (v) {
    // do something
    break;
    default:
-   throw Error("FIXME: Not implemented");
+   throw new Error("FIXME: Not implemented");
 }
 ```
 
-You will be able to run the code so long as you don't encounter the missing case. If you do, you'll get an exception and a stacktrace. By relying on CI, the active FIXME will ensure that you won't forget about adding the missing case before finishing your branch.
-
-Note that FIXMEs don't need to appear in code comments. They can appear in strings, SQL queries or even markdown files. 
+You will be able to run the code so long as you don't encounter the missing case. If you do, you'll get an exception and a stacktrace. By relying on CI, the active FIXME will ensure that you won't forget about adding the missing case before finishing your branch. Note that FIXMEs don't need to appear in code comments. They can appear in exceptions, strings, SQL queries or even markdown files. 
 
 # Pair programming and fixmification
 
