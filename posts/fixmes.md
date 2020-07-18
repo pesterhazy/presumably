@@ -50,7 +50,7 @@ You will be able to run the code so long as you don't encounter the missing case
 
 Note that FIXMEs don't need to appear in code comments. They can appear in strings, SQL queries or even markdown files. 
 
-# Pair Programming and Virtual Memory
+# Pair programming and fixmification
 
 As David Allen has pointed out (in Getting Things Done) the brain does a bad job of letting go of information it considers important. Allen recommends making lists. When you write down a task on a list, you silence the nagging doubt in the back of your mind that you may not remember it. The list helps you relax about your work schedule because instead of incessantly worrying about things falling through the cracks, the brain can rest assured that the task is stored in a secure place. Making a list allows you to forget abut the task now, temporarily.
 
@@ -70,4 +70,4 @@ But doing the work is not the only way forward. More interestingly, you may be a
 
 Finally, if all else fails, you can choose to demote the FIXME to TODO status. While the problem you identified is real, it's not a merge blocker *here and now*. A TODO can remind you that the concern should be addressed at some point in the future. Often, filing a follow-up issue in your issue tracker will help make sure that the matter is not forgotten. (From what I hear, Google requires TODOs to include a ticket number). Filing a follow-up for later in the project, while not always what we would prefer, is a valuable tool when working in teams. Long-running feature branches cause unnecessary integration work, so it's desirable to merge branches as soon as possible. Whether demotion is the right call will depends on the specifics of your project's goals and values. But when applied well, FIXME demotion is a valuable tool for managing priorities and focusing on the essential.
 
-That's why I've grown to love FIXMEs. It's true that a linter rule preventing merges of code containing the word FIXME limits your freedom of expression. But constraints like this can help creativity. FIXME-driven development gives you autonomy by helping you focus on essentials first and manage what is arguably our most precious resources - our congitive capacity.
+That's why I've grown to love FIXMEs. It's true that a linter rule preventing merges of code containing a word limits your freedom of expression. But as in art, constraints can help creativity. FIXME-driven development adds to our autonomy because it encourages us to focus on essentials and helps us manage what is arguably our most precious resource - our congitive capacity.
