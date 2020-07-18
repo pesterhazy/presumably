@@ -17,9 +17,7 @@ Tags with an agreed-upon meaning aid communication between team members while th
 
 # Code-wrangling maneuvers
 
-FIXMEs help the author as much as the reviewer, and that's where things get interesting. As David Allen has pointed out (in Getting Things Done) the brain does a bad job of letting go of information it considers important. Allen recommends making lists. When you write down a task on a list, you silence the nagging doubt in the back of your mind that you may not remember it. The list helps you relax about your work schedule because instead of incessantly worrying about things falling through the cracks, the brain can rest assured that the task is stored in a secure place. Making a list allows you to forget abut the task now, temporarily.
-
-While working on a branch, I use FIXMEs in a similar way. When I encounter a stumbling block, a consideration that will lead me away from my current path, I'll add a FIXME comment to the problematic line:
+FIXMEs are useful during review, but they help the author as much as the reviewer, and that's where things get interesting. While working on a branch, FIXMEs figure prominently in m code-wrangling maneuvers. When I encounter a stumbling block, a consideration that will lead me away from my current path, I'll add a FIXME comment to the problematic line:
 
 ```
 // FIXME: hardcoded user-id
@@ -31,7 +29,26 @@ Sometimes FIXMEs concern trivial matters, like the question of how to get a valu
 
 Of the various code-wrangling maneuvers made possible by FIXMEs, hardcoding, a form of wishful thinking, is my favorite. I frequently find while writing a function that a dependency value is awkward to retrieve without going on an extended refactoring safari. Wishful thinking, one of the most undervalued techniques in software engineering, begins with a what-if question. What if we had access to the user's id here? Well, let's just pretend that we already do by hardcoding the value here. This will only work for one particular user, of course, so it's not a generic solution - quite the opposite. But hardcoding a laughably specific solution will help you explore the problem space now and make progress on the design without worrying about specifics - a generic solution will come later.
 
+Another maneuver that can help is the stub. If there are multiple cases to consider, I often find myself using what could be called an active FIXME:
+
+```
+switch (v) {
+   case 1:
+   // do something
+   break;
+   case 2:
+   // do something
+   break;
+   default:
+   throw Error("FIXME: Not implemented");
+}
+```
+
+As a matter of fact, FIXMEs don't need to appear in code comments. They can be in strings, SQL queries or even markdown files.
+
 # Pair Programming and Virtual Memory
+
+As David Allen has pointed out (in Getting Things Done) the brain does a bad job of letting go of information it considers important. Allen recommends making lists. When you write down a task on a list, you silence the nagging doubt in the back of your mind that you may not remember it. The list helps you relax about your work schedule because instead of incessantly worrying about things falling through the cracks, the brain can rest assured that the task is stored in a secure place. Making a list allows you to forget abut the task now, temporarily.
 
 Human minds are finite, almost painfully so. It has been said that, like the balls a juggler can keep in the air, the number of concurrent ideas a person can keep in their head at the same time is 7, or perhaps 3. But regardless of what estimate you choose to believe, the number is depressingly low. To switch metaphors, while programming the RAM or "working memory" is our scracest resource. True, there's a spectrum here: some people can read more values into memory than others. But even the best programmer quickly runs out of heap.
 
