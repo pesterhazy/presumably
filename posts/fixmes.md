@@ -3,7 +3,7 @@ title: "A plea for FIXMEs"
 date-published: 2020-07-13
 ---
 
-Not too long ago, a friend and new contributor to a large codebase I work with was surprised to learn that the linter will block the merge of any pull request containing the word _FIXME_. "This rule is ill-considered", he cried out, exasperated, "We are lying to ourselves - these things still need to be fixed!"
+Not too long ago, a friend and new contributor to a large codebase I work with was surprised to learn that the linter will block the merge of any pull request containing the string FIXME. "This rule is ill-considered", he cried out, exasperated, "We are lying to ourselves - these things still need to be fixed!"
 
 My friend clearly felt that the CI rule was curtailing his freedom, and it's true that our practice of blocking merges on FIXMEs is unorthodox. But I've found that the judicious use of this simple convention can make a big impact on effectiveness both on the team and individual level. In this post, I will make the case for automatically enforced FIXMEs as a tool that has helped me improve as a programmer.
 
