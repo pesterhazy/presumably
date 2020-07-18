@@ -17,7 +17,7 @@ Tags with an agreed-upon meaning aid communication between team members while th
 
 # Code-wrangling maneuvers
 
-FIXMEs are useful during review, but they can help the author as much as the reviewer, and that's where things get interesting. During the code-wrangling phase, the phase when  actively implementing, trying things out and making small incremental improvements, the work decomposes into a series of small changes, each resulting in a commit. Changes such Inline Function and Rename Variable (and other refactorings) are instances of a maneuver, a generic pattern that, when applied on your code, gets you one step closer to your goal.
+FIXMEs are useful during review, but they can help the author as much as the reviewer, and that's where things get more interesting. During the code-wrangling phase, the phase when I'm actively implementing, trying things out and making small incremental improvements, the work is split up into a series of small changes, each resulting in a commit. Changes such as Inline Function and Rename Variable (and other refactorings) are instances of a maneuver, a generic pattern that, when applied on your code, gets you one step closer to your goal.
 
 FIXMEs figure prominently in my repertoire of code-wrangling maneuvers. When I encounter a stumbling block, a consideration that will lead me away from my current path, I'll go in and add a FIXME comment to the worrisome line:
 
@@ -27,11 +27,11 @@ FIXMEs figure prominently in my repertoire of code-wrangling maneuvers. When I e
 // FIXME: time cmplexity is O(n2), check if fast enough
 ```
 
-Sometimes FIXMEs concern trivial matters, like the question of how to get a value, like a user-id, from inside the context of an existing function. But even trivialities require attention, and I might not have enough mental bandwidth to deal with the issue in addition to the main problem I'm trying to solve. Other times the issue is more substantial and will require serious thought to resolve. But although the issue may be interesting, it is still off-topic relative to my current interest, and although I will need to come back to this, it's often best to leave the matter to one side for now.
+Sometimes FIXMEs concern trivial matters, like the question of how to get a user-id from inside the context of an existing function. But even trivialities require attention, and I often lack the mental bandwidth to deal with the issue in addition to the main problem I'm trying to solve. Other issues are more substantial and will require serious thought to resolve. But although doing this work may be interesting, it is still off-topic relative to my current focus, and although I will need to come back to this, it's often best to leave the matter to one side for now.
 
-Of the various code-wrangling maneuvers made possible by FIXMEs, hardcoding, a form of wishful thinking, is my favorite. I frequently find while writing a function that a dependency value is awkward to retrieve without going on an extended refactoring safari. Wishful thinking, one of the most undervalued techniques in software engineering, begins with a what-if question. What if we had access to the user's id here? Well, let's just pretend that we already do by hardcoding the value here. This will only work for one particular user, of course, so it's not a generic solution - quite the opposite. But hardcoding a laughably specific solution will help you explore the problem space now and make progress on the design without worrying about specifics - a generic solution will come later.
+My favorite of all the various code-wrangling maneuvers made possible by FIXMEs is hardcoding, a form of wishful thinking. I frequently find while writing a function that a dependency value is awkward to retrieve without going on a refactoring safari. Wishful thinking begins with a what-if question. What if we had access to the id here? Well, let's just pretend that we already do by hardcoding the value here. This will only work for one particular user, of course, so it's not a generic solution - quite the opposite. But hardcoding a laughably specific solution will help you make progress on the design without worrying about details - a generic solution will come later.
 
-Another maneuver that can help is the stub. If there are multiple cases to consider, I often find myself using what could be called an active FIXME:
+Another maneuver that can help is the partial implementation. If there are multiple cases to consider, I often find myself beginning with a stub and replacing the missing case with what could be called an active FIXME:
 
 ```
 switch (v) {
@@ -46,7 +46,9 @@ switch (v) {
 }
 ```
 
-As a matter of fact, FIXMEs don't need to appear in code comments. They can be in strings, SQL queries or even markdown files.
+You will be able to run the code so long as you don't encounter the missing case. If you do, you'll get an exception and a stacktrace. By relying on CI, the active FIXME will ensure that you won't forget about adding the missing case before finishing your branch.
+
+Note that FIXMEs don't need to appear in code comments. They can appear in strings, SQL queries or even markdown files. 
 
 # Pair Programming and Virtual Memory
 
