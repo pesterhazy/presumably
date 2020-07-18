@@ -3,21 +3,23 @@ title: "In Defense of FIXMEs (and Pair Programming)"
 date-published: 2020-07-13
 ---
 
-Not long ago, a new contributor to the Pitch codebase was surprised to learn that our linter blocks the merge of ny pull request containing the word _FIXME_. "This rule is ill-considered", he cried out, exasperated, "We are lying to ourselves - these things still need to be fixed!" He clearly felt that the CI rule was curtailing his freedom.
+Not too long ago, a new contributor to the Pitch codebase was surprised to learn that our linter will block the merge of any pull request containing the word _FIXME_. "This rule is ill-considered", he cried out, exasperated, "We are lying to ourselves - these things still need to be fixed!" He clearly felt that the CI rule was curtailing his freedom.
 
 I'll freely admit that our convention of using FIXMEs is unusual. But simple as it is, the use of the convention can make a big impact in a team. In this post, I will explain how automatically enforced FIXMEs have helped me improve as a programmer.
+
+# The meaning of code tags
 
 Code tags are certainly no recent invention. Since the dawn of programming code has included comments, and for decades - at least since the 1980s - programmers have lent significance to tags like XXX, TODO or FIXME. Most tags are added to express that the author is not satisfied with a solution, both as a _note to self_ and for the benefit of other readers. The use of uppercase letters not only makes tags jump out visually, it also makes them easy to grep for. The contentious linter rule requires no more than a single line of shell code: `git grep FIXME && exit 1`. Ane many IDEs give you a convenient ay to browse tags.
 
 While annotating code with tags is common enough, semantics vary from team to team. With time teams tend to assign specific meanings to individual tags, much like emojis in Slack workspaces gradually acquire a definite meaning. At Pitch we tag comments as TODO when code _should_ be changed eventually, though not necessarily today. It is considered acceptable, perhaps even desirable to delay the improvement suggested. A TODO is a soft sign for the future. By contrast, FIXMEs are stringent: the code is unfit for merge until the author addresses the problem. Our automated linter codifies this judgment: FIXMEs fail the build, but TODOs are given a pass.
 
-# Learning to let go
-
 Tags with an agreed-upon meaning aid communication between team members while the pull request is in progress. "Is this a FIXME or a TODO?" you might ask your colleague while pairing, requesting a judgment of the status and priority of the less-than-satisfying implementation. Similarly, during code review, an oustanding FIXME signals that the function annotated requires close attention. The comment screams out, "Help! Ask me about this issue I can't make progress on!"
+
+# Code-wrangling maneuvers
 
 FIXMEs help the author as much as the reviewer, and that's where things get interesting. As David Allen has pointed out (in Getting Things Done) the brain does a bad job of letting go of information it considers important. Allen recommends making lists. When you write down a task on a list, you silence the nagging doubt in the back of your mind that you may not remember it. The list helps you relax about your work schedule because instead of incessantly worrying about things falling through the cracks, the brain can rest assured that the task is stored in a secure place. Making a list allows you to forget abut the task now, temporarily.
 
-While working on a branch, I use FIXMEs in a similar way. When I encounter a stumbling block - a problem that will lead me away from my current path - I'll add a FIXME comment to the problematic line:
+While working on a branch, I use FIXMEs in a similar way. When I encounter a stumbling block, a consideration that will lead me away from my current path, I'll add a FIXME comment to the problematic line:
 
 ```
 // FIXME: hardcoded user-id
@@ -47,4 +49,4 @@ But doing the work is not the only way forward. More interestingly, you may be a
 
 Finally, if all else fails, you can choose to demote the FIXME to TODO status. After considering the matter, you decide that, while the problem you identified is real, it's not a merge blocker. A TODO can remind you that this is something that should be addressed at some point. Often, filing a follow-up issue in your issue tracker will help make sure that the matter is not forgotten. Filing a follow-up for later in the project, while not always what we prefer, is a valuable tool for larger teams, where it's desirable to merge branches earlier rather than later. Excessively long-running feature branches cause unnecessary additional integration work and merge conflicts. Whether demotion is the right call will depends on the specifics of your project. But when applied well, demotiing FIXMEs is a useful tool for managing priorities and focusing on the essential.
 
-That's why I love FIXMEs. It's true that a linter rule preventing merges of code containing the word FIXME limits your freedom of expression. But constraints like this can help creativity. FIXME-driven development gives you autonomy by helping you focus on essentials first and manage what is arguably our most precious resources - our congitive capacity.
+That's why I've grown to love FIXMEs. It's true that a linter rule preventing merges of code containing the word FIXME limits your freedom of expression. But constraints like this can help creativity. FIXME-driven development gives you autonomy by helping you focus on essentials first and manage what is arguably our most precious resources - our congitive capacity.
