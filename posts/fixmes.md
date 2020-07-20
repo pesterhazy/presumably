@@ -1,5 +1,5 @@
 ---
-title: "A plea for FIXMEs"
+title: "On the effectiveness of FIXMEs"
 date-published: 2020-07-13
 ---
 
@@ -9,7 +9,7 @@ My friend clearly felt that the CI rule mandating the removal of the string was 
 
 # The meaning of codetags
 
-Codetags are not a recent innovation. Since the dawn of programming, code has been interwoven with comments, and since the 1980s programmers have lent special significance to tags like XXX, TODO or FIXME.[^xxx] Most tags are added with the intention of flagging that the author is not satisfied with a solution, both as a _note to self_ and for the benefit of other readers. The use of uppercase letters not only makes tags stand out visually, it also makes them easy to grep for. The contentious linter rule requires no more than a single line of shell code: `git grep FIXME && exit 1`.
+Comments are as old as programming itself and have served a [variety of purposes](https://en.wikipedia.org/wiki/Comment_%28computer_programming%29#Stress_relief). Codetags are not a recent innovation either. In the 1980s, programmers started attaching special significance to tags like XXX, FIXME or TODO.[^xxx] Most tags are added with the intention of flagging that the author is not satisfied with a solution, both as a _note to self_ and for the benefit of other readers. The use of uppercase letters not only makes tags stand out visually, it also makes it stupid easy to grep for them. Our linter rule requires barely more than a single line of shell code: `git grep FIXME && exit 1`.
 
 Codetag semantics vary from team to team. With time teams tend to assign specific meanings to individual tags, much like emojis in Slack workspaces gradually acquire a more and more definite meaning. In my team, we tag comments as TODO as a heads-up, a note that we're not happy with it. While the code could be changed at some point in the future, it is considered acceptable, perhaps even preferable from a project-management perspective, to delay the suggested improvement, sometimes indefinitely. Whereas a TODO is a gentle nudge, a FIXME is stringent: the code is unfit for merge until the author addresses the problem. Our automated linter gives this judgment reality: FIXMEs fail the CI build, while TODOs are given a pass.
 
@@ -24,7 +24,7 @@ FIXMEs figure prominently in my repertoire of code-wrangling maneuvers. When I e
 ```
 // FIXME: hardcoded user-id
 
-// FIXME: time cmplexity is O(n2), check if fast enough
+// FIXME: O(n2) time complexity, check if fast enough
 ```
 
 Some FIXMEs concern small hurdles, like the question of how to get a user-id from inside the context of an existing function. But even trivial refactorings require attention, and I often lack the mental bandwidth to deal with the issue in addition to the main problem at hand. Other issues are more substantial and will require serious thought to resolve. But although doing this work may be tempting, it is still off-topic relative to my current focus, and while I know I will need to come back to the issue, the best choice is often to leave it to one side for the moment.
