@@ -1,15 +1,15 @@
 ---
 title: "On the effectiveness of FIXMEs"
-date-published: 2020-07-13
+date-published: 2020-07-27
 ---
 
 Not too long ago, a friend and new contributor to a large codebase I work with was surprised to learn that the linter will block the merge of any pull request containing the string FIXME. "This rule is ill-considered", he cried out, exasperated. It's fair to say he didn't like the linter ruler. 
 
-As his reaction shows, I didn't do a good job explaining the reasons behind our rule. Our treatment of FIXMEs is unorthodox, but we decided to implement it for a reason. In fact, treating FIXMEs as merge blockers is among the most effective measures against cognitive overload that I know. In this post, I will explain how FIXMEs unclutter the mind. In doing so, I hope to show that automatically enforced FIXMEs can be an effective tool for teams working on hard problems.
+As his reaction shows, I didn't do a good job explaining the rationale behind our rule. Our treatment of FIXMEs is unorthodox, but we decided to implement it for a reason. In fact, treating FIXMEs as merge blockers is among the most effective measures against cognitive overload that I know. In this post, I will explain how FIXMEs unclutter the mind, and, in doing so, I hope to show that automatically enforced FIXMEs can be an effective tool for teams working on hard problems.
 
 # The meaning of codetags
 
-Comments are as old as programming itself and have served a [variety of purposes](https://en.wikipedia.org/wiki/Comment_%28computer_programming%29#Stress_relief). Codetags are not a recent innovation either. In the 1980s, programmers started attaching special significance to tags like XXX, FIXME or TODO.[^xxx] Then as now, tags are added as a heads-up that the author is not satisfied with a solution, both as a _note to self_ and for the benefit of other readers. The use of uppercase letters not only makes tags stand out visually, it also makes it stupid easy to grep for them. Our linter rule can be expressed in a single line of shell code: `git grep FIXME && exit 1`.
+Code comments are as old as programming itself and have served a [variety of purposes](https://en.wikipedia.org/wiki/Comment_%28computer_programming%29#Stress_relief). Codetags are not a recent innovation either. In the 1980s, programmers started attaching special significance to tags like XXX, FIXME or TODO.[^xxx] Then as now, tags are added as a heads-up that the author is not satisfied with a solution, both as a _note to self_ and for the benefit of other readers. The use of uppercase letters not only makes tags stand out visually, it also makes it stupid easy to grep for them. Our linter rule can be expressed in a single line of shell code: `git grep FIXME && exit 1`.
 
 Codetag semantics vary from team to team. While often initially vague, over time more specific meanings tend to materialize, much like emojis in Slack workspaces gradually acquire a more and more definite meaning. In my team, the TODO tag means that the code in question could be optimized or cleaned up. Crucially, however, it is acceptable, perhaps even preferable from a project-management perspective, to delay the suggested improvement, sometimes indefinitely. A TODO is a gentle nudge. A FIXME, on the other hand, is stringent: the code isn't ready to merge until the author addresses the problem. Our automated linter adds reality to this judgment: FIXMEs fail the CI build, while TODOs are given a pass.[^linux]
 
