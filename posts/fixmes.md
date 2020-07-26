@@ -42,7 +42,7 @@ switch (v) {
 }
 ```
 
-You will still be able to experiment and run the code so long. If you hit the missing case, it will fail loudly, with an exception and a stacktrace. The FIXME is active at runtime, but it will also ensure that you won't forget to fil in the missing case before finishing your branch.[^meta]
+With the partial implementation, you will still be able to experiment and run the code. If you hit the missing case, it will fail loudly, with an exception and a stacktrace. The FIXME is active at runtime, but it will also ensure that you won't forget to fill in the missing case before finishing your branch.[^meta]
 
 # Pair programming and fixmification
 
