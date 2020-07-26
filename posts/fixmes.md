@@ -23,11 +23,11 @@ More interestingly, however, FIXMEs have an important role to play before code i
 // FIXME: O(n2) time complexity, check if fast enough
 ```
 
-Some FIXMEs concern small hurdles, like the question of how to get a user-id from inside the context of an existing function. But even trivial refactorings require attention, and I often lack the mental bandwidth to deal with the issue in addition to the main problem at hand. Other issues are more substantial and will require serious thought to resolve. But although doing this work may be tempting, it is still off-topic relative to my current focus, and while I know I will need to come back to the issue, the best choice is often to leave it to one side for the moment.
+Some FIXMEs concern small detours, like retrieving a user-id from inside an existing function. Other issues are more substantial and will require serious thought to resolve. Either way fixing the issue demands mental bandwidth, which is in short supply. While it's tempting to jump into the FIXME right away, the best choice is often to leave it to one side for the moment.
 
-My favorite of all the maneuvers made possible by FIXMEs is hardcoding, a form of wishful thinking. I frequently find while writing a function that a dependency value is awkward to retrieve without going on a refactoring safari. Wishful thinking begins with a what-if question. What if we had access to the id here? Well, let's just pretend that we already do by hardcoding the value here. This will only work for one particular user, of course, so it's not a generic solution - quite the opposite. But hardcoding a laughably specific solution will help you make progress on the design without worrying about details - a generic solution will come later.
+It's worth going into detail on two maneuvers enabled by FIXMEs. The first, hardcoding, is a form of wishful thinking. When the structure of the code makes it awkward to use a value, a refactoring safari is often needed. The maneuver is to delay this step. Wishful thinking begins with the what-if question. What if we had access to the id here? Well, let's just pretend that we already do by hardcoding the value. This won't work except in a very specific case, of course, so it's not a generic solution - quite the opposite. But hardcoding an absurdly specific solution will allow you to make progress on the design while bracketing insignifant details. The generic solution will come later.
 
-Another maneuver that can help is the partial implementation. If there are multiple cases to consider, I often find myself beginning with a stub and replacing the missing case with what could be called an active FIXME:
+Stubbing, the second maneuver, helps when multiple cases need to be considered. You start with a stub, replacing the missing case with what an _active FIXME_:
 
 ```
 switch (v) {
@@ -42,7 +42,7 @@ switch (v) {
 }
 ```
 
-You will be able to run the code so long as you don't encounter the missing case. If you do, you'll get an exception and a stacktrace. By relying on CI, the active FIXME will ensure that you won't forget about filling in the missing case before finishing your branch. Note that FIXMEs can appear outside of code comments, in locations as diverse as exceptions, strings, SQL queries or even documentation.
+You will still be able to experiment and run the code so long. If you hit the missing case, it will fail loudly, with an exception and a stacktrace. The FIXME is active at runtime, but it will also ensure that you won't forget to fil in the missing case before finishing your branch.[^meta]
 
 # Pair programming and fixmification
 
@@ -71,3 +71,5 @@ That's why I've grown to love FIXMEs. It's true that a linter rule preventing me
 [^linux]: The Linux kernel repository contains 4041 FIXMEs and 5720 TODOs. It clearly doesn't follow the rule proposed in this post.
 
 [^grep]: Our linter rule can be expressed in a single line of shell code: `git grep FIXME && exit 1`.
+
+[^meta]: Note that FIXMEs can appear outside of code comments, in locations as diverse as exceptions, user-visible strings or SQL queries. Even writing documentation or blog posts (including this one) benefits from automatically enforced FIXMEs.
