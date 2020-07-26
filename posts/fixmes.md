@@ -25,6 +25,8 @@ More interestingly, however, FIXMEs have an important role to play before code i
 
 Some FIXMEs concern small detours, like retrieving a user-id from inside an existing function. Other issues are more substantial and will require serious thought to resolve. Either way fixing the issue demands mental bandwidth, which is in short supply. While it's tempting to jump into the FIXME right away, the best choice is often to leave it to one side for the moment.
 
+# Two examples of using FIXMEs
+
 It's worth going into detail on two maneuvers enabled by FIXMEs. The first, hardcoding, is a form of wishful thinking. When the structure of the code makes it awkward to use a value, a refactoring safari is often needed. The maneuver is to delay this step. Wishful thinking begins with the what-if question. What if we had access to the id here? Well, let's just pretend that we already do by hardcoding the value. This won't work except in a very specific case, of course, so it's not a generic solution - quite the opposite. But hardcoding an absurdly specific solution will allow you to make progress on the design while bracketing insignifant details. The generic solution will come later.
 
 Stubbing, the second maneuver, helps when multiple cases need to be considered. You start with a stub, replacing the missing case with what an _active FIXME_:
@@ -54,7 +56,7 @@ Think of how effective pair programming can be when working through a hard probl
 
 The net effect of temporarily transfering inessentials to swap space is that you can focus on the heart of the issue, the inherent complexity of the business problem, the solution to which is your ultimate goal. Accidental complexity has a talismanic quality. We have an unfortunate but understandable tendency to be distracted by details of how to express an idea in code. It is true that eventually we will need a decision about the accidental details, but it's almost always better to tackle the essential complexity first. The rest is FIXMEs.
 
-Your brain is prone to worrying that you may after all forget about the hardcoded value left in the code or the quadratic complexity that might blow up in production. People will be angry at you, or, what may be worse, you'll blame yourself. In truth, emotions and other sub-conscious processes play a big role in our ability to focus. The unconscious mind will only allow itself to stop worrying about a task until it is written down, with a systems in place ensuring you will circle back to the topic without risking emotional backlash. The real value of fixmification is in its liberating effect. Let it go, brain, the CI job has got your back!
+Your brain is prone to worrying that you may after all forget about the hardcoded value left in the code or the quadratic complexity that might blow up in production. People will be angry at you, or, what may be worse, you'll blame yourself. Whether we like it or not, emotions and other sub-conscious processes play a big role in our ability to focus. The unconscious mind will only allow itself to stop worrying about a task until it is written down, with a systems in place ensuring you will circle back to the topic without risking emotional backlash. The real value of fixmification is in its liberating effect. Let it go, brain, the CI job has got your back!
 
 # Three ways of eliminating FIXMEs
 
