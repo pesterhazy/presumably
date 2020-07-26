@@ -5,7 +5,7 @@ date-published: 2020-07-27
 
 Not too long ago, a friend and new contributor to a large codebase I work with was surprised to learn that the linter will block the merge of any pull request containing the string FIXME. "This rule is ill-considered", he cried out, exasperated. It's fair to say he didn't like the linter ruler. 
 
-As his reaction shows, I didn't do a good job explaining the rationale behind our rule. Our treatment of FIXMEs is unorthodox, but we decided to adopt it for a reason. In fact, treating FIXMEs as merge blockers is among the most effective measures against cognitive overload that I know. In this post, I will explain how FIXMEs unclutter the mind, and, in doing so, I hope to show that automatically enforced FIXMEs can be an effective tool for teams working on hard problems.
+Judging from his reaction, I didn't do a good job of explaining the rationale behind our rule. Our treatment of FIXMEs is unorthodox, but we decided to adopt it for a reason. In fact, in my opinion treating FIXMEs as merge blockers is among the most effective measures against cognitive overload. In this post, I will explain how FIXMEs unclutter the mind, and, the course of the argument, I hope to show that automatically enforced FIXMEs can be an effective tool for teams working on hard problems.
 
 # The meaning of codetags
 
@@ -58,11 +58,11 @@ We can push the analogy even further. Think of how effective pair programming is
 
 The net effect of temporarily transferring inessentials to swap space is better focus on the inherent complexity of your problem, the solution to which is your ultimate goal. Accidental complexity has a talismanic quality. We have an unfortunate but understandable tendency to be distracted by details of how to express an idea in code. It is true that eventually we will need a decision about the accidental details, but it's almost always better to tackle the essential complexity first. The rest is FIXMEs.
 
-Your brain is prone to worrying that you may after all forget about the hardcoded value left in the code or the quadratic complexity that might blow up in production. People will be angry at you, or, what may be worse, you'll blame yourself. Whether we like it or not, emotions and other sub-conscious processes play a big role in our ability to focus. The unconscious mind will only allow itself to stop worrying about a task until it is written down, with a systems in place ensuring you will circle back to the topic without risking emotional backlash. Writing down FIXMEs has a liberating effect. With CI as a safety net, the brain can relax.
+Your brain is prone to worrying that you may after all forget about the hardcoded value left in the code or the quadratic complexity that might blow up in production. People will be angry at you, or, what may be worse, you'll blame yourself. Whether we like it or not, emotions and other sub-conscious processes play a big role in our ability to focus. The unconscious mind will not allow itself to stop worrying about a task unless it is written down, with a systems in place ensuring you will circle back to the topic without risking emotional backlash. Writing down FIXMEs has a liberating effect. With CI as a safety net, the brain can relax.
 
 # Three ways of eliminating FIXMEs
 
-After moving the distraction out of the way, you can return to the core problem. When your RAM isn't cluttered with inessential details, the clearer view gives you a better shot at seeing the solution. At some point, of course, you will need to go back to the problem you snoozed. Having reached this point, eliminating the FIXME can take one of three possible forms.
+After moving the distraction out of the way, you can focus on the core problem. When your RAM isn't cluttered with inessential details, the clearer view gives you a better shot at seeing the solution. At some point, of course, you will need to go back to the problem you snoozed. Having reached this point, eliminating the FIXME can take one of three possible forms.
 
 1. The most straightforward resolution is to face the problem head-on. In other words, you perform the task you anticipated initially, for instance by refactoring the code to get access to the user-id you needed or by rewriting the algorithm to require O(n) iterations instead of O(n2). Frequently, a test case needs to be added as well.
 
