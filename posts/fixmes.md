@@ -3,9 +3,9 @@ title: "On the effectiveness of FIXMEs"
 date-published: 2020-07-13
 ---
 
-Not too long ago, a friend and new contributor to a large codebase I work with was surprised to learn that the linter will block the merge of any pull request containing the string FIXME. "This rule is ill-considered", he cried out, exasperated, "We are lying to ourselves - these things still need to be fixed!"
+Not too long ago, a friend and new contributor to a large codebase I work with was surprised to learn that the linter will block the merge of any pull request containing the string FIXME. "This rule is ill-considered", he cried out, exasperated. It's fair to say he didn't like the linter ruler. 
 
-My friend clearly felt that the CI rule mandating the removal of the string was curtailing his freedom. But while it's true that our practice of blocking merges on FIXMEs is unorthodox, I've found that the judicious use of this simple convention can improve effectiveness both on a team and individual level. In this post, I will make the case for automatically enforced FIXMEs as a tool that can help us become better developers.
+I obviously didn't do a good job explaining the reasons behind our rule. Our treatment of FIXMEs is unorthodox, but there's a story behind it. In my experience, treating FIXMEs as merge blockers is an effective measure against cognitive overload. In this post, I will make another attempt at explaining why automatically enforced FIXMEs are so effective.
 
 # The meaning of codetags
 
