@@ -5,11 +5,11 @@ date-published: 2020-07-27
 
 Not too long ago, a friend and new contributor to a large codebase I work with was surprised to learn that the linter will block the merge of any pull request containing the string FIXME. "This rule is ill-considered", he cried out, exasperated. It's fair to say he didn't like the linter ruler. 
 
-Judging from his reaction, I didn't do a good job of explaining the rationale behind our rule. Our treatment of FIXMEs is unorthodox, but we decided to adopt it for a reason. In fact, in my opinion treating FIXMEs as merge blockers is among the most effective measures against cognitive overload. In this post, I will explain how FIXMEs unclutter the mind. My goal is to show that automatically enforced FIXMEs are an effective tool for teams working on hard problems.
+Judging from his reaction, I didn't do a good job of explaining the rationale behind our rule. Our treatment of FIXMEs is unorthodox, but we decided to adopt it for a reason. In fact, in my opinion treating FIXMEs as merge blockers is among the most effective ways to reduce cognitive overload. In this post, I will explain how FIXMEs unclutter the mind. My goal is to show that automatically enforced FIXMEs are an effective tool for teams working on hard problems.
 
-# The meaning of codetags
+## The meaning of codetags
 
-Code comments are as old as programming itself. Codetags are also not a recent innovation. In the 1980s, programmers started attaching special significance to short tags like XXX, FIXME or TODO.[^xxx] Tags were added as a heads-up that the author wasn't entirely satisfied with a solution, both as a _note to self_ and for the benefit of other readers. The use of uppercase letters not only made tags stand out visually, it also makes it easy to grep for them.[^grep]
+Code comments are as old as programming itself. Codetags are also not a recent innovation. In the 1980s, programmers started attaching special significance to short tags like FIXME or TODO.[^xxx] Tags were added as a heads-up that the author wasn't entirely satisfied with a solution, both as a _note to self_ and for the benefit of other readers. The use of uppercase letters not only made tags stand out visually, it also makes it easy to grep for them.[^grep]
 
 Codetags are in wide use use today, though semantics vary from team to team. While often initially vague, over time more specific meanings tend to materialize, much like emojis in Slack communities gradually acquire a more definite meaning. In my team, a clear line separates FIXMEs from TODOs. A TODO annotation means that the code in question could be optimized or cleaned up. Crucially, however, delaying the suggested improvement is acceptable, perhaps even preferable from a project-management perspective. A TODO is a gentle nudge. FIXMEs, on the other hand, signal that the code isn't ready to merge until the author addresses the problem. Our automated linter adds reality to this stringent judgment: FIXMEs fail the CI build, while TODOs are given a pass.[^linux]
 
@@ -25,11 +25,11 @@ More interestingly, however, FIXMEs have an important role to play before code i
 
 Some FIXMEs concern small detours, like retrieving a user-id from inside an existing function. Other issues are more substantial and will require serious thought to resolve. Either way fixing the issue demands mental bandwidth, which is in short supply. While it's tempting to jump into the FIXME right away, the best choice is often to leave it to one side for the moment.
 
-# Two examples of using FIXMEs
+## Two examples of using FIXMEs
 
-It's worth going into detail on two maneuvers enabled by FIXMEs. The first, hardcoding, is a form of wishful thinking. When the structure of the code makes it awkward to use a value, a refactoring safari is often needed. The maneuver is to delay this step. Wishful thinking begins with the what-if question. What if we had access to the id here? Well, let's just pretend that we already do by hardcoding the value. This won't work except in a very specific case, of course, so it's not a generic solution - quite the opposite. But hardcoding an absurdly specific solution will allow you to make progress on the design while bracketing insignificant details. The generic solution will come later.
+Let's look at two maneuvers that are made possible by FIXMEs. The first, _hardcoding_, is a form of wishful thinking. When the structure of the code makes it awkward to use a value, a refactoring safari is often needed. The maneuver is to delay this step. Wishful thinking begins with the what-if question. What if we had access to the id here? Well, let's just pretend that we already do by hardcoding the value. This won't work except in a very specific case, of course, so it's not a generic solution - quite the opposite. But hardcoding an absurdly specific solution will allow you to make progress on the design while bracketing insignificant details. The generic solution will come later.
 
-Stubbing, the second maneuver, helps when multiple cases need to be considered. You start with a stub, replacing the missing case with an _active FIXME_:
+_Stubbing_, the second maneuver, helps when multiple cases need to be considered. You start with a stub, replacing the missing case with an active FIXME:
 
 ```
 switch (v) {
@@ -44,9 +44,9 @@ switch (v) {
 }
 ```
 
-With the partial implementation in place, you will still be able to experiment and run the code. If you hit the missing case, it will fail loudly, with an exception and a stacktrace. The FIXME is not only active at runtime, it will also ensure that you won't forget to fill in the missing case before finishing your branch.[^meta]
+With the partial implementation in place, can now experiment with and get a feel for the code. When you hit the missing case, it will fail loudly and clearly, with an exception and a stacktrace. But the FIXME is not only active at runtime. It will also ensure that you won't forget to fill in the missing case before finishing your branch.[^meta]
 
-# Juggling concepts and virtual memory
+## Juggling concepts and virtual memory
 
 Pausing a train of thought by converting it into a FIXME improves the flow of deep work, and we can explain why by considering why so many of us struggle to manage our daily priorities. As unfinished work piles up, we develop a nagging doubt in the back of their minds, a fear that there's something important we're forgetting, with all the bad consequences that entails. As a solution, David Allen's Getting Things Done (GTD) system famously proposes lists and regular review sessions. Lists work because writing a task into a notebook permits you to forget about it temporarily. Keeping a written list of "in" tasks helps you relax about your obligations, so that instead of incessantly worrying about things falling through the cracks, you can be confident that the task is stashed away in a secure place. You know you'll return to the tasks in your review session, which has a clear spot in your calendar. 
 
@@ -54,13 +54,13 @@ Let's apply this idea to coding. FIXMEs are powerful because programming is a co
 
 We can push the analogy even further. Think of how effective pair programming is when working through a hard problem. The Linux virtual memory system allows the user to double their RAM by making use of spare hard drive capacity. Similarly, the pairing partner temporarily expands the programmer's working memory by allowing them access to part of their cognitive capacity. Writing down FIXMEs achieves a similar effect. Whereas in a pairing session you extend your cognitive capacity with help from you partner, FIXMEs allow you to swap to disk. You remove an idea from your working memory, with the intention of paging it back in as needed, usually at the end of the session.[^better]
 
-# Focus on the inherent complexity
+## Focus on the inherent complexity
 
 The net effect of temporarily transferring inessential questions to swap space is better focus on the inherent complexity of the problem, the solution to which is the ultimate goal. Accidental complexity has a talismanic quality. We have an unfortunate but understandable tendency to get distracted by mere details of how to express an idea in code. It is true that eventually we will need a decision about the accidental aspects of the problem, but as a rule it is better to tackle the essential complexity first. The rest is FIXMEs.
 
 Your brain is prone to worrying that you may after all forget about the hardcoded value left in the code or the quadratic complexity that might blow up in production. People will be angry at you, or, what may be worse, you'll blame yourself. Whether we like it or not, emotions and other sub-conscious processes play a big role in our ability to focus. The unconscious mind will not allow itself to stop worrying about a task unless it is written down, with a systems in place ensuring you will circle back to the topic without risking emotional backlash. Writing down FIXMEs has a liberating effect. With CI as a safety net, the brain can relax.
 
-# Three ways of eliminating FIXMEs
+## Three ways of eliminating FIXMEs
 
 After moving the distraction out of the way, you can focus on the core problem. When your RAM isn't cluttered with inessential details, the clearer view gives you a better shot at seeing the solution. At some point, of course, you will need to go back to the problem you snoozed. Having reached this point, eliminating the FIXME can take one of three possible forms.
 
@@ -72,9 +72,9 @@ After moving the distraction out of the way, you can focus on the core problem. 
 
 In a nutshell, that's why I'm a fan of FIXMEs automatically enforced by CI. FIXME-driven development adds to our autonomy, rather than subtracting from it, because it guides us towards what matters and because it optimizes for what is arguably our most precious resource - our cognitive capacity.
 
-[^xxx]: There's evidence that, like many conventions, significant codetags were first introduced by Unix hackers in the BSD codebase. Possibly the earliest example of the codetag XXX (used more or less synonymously with FIXME) is a [1981 commit](https://github.com/dspinellis/unix-history-repo/commit/9e295a2f65c046125ece0ad68f142f59df4c3400) by Bill Joy, the author of vi. FIXME seems like it became popular later. When 4.4BSD came around, its source contained 1500 instances of `/* XXX`, compare to only 332 of `/* FIXME`, mostly in gcc and gdb. For more software archaeology, see [Juho Snellman's fascinating investigation](https://www.snellman.net/blog/archive/2017-04-17-xxx-fixme/).
+[^xxx]: There's evidence that, like many conventions, significant codetags were first introduced by Unix hackers in the BSD codebase. Possibly the earliest example of the codetag XXX (used more or less synonymously with FIXME today) is a [1981 commit](https://github.com/dspinellis/unix-history-repo/commit/9e295a2f65c046125ece0ad68f142f59df4c3400) by Bill Joy, the author of vi. FIXME seems like it became popular later. When 4.4BSD came out, its source contained 1500 instances of `XXX`, compared to only 332 of `FIXME` (mostly in gcc and gdb). For more software archaeology, see [Juho Snellman's fascinating investigation](https://www.snellman.net/blog/archive/2017-04-17-xxx-fixme/).
 
-[^linux]: The Linux kernel repository contains 4041 FIXMEs and 5720 TODOs. It clearly doesn't follow the rule proposed in this post.
+[^linux]: The Linux kernel repository contains 4041 FIXMEs and 5720 TODOs. It clearly doesn't adhere to the rule proposed in this post.
 
 [^grep]: Our linter rule can be expressed in a single line of shell code: `git grep FIXME && exit 1`.
 
