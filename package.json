@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm-run-all --parallel build:live serve",
-    "build": "tsc -p .",
+    "build": "rm -rf out && tsc -p . && node lib/index.js",
     "serve": "live-server out --no-browser --wait=1000",
     "build:live": "watchexec -w posts -w src -w templates -w resources -n npx ts-node src/index.ts"
   },

@@ -1,5 +1,5 @@
 ---
-title: "On the effectiveness of FIXMEs"
+title: "On the Effectiveness of FIXMEs"
 date-published: 2020-07-28
 ---
 
