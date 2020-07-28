@@ -1,6 +1,6 @@
 ---
 title: "On the effectiveness of FIXMEs"
-date-published: 2020-07-27
+date-published: 2020-07-28
 ---
 
 Not too long ago, a friend and new contributor to a large codebase I work with was surprised to learn that an automatic linter rule will block the merge of any pull request containing the string FIXME. "This rule is ill-considered", he cried out, exasperated.
@@ -11,7 +11,7 @@ Judging from his reaction, I didn't do a good job of explaining the rationale be
 
 Code comments are as old as programming itself. Codetags are also not a recent innovation. In the 1980s, programmers started attaching special significance to short tags like FIXME or TODO.[^xxx] Tags were added as a heads-up that the author wasn't entirely satisfied with a solution, both as a _note to self_ and for the benefit of other readers. The use of uppercase letters not only made tags stand out visually, it also makes it easy to grep for them.[^grep]
 
-Codetags are in wide use today, though semantics vary from team to team. While often initially vague, over time more specific meanings tend to materialize, much like emojis in Slack communities gradually acquire a more definite meaning. In my team, a clear line separates FIXMEs from TODOs. A TODO annotation means that the code in question could be optimized or cleaned up. Crucially, however, delaying the suggested improvement is acceptable, perhaps even preferable from a project-management perspective. A TODO is a gentle nudge. FIXMEs, on the other hand, signal that the code isn't ready to merge until the author addresses the problem. Our automated linter adds reality to this stringent judgment: FIXMEs fail the CI build, while TODOs are given a pass.[^linux]
+Codetags are in wide use today, though semantics vary from team to team. While often initially vague, over time more specific meanings tend to materialize, much like emojis in Slack communities gradually acquire a more definite meaning. In my team, a clear line separates FIXMEs from TODOs. The distinction between the two is not universal - it's an arbitrary convention, but a very useful one. A TODO annotation means that the code in question could be optimized or cleaned up. Crucially, however, delaying the suggested improvement is acceptable, perhaps even preferable from a project-management perspective. A TODO is a gentle nudge. FIXMEs, on the other hand, signal that the code isn't ready to merge until the author addresses the problem. Our automated linter adds reality to this stringent judgment: FIXMEs fail the CI build, while TODOs are given a pass.[^linux]
 
 Tags with an agreed-upon meaning aid communication between team members while the pull request is in progress. "FIXME or TODO?" you might ask your colleague while pairing, requesting clarification of the status and priority of a less-than-satisfying solution. Similarly, during code review a FIXME left in the code signals that the line annotated requires close attention. It's a cry for help: "I'm stuck! Can we talk about this?"
 
