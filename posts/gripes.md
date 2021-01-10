@@ -37,3 +37,12 @@ Lightweight branches and commits as snapshots are not immediately intuitive. But
 
 ---
 
+The argument, then, is that efforts to learn Git are hampered by too much emphasis on Git's "porceallain", while ignoring its plumbing. I'd argue that you can't use Git with confidence without some level of understanding of its underpinnings and data structures.
+
+Nor is Git unique in this regard. Users of relational databases like Postgres often find it tedious or difficult to learn about how indexes work. This makes it easy to shoot yourself in the foot, because indexes are at the core of how relational databases work. It turns out to be illuminating to understand the data structure used to represent indexes on disk. B-Trees have powered all SQL databases since the 70's.
+
+Understanding this makes you realize what operations can be done efficiently, ideally in constant time. Essentially, B-Trees allow you to locate rows quickly by looking up finding a node in the tree matching the search criteria. As a result, an index can be used in WHERE clauses, but crucially it also powers JOINs whose ON expressions are covered by indexes. Because range queries can use the structure of a B-Tree, the conditions can be inequalities like `>` or `>=` as well as equalities `=`.
+
+Similarly, multi-column indexes (A, B) can speed up row selection. But this is true only if all columns starting from the left are specified, and all but the rightmost column use equalities rather than inequalities. So an index covering `A, B` can speed up a query selecting `WHERE A=3 and B>1000` but will be useless for `WHERE B<1000` in isolation. If you visualize the structure on disk as a tree, with nodes ordered by columns, it is easy to see why this is so. Peeling back the outer layer of abstraction of SQL makes this immediately evident.
+
+Again, there's a continuum here.
