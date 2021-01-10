@@ -5,7 +5,7 @@ date-published: 2020-12-31
 
 Much ink has been spilled over how difficult it is to use Git. And it's undeniable that for a beginner, learning the safe and confident use Git safely can feel like a daunting task. New users often report messing up their state, requiring the help of an experienced developer to get themselves untangled.
 
-So is it time to look to throw Git away and to look for a better alternative? I don't think so. In this post, instead of decrying the UX challenges of using this professional tool, I will argue that a lot of problems typically encountered by a Git novice can be traced back to an excessively blackbox approach to learning. A technology or technique with a certain degree of complexity - any tech that's worth learning - requires taking a greybox stance. Only by peeling back the outer layer of abstraction are you going to understand the tool to a degreee that's sufficient to be able to use it safely and with confidence.
+So is it time to look to throw out Git? Well, not so fast. The gripes are understandable but mostly based on two incorrect assumptions. In this post, I will claim that a lot of problems typically encountered by a Git novice can be traced back to premature optimization and an excessively blackbox approach to learning. I'll argue that any complicated technology or technique - any tech that's worth learning - requires taking what I will call a greybox stance. Only by peeling back the outer layer of abstraction are you going to understand the tool to a degreee that's sufficient to be able to use it safely and with confidence.
 
 ---
 
@@ -51,10 +51,12 @@ Essentially, before SQL came along, databases required the user to look at the s
 
 ---
 
-Databases before SQL were deficient because they lacked the power of abstraction of relational algebra, forcing the users to treat the system as a whitebox. This was bad. But it's also not optimal to take a pure blackbox approach, ignoring data structures completely. As it turns out, with powerful systems like Postgres, the best stance to take is to treat the system as a greybox, relying on the correctness guarantees provided by the blackbox abstraction while also taking into account charactersistcs that require peeling back the outer layer of abstraction just so much to be more confident in predicting the behavior of the system.
+Databases before SQL were deficient because they lacked the power of abstraction of relational algebra, forcing the user to treat the system as a whitebox. This was bad. But it's also not optimal to take a pure blackbox approach, ignoring data structures completely. As it turns out, with powerful systems like Postgres, the best stance to take is to treat the system as a greybox, relying on the correctness guarantees provided by the blackbox abstraction while also taking into account charactersistcs that require peeling back the outer layer of abstraction just so much to be more confident in predicting the behavior of the system.
 
 The same is true for Git. The best way to understand Git is to combine a grasp of its external interface (the procellain) with some level of understanding of the underlying data structures. Fortunately for those of us who want to learn about Git's plumbing, wears its heart on its sleeve. Inspecting its data structures is as easy as looking at the files contained in the `.git` subdirectory. Some data is stored as plain text. For example, `cat .git/HEAD` reveals what revision is currently checked out (and if it's in the "detached head" state). Objects, which are stored in a compact format, are easily uncovered using `git cat-file`.
 
 The graybox approach to learning Git (and many other complex technologies worth learning) is successful, both in making you more proficient in the tool you're using and in becoming a better hacker. In the words of Git's creator:
 
 > I’m a huge proponent of designing your code around the data, rather than the other way around, and I think it’s one of the reasons git has been fairly successful… I will, in fact, claim that the difference between a bad programmer and a good one is whether he considers his code or his data structures more important. Bad programmers worry about the code. Good programmers worry about data structures and their relationships (Linus Torvalds, 2006)
+
+_Thanks to Arthur Caillau and James Mintram for discussing earlier drafts of this post_
