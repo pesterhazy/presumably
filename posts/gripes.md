@@ -1,0 +1,39 @@
+---
+title: "Gripes, Git and Greybox Thinking"
+date-published: 2020-12-31
+---
+
+Much ink has been spilled over how difficult it is to use Git. And it's true that for a beginner, learning to use Git safely and with confidence is a substantial task. New users can easily mess up their state, requiring the help of an experienced developer to get themselves untangled.
+
+So is it time to look to throw Git away and to look for a better alternative? In this post, instead of decrying the UX challenges of using this professional tool, I will argue that a lot of problems typically encountered by a Git novice can be traced back to a blackbox approach to learning. A technology or technique with a certain degree of complexity - any tech that's worth learning - requires taking a greybox stance. Only by peeling back the outer layer of abstraction are you going to understand the tool to a degreee that's sufficient to be able to use it safely and with confidence.
+
+---
+
+There's no denying that there's a barrier of entry to learning Git. Concepts like remotes, branches or staging area easily confuse the beginner. I, too, don't know why `git checkout` do two seemingly different things, and I get frustrated remembering the exact behavior between soft and hard `git reset`.
+
+These are initial speed bumps, however, and experience Git users rarely make mistakes anymore, and if a problem happens, you know how to undo it. Like any tool, you get used to it and, with time, learn its sharp edges. Some of the frustration encountered by the novice, then, is the natural effect of learning unfamiliar concepts. And although I emphasize with the feeling, there's often an unfounded expectation that a new technology will be easy.
+
+In reality, learning with understanding is rarely effortless. After all, learning new concepts requires thwarting your expectations and breaking down preconceived notions, much like building muscle requires breaking down and rebuilding existing muscle tissue. We instinctively know this, and yet we often get frustrated while learning anyway. Why does everything have to be so complicated? Just let commit my work. (Of course, weeks later you will realize, in a flash of sudden understanding, why the staging area works the way it does and, perhaps, does to _of necessity_)
+
+When building tools developers often face a fundamental tradeoff between intuitiveness for a novice and long-term power and robustness. On this continuum, Git repesents a point closer to long-term power, even if over the years it has become easier to use. But in general Git favors sounds concepts over facility, and it does to because it optimizes for a long-term use. Like any tool that is used daily by professionals, the time that you're a novice — the first week or so — is dwarfed by the years and years of use you'll use. It would be a mistake to optimize for the first week, which only represents a small fraction of your time with Git over its entire lifespan.
+
+---
+
+You get over this speed bump by reading the documentation, asking your colleagues and, above all, using Git in anger for a while, learning how to get yourself out of a bind if you do get stuck. But over and above this, there's excellent advise out there: go read this blog post or that explaining the Git internals. Over the years, a number of resources have appeared that walk you through how you would go about implementing Git from scratch. More than anything else, these guides help you become proficient in using the tool properly.
+
+In fact, a good command of Git requires a basic understanding of the data structures used to represent a repository. It may be argued that this represents some sort of deficiency. If the developers of Git made it impossible to use the tool safely without knowing its internals, have they failed at their job?
+
+I think the unwillingness to engage with details is the deeper reason why people sometimes have trouble learning Git properly. It's also easy to see where this attitude is coming from. As computer users, we are used to taking the abstractions we're exposed to at face value. When we learn a new tool, we'll treat it as a blackbox — as a system defined purely by its inputs and outputs. In the case of git, we learn the different operations — checkout, add, commit and so forth — while ignoring what's happening under the hood when those commands are executed.
+
+But with Git, peeling off the outer layer of abstraction and understanding the underlying data structures helps makes sense of why Git works the way it does, and why, given the choice of data structures, it has to work the way it does. Consider two examples:
+
+- _Lightweight branches_: In Git a branch is simply a pointer to a commit. If you know this, you instantly now that switching creating a new branch with the state of the repository is near-instantaneous. After all, all that needs to happen is to write a new SHA hash to a file in the `.git` directory. No data is copied, and no network packets are sent over the wire.
+
+- _Commits as snapshots_: When you use `git show` to show a commit, the output is a patch similar to the output of the hoary `diff -u` tool. So it's easy to conclude that a commit is written to disk as a patch. But contrary to this natural expectation, what Git actually does when creating a new commit is to store a complete snapshot of your repository in `.git`. Code diffs are never stored on disk. What you see in `git show` is generated on the fly by comparing the snapshot pointed to by the commit to its parent. 
+
+When I learned the latter fact I was confused, because I had naively assumed that storing things in this way would be hopelessly inefficient, both in terms of disk space requirements and performance. But I turned out to be wrong on both counts. The diff algorithm is fast enough to make on-the-fly calculations feel instantaneous. And Git objects are stored efficiently through the use of persistent data structures and compression, making storage requirements essentially a non-issue.
+
+Lightweight branches and commits as snapshots are not immediately intuitive. But they turn out to be a beautiful design, which simplifies the user's reasoning about Git's behavior. But to leverage these elements of the design as a user, you need to know about them — you need to gently lift the lid on the abstraction. The reward is a deeper understanding.
+
+---
+
