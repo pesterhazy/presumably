@@ -1,5 +1,5 @@
 ---
-title: "Gripes, Git and Greybox Thinking"
+title: "Git Gripes and Greybox Thinking"
 date-published: 2020-12-31
 ---
 
@@ -55,6 +55,6 @@ Databases before SQL were deficient because they lacked the power of abstraction
 
 The same is true for Git. The best way to understand Git is to combine a grasp of its external interface (the procellain) with some level of understanding of the underlying data structures. Fortunately for those of us who want to learn about Git's plumbing, wears its heart on its sleeve. Inspecting its data structures is as easy as looking at the files contained in the `.git` subdirectory. Some data is stored as plain text. For example, `cat .git/HEAD` reveals what revision is currently checked out (and if it's in the "detached head" state). Objects, which are stored in a compact format, are easily uncovered using `git cat-file`.
 
-The graybox approach to learning Git (and many other complex technologies worth learning) is successful, both in making you more proficient in the tool you're using and in becoming a better programemr. In the word's of Git's creator:
+The graybox approach to learning Git (and many other complex technologies worth learning) is successful, both in making you more proficient in the tool you're using and in becoming a better hacker. In the words of Git's creator:
 
 > I’m a huge proponent of designing your code around the data, rather than the other way around, and I think it’s one of the reasons git has been fairly successful… I will, in fact, claim that the difference between a bad programmer and a good one is whether he considers his code or his data structures more important. Bad programmers worry about the code. Good programmers worry about data structures and their relationships (Linus Torvalds, 2006)
