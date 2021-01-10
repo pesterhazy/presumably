@@ -3,9 +3,9 @@ title: "Git Gripes and Greybox Thinking"
 date-published: 2020-12-31
 ---
 
-Much ink has been spilled over how difficult it is to use Git. And it's undeniable that for a beginner, learning the safe and confident use Git safely can feel like a daunting task. New users often report messing up their state, requiring the help of an experienced developer to get themselves untangled.
+Even though Git has been ubiqutous for a decade, blog posts are frequently published complaining that it is error-prone and has terrible UI. New users often report messing up their local state, requiring the help of an experienced developer to get themselves untangled.
 
-So is it time to look to throw out Git? Well, not so fast. The gripes are understandable but mostly based on two incorrect assumptions. In this post, I will claim that a lot of problems typically encountered by a Git novice can be traced back to premature optimization and an excessively blackbox approach to learning. I'll argue that any complicated technology or technique - any tech that's worth learning - requires taking what I will call a greybox stance. Only by peeling back the outer layer of abstraction are you going to understand the tool to a degreee that's sufficient to be able to use it safely and with confidence.
+Do these gripes have merit? Although beginners often have a hard time learning the tool, the claim that this indicates a deficiency in Git is based on an incorrect assumption — the idea that a tool like Git should be treated as a black box. Instead, I will argue, safe and confident use of Git, as well as other technologies, requires adopting what I will call a greybox stance.
 
 ---
 
