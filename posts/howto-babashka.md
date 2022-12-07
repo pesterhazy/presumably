@@ -93,8 +93,8 @@ Assuming your project has a `scripts/` folder at the top level, you can use this
 ;; Print root folder
 (println (str project-root))
 
-;; Find filename in root folder
-(str (babashka.fs/file project-root "README.txt"))
+;; Print filename in root folder
+(println (str (babashka.fs/file project-root "README.txt")))
 ```
 
 Bash equivalent:
