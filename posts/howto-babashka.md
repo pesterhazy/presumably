@@ -43,7 +43,9 @@ if [[ -f /etc/hosts ]]; then echo File exists; fi
 
 ## Duplicate an array
 
-Well, you don't. First, babashka typically uses vectors, not arrays. But more importantly, in babashka you don't need to make a copy of a thing to preserve the original, because vectors are immutable:
+As a Bash programmer you mask wonder how to duplicate an array in babashka. Well, you don't.
+
+First, babashka typically uses vectors, not arrays. But more importantly, in babashka you don't need to make a copy of a thing to preserve the original, because vectors are immutable:
 
 ```
 ;; straightforward
