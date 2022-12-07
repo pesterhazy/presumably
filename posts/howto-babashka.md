@@ -15,7 +15,22 @@ Bash equivalent:
 whoami
 ```
 
-## Run a shell command, capturing its output
+## Set environment variable for shell command
+
+You can pass on extra environment variables to child processes:
+
+```
+(require '[babashka.process :refer [shell]])
+(shell {:extra-env {"FOO" "bar"}} "printenv" "FOO")
+```
+
+Bash equivalent:
+
+```
+FOO=bar printenv FOO
+```
+
+## Capture output of a shell command
 
 ```
 (require '[babashka.process :refer [sh]])
@@ -61,3 +76,30 @@ my_args2="${my_args[@]+"${my_args[@]}"}"
 
 To the best of my knowledge, this is the only safe incantation to duplicate an array in Bash 3 (which is what ships with macOS).
 
+## Find project folder
+
+A typical pattern is to locate the folder of the code project containing a script, regardless of the current working directory.
+
+Assuming your project has a `scripts/` folder at the top level, you can use this:
+
+```
+;; Note that the `*file* form has to be evaluated at the top level of your file,
+;; i.e. not in the body a function.
+
+(def project-root (-> *file* babashka.fs/parent babashka.fs/parent))
+
+;; Print root folder
+(println (str project-root))
+
+;; Find filename in root folder
+(str (babashka.fs/file project-root "README.txt"))
+```
+
+Bash equivalent:
+
+```
+project_root="$(dirname "${BASH_SOURCE[0]}")/.."
+
+printf "%s\n" "$project_root"
+printf "%s\n" "${project_root}/README.txt"
+```
