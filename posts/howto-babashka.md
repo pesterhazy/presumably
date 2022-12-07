@@ -80,7 +80,7 @@ To the best of my knowledge, this is the only safe incantation to duplicate an a
 
 A typical pattern is to locate the folder of the code project containing a script, regardless of the current working directory.
 
-Assuming your project has a `scripts/` folder at the top level, you can use this:
+Assuming your script is located in a top-level folder called `scripts/`, you can use this:
 
 ```
 ;; Note that the `*file* form has to be evaluated at the top level of your file,
