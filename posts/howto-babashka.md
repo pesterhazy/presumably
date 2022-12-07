@@ -85,6 +85,8 @@ Assuming your project has a `scripts/` folder at the top level, you can use this
 ```
 ;; Note that the `*file* form has to be evaluated at the top level of your file,
 ;; i.e. not in the body a function.
+;;
+;; Here fs/parent works similarly to the "dirname" Unix command.
 
 (def project-root (-> *file* babashka.fs/parent babashka.fs/parent))
 
