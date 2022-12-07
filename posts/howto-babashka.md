@@ -40,3 +40,22 @@ Bash equivalent:
 ```
 if [[ -f /etc/hosts ]]; then echo File exists; fi
 ```
+
+## Duplicate an array
+
+Well, you don't. First, babashka typically uses vectors, not arrays. But more importantly, in babashka you don't need to make a copy of a thing to preserve the original, because vectors are immutable:
+
+```
+;; straightforward
+(def my-args *command-line-args*)
+```
+
+Simple _and_ easy! In Bash however... oh boy:
+
+```
+my_args="${@+"${@}"}"
+my_args2="${my_args[@]+"${my_args[@]}"}" 
+```
+
+To the best of my knowledge, this is the only safe incantation to duplicate an array in Bash 3 (which is what ships with macOS).
+
