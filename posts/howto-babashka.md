@@ -55,7 +55,7 @@ myname=$(whoami)
   @p)
 ```
 
-Because of its heritage, Babashka has strong threading primitives. Clojure makes working with concurrency easy.
+Because of its Java heritage, Babashka has strong threading primitives. Clojure makes working with concurrency safe and easy.
 
 Bash equivalent:
 
