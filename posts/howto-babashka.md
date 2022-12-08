@@ -66,6 +66,53 @@ echo Waiting for result...
 wait "$pid"
 ```
 
+## Read command output line by line
+
+```
+(require '[babashka.process :as p :refer [process destroy-tree]]
+         '[clojure.java.io :as io])
+
+(let [stream (process
+              {:err :inherit
+               :shutdown destroy-tree}
+              ["cat" "/etc/hosts"])]
+
+  (with-open [rdr (io/reader (:out stream))]
+    (binding [*in* rdr]
+      (loop []
+        (when-let [line (read-line)]
+          (println (str "#" line))
+          (recur)))))
+
+  ;; kill the streaming bb process:
+  (p/destroy-tree stream)
+  nil)
+```
+
+This reads the command's stdout in a streaming fashion, making the approach suitable for large files. However, if you know you're not going to deal with large files, it's easier to read the file into memory:
+
+```
+(require '[babashka.process :as p :refer [shell destroy-tree]]
+         '[clojure.java.io :as io])
+
+(let [p (shell {:err :inherit
+                :out :string
+                :shutdown destroy-tree}
+               "cat" "/etc/hosts")]
+  (doseq [line (clojure.string/split-lines (:out p))]
+    (println (str "#" line)))
+
+  nil)
+```
+
+Note that `cat` is used only as an example here. Use `slurp` to read a file efficiently.
+
+Bash equivalent:
+
+```
+cat /etc/hosts | sed 's/^/#/'
+```
+
 ## Check if a file exists
 
 ```
