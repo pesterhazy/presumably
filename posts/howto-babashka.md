@@ -2,7 +2,7 @@
 
 ## Run a shell command
 
-```
+``` clojure
 (require '[babashka.process :refer [shell]])
 (shell "whoami")
 ```
@@ -19,7 +19,7 @@ whoami
 
 You can pass on extra environment variables to child processes:
 
-```
+``` clojure
 (require '[babashka.process :refer [shell]])
 (shell {:extra-env {"FOO" "bar"}} "printenv" "FOO")
 ```
@@ -32,7 +32,7 @@ FOO=bar printenv FOO
 
 ## Capture output of a shell command
 
-```
+``` clojure
 (require '[babashka.process :refer [sh]])
 (def myname (:out (sh ["whoami"])))
 ```
@@ -45,7 +45,7 @@ myname=$(whoami)
 
 ## Spawn a shell command in the background
 
-```
+``` clojure
 (require '[babashka.process :refer [shell process]])
 
 (let [p (process ["sh" "-c" "for i in `seq 3`; do date; sleep 1; done"]
@@ -68,7 +68,7 @@ wait "$pid"
 
 ## Read command output line by line
 
-```
+``` clojure
 (require '[babashka.process :as p :refer [process destroy-tree]]
          '[clojure.java.io :as io])
 
@@ -91,7 +91,7 @@ wait "$pid"
 
 This reads the command's stdout in a streaming fashion, making the approach suitable for large files. However, if you know you're not going to deal with large files, it's easier to read the file into memory:
 
-```
+``` clojure
 (require '[babashka.process :as p :refer [shell destroy-tree]]
          '[clojure.java.io :as io])
 
@@ -112,7 +112,7 @@ cat /etc/hosts | sed 's/^/#/'
 
 ## Check if a file exists
 
-```
+``` clojure
 (when (babashka.fs/exists? "/etc/hosts")
    (println "File exists"))
 ```
@@ -129,7 +129,7 @@ As a Bash programmer you may wonder how to duplicate an array in babashka. Well,
 
 First, babashka typically uses vectors, not arrays. But more importantly, in babashka you don't need to make a copy of a thing to preserve the original, because vectors are immutable:
 
-```
+``` clojure
 ;; straightforward
 (def my-args *command-line-args*)
 ```
@@ -149,7 +149,7 @@ A typical pattern is to locate the folder of the code project containing a scrip
 
 Assuming your script is located in a top-level folder called `scripts/`, you can use this:
 
-```
+``` clojure
 ;; Note that the `*file* form has to be evaluated at the top level of your file,
 ;; i.e. not in the body a function.
 ;;
