@@ -95,10 +95,7 @@ This reads the command's stdout in a streaming fashion, making the approach suit
 (require '[babashka.process :as p :refer [shell destroy-tree]]
          '[clojure.java.io :as io])
 
-(let [p (shell {:err :inherit
-                :out :string
-                :shutdown destroy-tree}
-               "cat" "/etc/hosts")]
+(let [p (shell {:out :string} "cat" "/etc/hosts")]
   (doseq [line (clojure.string/split-lines (:out p))]
     (println (str "#" line)))
 
