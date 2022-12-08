@@ -43,6 +43,29 @@ Bash equivalent:
 myname=$(whoami)
 ```
 
+## Spawn a shell command in the background
+
+```
+(require '[babashka.process :refer [shell process]])
+
+(let [p (process ["sh" "-c" "for i in `seq 3`; do date; sleep 1; done"]
+                 {:out :inherit, :err :inherit})]
+  (println "Waiting for result...")
+  ;; dereference to wait for result
+  @p)
+```
+
+Because of its heritage, Babashka has strong threading primitives. Clojure makes working with concurrency easy.
+
+Bash equivalent:
+
+```
+sh -c 'for i in `seq 3`; do date; sleep 1; done' &
+pid=$!
+echo Waiting for result...
+wait "$pid"
+```
+
 ## Check if a file exists
 
 ```
