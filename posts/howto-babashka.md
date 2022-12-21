@@ -80,6 +80,8 @@ myname=$(whoami)
   nil)
 ```
 
+Note: this example requires babashka v1.0.168 or higher.
+
 Because of its Java heritage, Babashka has strong threading primitives. Clojure makes working with concurrency safe and easy.
 
 Bash equivalent:
@@ -103,6 +105,8 @@ wait "$pid"
       (println (str "#" line))))
   nil)
 ```
+
+Note: this example requires babashka v1.0.168 or higher.
 
 This reads the command's stdout in a streaming fashion, making the approach suitable for large files. However, if you know you're not going to deal with large files, it's easier to read the file into memory:
 
