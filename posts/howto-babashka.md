@@ -1,4 +1,26 @@
-# How to do things with babashka
+---
+title: "How to Do Things With Babashka"
+uuid: d5724368-5890-4d73-b506-1c324be7df20
+author: Paulus
+date-published: 2022-12-21
+---
+
+It's time to move on from Bash.
+
+Even though it's a fine interactive shell, Bash is inadequate for scripting. By default, Bash scripts swallow errors (and far from fixing this, the `set -e` option comes with its own set of footguns). Bash has arrays and other useful data structures, but they're [notoriously buggy](https://stackoverflow.com/a/61551944/239678) in Bash 3, which is what's preinstalled on macOS. And, finally, it lacks adequate means of abstraction to safely express complex logic - and by complex logic, I mean anything requiring a loop or function call.
+
+Built on Clojure, Babashka is superior in all these respects. It has great support for safe concurrency and comes with batteries included, with support for [finding files](https://github.com/babashka/fs/blob/master/API.md#babashka.fs/glob), [starting subprocesses](https://github.com/babashka/process/blob/master/API.md#babashka.process/shell) and [reading and writing JSON](https://github.com/dakrone/cheshire). And the built-in Clojure standard library for transforming data structures is second to none.
+
+What's the cost? Thanks to the magic of GraalVM, the startup penalty is barely noticeable despite the fact that Babashka is built on top of Java:
+
+```
+% time bb -e '(println (* 3 4))'
+0.020 total  # that's 20 milliseconds
+% bash -c "echo $(( 3 * 4 ))"
+0.006 total
+```
+
+This document demonstrates how to approach common Bash scripting tasks in Babashka. With this Rosetta stone, you can translate Bash scripts to Babashka - and get results that are vastly more reliable, maintainable and fun to work with.
 
 ## Run a shell command
 
@@ -173,7 +195,7 @@ printf "%s\n" "$project_root"
 printf "%s\n" "${project_root}/README.txt"
 ```
 
-## Copying, moving, deleting, reading and writing files
+## Copy, move, delete, read and write files
 
 ``` clojure
 (require '[babashka.fs :as fs])
@@ -199,7 +221,7 @@ mv world2 world
 cat world
 ```
 
-## Working with dates and times
+## Work with dates and times
 
 The modern java.time API is available in Babashka. For the common "YYYY-MM-DD" pattern you can use a built-in formatter:
 

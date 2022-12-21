@@ -1,6 +1,5 @@
 ---
 title: "Git Gripes and Greybox Thinking"
-date-published: 2020-12-31
 ---
 
 Even though Git has been ubiqutous for a decade, blog posts are frequently published complaining that it is error-prone and has terrible UI. New users often report messing up their local state, requiring the help of an experienced developer to get themselves untangled.
