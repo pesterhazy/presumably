@@ -70,13 +70,14 @@ myname=$(whoami)
 ## Spawn background command
 
 ``` clojure
-(require '[babashka.process :refer [shell process]])
+(require '[babashka.process :refer [process]])
 
-(let [p (process ["sh" "-c" "for i in `seq 3`; do date; sleep 1; done"]
-                 {:out :inherit, :err :inherit})]
+(let [p (process {:out :inherit, :err :inherit}
+                 "sh" "-c" "for i in `seq 3`; do date; sleep 1; done")]
   (println "Waiting for result...")
   ;; dereference to wait for result
-  @p)
+  @p
+  nil)
 ```
 
 Because of its Java heritage, Babashka has strong threading primitives. Clojure makes working with concurrency safe and easy.
