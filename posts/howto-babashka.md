@@ -93,13 +93,10 @@ wait "$pid"
 ## Read command output line by line
 
 ``` clojure
-(require '[babashka.process :as p :refer [process]]
+(require '[babashka.process :refer [process]]
          '[clojure.java.io :as io])
 
-(let [stream (process
-              {:err :inherit}
-              ["cat" "/etc/hosts"])]
-
+(let [stream (process {:err :inherit} "cat" "/etc/hosts")]
   (with-open [rdr (io/reader (:out stream))]
     (doseq [line (line-seq rdr)]
       (println (str "#" line))))
