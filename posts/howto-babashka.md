@@ -172,3 +172,29 @@ project_root="$(dirname "${BASH_SOURCE[0]}")/.."
 printf "%s\n" "$project_root"
 printf "%s\n" "${project_root}/README.txt"
 ```
+
+## Copying, moving, deleting, reading and writing files
+
+```
+(require '[babashka.fs :as fs])
+
+(spit "world" "hello\n")
+(fs/copy "world" "world2")
+(spit "world2" "world\n" :append true)
+(fs/delete "world")
+(fs/move "world2" "world")
+(print (slurp "world"))
+```
+
+Common operations like `spit` or `slurp` and functions in [babashka.fs](https://github.com/babashka/fs/blob/master/API.md) accept a string filename or, alternatively, an instance of java.io.File as returned by [babashka.fs/file](https://github.com/babashka/fs/blob/master/API.md#file-page_facing_up). So `(spit "out" "xxx")` and `(spit (babashka.fs/file "out") "xxx")` are interchangeable.
+
+Bash equivalent:
+
+```
+echo hello > world
+cp world world2
+echo "world" >> world2
+rm world
+mv world2 world
+cat world
+```
