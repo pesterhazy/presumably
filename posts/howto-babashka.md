@@ -11,7 +11,7 @@ Command output is visible to the user (stdout and stderr are inherited from the 
 
 Bash equivalent:
 
-```
+``` shell
 whoami
 ```
 
@@ -26,7 +26,7 @@ You can pass on extra environment variables to child processes:
 
 Bash equivalent:
 
-```
+``` shell
 FOO=bar printenv FOO
 ```
 
@@ -39,7 +39,7 @@ FOO=bar printenv FOO
 
 Bash equivalent:
 
-```
+``` shell
 myname=$(whoami)
 ```
 
@@ -59,7 +59,7 @@ Because of its Java heritage, Babashka has strong threading primitives. Clojure 
 
 Bash equivalent:
 
-```
+``` shell
 sh -c 'for i in `seq 3`; do date; sleep 1; done' &
 pid=$!
 echo Waiting for result...
@@ -106,7 +106,7 @@ Note that `cat` is used only as an example here. Use `slurp` to read a file effi
 
 Bash equivalent:
 
-```
+``` shell
 cat /etc/hosts | sed 's/^/#/'
 ```
 
@@ -119,7 +119,7 @@ cat /etc/hosts | sed 's/^/#/'
 
 Bash equivalent:
 
-```
+``` shell
 if [[ -f /etc/hosts ]]; then echo File exists; fi
 ```
 
@@ -136,7 +136,7 @@ First, babashka typically uses vectors, not arrays. But more importantly, in bab
 
 Simple _and_ easy! In Bash however... oh boy:
 
-```
+``` shell
 my_args="${@+"${@}"}"
 my_args2="${my_args[@]+"${my_args[@]}"}" 
 ```
@@ -166,7 +166,7 @@ Assuming your script is located in a top-level folder called `scripts/`, you can
 
 Bash equivalent:
 
-```
+``` shell
 project_root="$(dirname "${BASH_SOURCE[0]}")/.."
 
 printf "%s\n" "$project_root"
@@ -175,7 +175,7 @@ printf "%s\n" "${project_root}/README.txt"
 
 ## Copying, moving, deleting, reading and writing files
 
-```
+``` clojure
 (require '[babashka.fs :as fs])
 
 (spit "world" "hello\n")
@@ -190,7 +190,7 @@ Common operations like `spit` or `slurp` and functions in [babashka.fs](https://
 
 Bash equivalent:
 
-```
+``` shell
 echo hello > world
 cp world world2
 echo "world" >> world2
@@ -203,7 +203,7 @@ cat world
 
 The modern java.time API is available in Babashka. For the common "YYYY-MM-DD" pattern you can use a built-in formatter:
 
-```
+``` clojure
 (defn iso-date
   []
   (-> (java.time.LocalDateTime/now)
@@ -214,13 +214,13 @@ The modern java.time API is available in Babashka. For the common "YYYY-MM-DD" p
 
 Bash equivalent:
 
-```
+``` shell
 fname="backup-$(date '+%Y-%m-%d').zip"
 ```
 
 If you need more control, you can specify your own [DateTimeFormatter](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/time/format/DateTimeFormatter.html) pattern:
 
-```
+``` clojure
 (defn iso-date-hm
   []
   (-> (java.time.LocalDateTime/now)
@@ -231,6 +231,6 @@ If you need more control, you can specify your own [DateTimeFormatter](https://d
 
 Bash equivalent:
 
-```
+``` shell
 fname="backup-$(date '+%Y-%m-%d---%H-%M').zip"
 ```
