@@ -7,16 +7,16 @@ date-published: 2022-12-21
 
 It's time to move on from Bash.
 
-Even though it's a fine interactive shell, Bash is inadequate for scripting. By default, Bash scripts swallow errors (and far from fixing this mistake, the `set -e` option comes with its own set of [footguns](https://github.com/pesterhazy/blissful-bash#arent-the-strict-mode-switches-broken)). Bash has arrays and other useful data structures, but they're [notoriously buggy](https://stackoverflow.com/a/61551944/239678) in Bash 3, which is what's preinstalled on macOS. And, finally, it lacks adequate means of abstraction to safely express complex logic - and by complex logic, I mean anything requiring a loop or function call.
+Bash may be a fine interactive shell, but it's inadequate for scripting. By default, Bash scripts swallow errors (and far from fixing this mistake, the `set -e` option comes with its own set of [footguns](https://github.com/pesterhazy/blissful-bash#arent-the-strict-mode-switches-broken)). Bash has arrays and other useful data structures, but they're [notoriously buggy](https://stackoverflow.com/a/61551944/239678) in Bash 3, which is what's preinstalled on macOS. And, finally, it lacks the means of abstraction required to safely express complex logic - and by complex logic, I mean anything requiring a loop or function call.
 
-Built on Clojure, Babashka is superior in all these respects. It has great support for safe concurrency and comes with batteries included, with support for [finding files](https://github.com/babashka/fs/blob/master/API.md#babashka.fs/glob), [starting subprocesses](https://github.com/babashka/process/blob/master/API.md#babashka.process/shell) and [reading and writing JSON](https://github.com/dakrone/cheshire). And the built-in Clojure standard library for transforming data structures is second to none.
+[Babashka](https://babashka.org/), a Clojure dialect, is superior in all these respects. It has safe concurrency primitives and comes with support for [finding files](https://github.com/babashka/fs/blob/master/API.md#babashka.fs/glob), [starting subprocesses](https://github.com/babashka/process/blob/master/API.md#babashka.process/shell) and [reading and writing JSON](https://github.com/dakrone/cheshire). And the built-in Clojure standard library for transforming data structures is second to none.
 
-What's the cost? Thanks to the magic of GraalVM, the startup penalty is barely noticeable despite the fact that Babashka is built on top of Java:
+What's the cost? Thanks to the magic of GraalVM, the startup penalty is barely noticeable, despite the fact that Babashka is built on top of Java:
 
 ```
 % time bb -e '(println (* 3 4))'
 0.020 total  # that's 20 milliseconds
-% bash -c "echo $(( 3 * 4 ))"
+% time bash -c "echo $(( 3 * 4 ))"
 0.006 total
 ```
 
