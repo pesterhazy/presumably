@@ -7,7 +7,7 @@ date-published: 2022-12-21
 
 It's time to move on from Bash.
 
-Even though it's a fine interactive shell, Bash is inadequate for scripting. By default, Bash scripts swallow errors (and far from fixing this, the `set -e` option comes with its own set of footguns). Bash has arrays and other useful data structures, but they're [notoriously buggy](https://stackoverflow.com/a/61551944/239678) in Bash 3, which is what's preinstalled on macOS. And, finally, it lacks adequate means of abstraction to safely express complex logic - and by complex logic, I mean anything requiring a loop or function call.
+Even though it's a fine interactive shell, Bash is inadequate for scripting. By default, Bash scripts swallow errors (and far from fixing this mistake, the `set -e` option comes with its own set of [footguns](https://github.com/pesterhazy/blissful-bash#arent-the-strict-mode-switches-broken)). Bash has arrays and other useful data structures, but they're [notoriously buggy](https://stackoverflow.com/a/61551944/239678) in Bash 3, which is what's preinstalled on macOS. And, finally, it lacks adequate means of abstraction to safely express complex logic - and by complex logic, I mean anything requiring a loop or function call.
 
 Built on Clojure, Babashka is superior in all these respects. It has great support for safe concurrency and comes with batteries included, with support for [finding files](https://github.com/babashka/fs/blob/master/API.md#babashka.fs/glob), [starting subprocesses](https://github.com/babashka/process/blob/master/API.md#babashka.process/shell) and [reading and writing JSON](https://github.com/dakrone/cheshire). And the built-in Clojure standard library for transforming data structures is second to none.
 
