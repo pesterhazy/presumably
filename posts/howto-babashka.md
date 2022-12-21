@@ -29,7 +29,7 @@ This document demonstrates how to approach common Bash scripting tasks in Babash
 (shell "whoami")
 ```
 
-Command output is visible to the user (stdout and stderr are inherited from the babashka process).
+When using [babashka.process/shell](https://github.com/babashka/process/blob/master/API.md#babashka.process/shell), the output of the command executed is visible to the user, as the subprocess inherits stdout and stderr from its parent.
 
 Bash equivalent:
 
@@ -39,7 +39,7 @@ whoami
 
 ## Set environment variable for shell command
 
-You can pass on extra environment variables to child processes:
+Normally, a child process gets the same environment (PATH, HOME, etc) as its parent, but you can choose to pass in additional environment variables:
 
 ``` clojure
 (require '[babashka.process :refer [shell]])
@@ -53,6 +53,8 @@ FOO=bar printenv FOO
 ```
 
 ## Capture output of a shell command
+
+Sometimes, instead of showing a command output to the user you want to store it in memory as a string:
 
 ``` clojure
 (require '[babashka.process :refer [sh]])
