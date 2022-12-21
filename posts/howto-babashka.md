@@ -52,7 +52,7 @@ Bash equivalent:
 FOO=bar printenv FOO
 ```
 
-## Capture output of a shell command
+## Capture command output
 
 Sometimes, instead of showing a command output to the user you want to store it in memory as a string:
 
@@ -67,7 +67,7 @@ Bash equivalent:
 myname=$(whoami)
 ```
 
-## Spawn a shell command in the background
+## Spawn background command
 
 ``` clojure
 (require '[babashka.process :refer [shell process]])
