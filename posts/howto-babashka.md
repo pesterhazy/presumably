@@ -93,20 +93,16 @@ wait "$pid"
 ## Read command output line by line
 
 ``` clojure
-(require '[babashka.process :as p :refer [process destroy-tree]]
+(require '[babashka.process :as p :refer [process]]
          '[clojure.java.io :as io])
 
 (let [stream (process
-              {:err :inherit
-               :shutdown destroy-tree}
+              {:err :inherit}
               ["cat" "/etc/hosts"])]
 
   (with-open [rdr (io/reader (:out stream))]
     (doseq [line (line-seq rdr)]
       (println (str "#" line))))
-
-  ;; kill the streaming bb process:
-  (p/destroy-tree stream)
   nil)
 ```
 
