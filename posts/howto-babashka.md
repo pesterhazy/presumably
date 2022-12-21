@@ -198,3 +198,39 @@ rm world
 mv world2 world
 cat world
 ```
+
+## Working with dates and times
+
+The modern java.time API is available in Babashka. For the common "YYYY-MM-DD" pattern you can use a built-in formatter:
+
+```
+(defn iso-date
+  []
+  (-> (java.time.LocalDateTime/now)
+      (.format (java.time.format.DateTimeFormatter/ISO_LOCAL_DATE))))
+
+(str "backup-" (iso-date) ".zip")
+```
+
+Bash equivalent:
+
+```
+fname="backup-$(date '+%Y-%m-%d').zip"
+```
+
+If you need more control, you can specify your own [DateTimeFormatter](https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/time/format/DateTimeFormatter.html) pattern:
+
+```
+(defn iso-date-hm
+  []
+  (-> (java.time.LocalDateTime/now)
+      (.format (java.time.format.DateTimeFormatter/ofPattern "yyyy-MM-dd---kk-mm"))))
+
+(str "backup-" (iso-date-hm) ".zip")
+```
+
+Bash equivalent:
+
+```
+fname="backup-$(date '+%Y-%m-%d---%H-%M').zip"
+```
