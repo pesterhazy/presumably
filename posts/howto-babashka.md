@@ -102,11 +102,8 @@ wait "$pid"
               ["cat" "/etc/hosts"])]
 
   (with-open [rdr (io/reader (:out stream))]
-    (binding [*in* rdr]
-      (loop []
-        (when-let [line (read-line)]
-          (println (str "#" line))
-          (recur)))))
+    (doseq [line (line-seq rdr)]
+      (println (str "#" line))))
 
   ;; kill the streaming bb process:
   (p/destroy-tree stream)
