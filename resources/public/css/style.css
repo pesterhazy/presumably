@@ -81,6 +81,9 @@ hr.rule {
 }
 
 /* show the anchor links in headings if one hovers over the heading. */
+a.anchor {
+    margin: 0 !important;
+}
 .anchor:before {
   /* link symbol + variation selector-15 (UFE0E); the latter forces to use the
    current font, not some special emoji. */
