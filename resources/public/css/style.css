@@ -36,6 +36,7 @@ h3 {
 .content {
     max-width: 600px;
     line-height: 1.6;
+    position: relative;
 }
 
 a {
@@ -78,3 +79,26 @@ hr.rule {
     height: 1px;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
+
+/* show the anchor links in headings if one hovers over the heading. */
+.anchor:before {
+  /* link symbol + variation selector-15 (UFE0E); the latter forces to use the
+   current font, not some special emoji. */
+  content: '🔗\FE0E';
+  display: inline-block;
+  font-size: 14pt;
+  left: -1.75em;
+  line-height: 1.66;
+  opacity: 0.2;
+  padding-right: 0.5em;
+  position: absolute;
+}
+.anchor:hover {
+  text-decoration: none;
+}
+h1:hover > .anchor::before,
+h2:hover > .anchor::before,
+h3:hover > .anchor::before {
+  opacity: 1;
+}
+/* end: heading anchor links */

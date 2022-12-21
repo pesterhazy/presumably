@@ -4,10 +4,12 @@ set -euo pipefail && cd "$(dirname "${BASH_SOURCE[0]}")/.."
 if [[ "${1-}" == "--really-act" ]]; then
     aws s3 sync \
         --acl public-read \
+        --cache-control 'max-age=120' \
         out/ s3://presumably-de-sitebucket-i2nzci1gpkw3/
 else
     aws s3 sync \
         --dryrun \
         --acl public-read \
+        --cache-control 'max-age=120' \
         out/ s3://presumably-de-sitebucket-i2nzci1gpkw3/
 fi

@@ -56,6 +56,7 @@ async function staticFiles(publicDir: string, outDir: string) {
 async function transform(inFile: string, meta: Record<string, string>) {
   let result = await execFile("pandoc", [
     "--to=html5",
+    "--lua-filter=tools/anchor-links.lua",
     ...Object.entries(meta).flatMap(([k, v]: [string, string]) => [
       "--metadata",
       k + "=" + v
