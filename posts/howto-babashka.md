@@ -58,7 +58,7 @@ Sometimes, instead of showing a command output to the user you want to store it 
 
 ``` clojure
 (require '[babashka.process :refer [sh]])
-(def myname (:out (sh ["whoami"])))
+(def myname (:out (sh "whoami")))
 ```
 
 Bash equivalent:
@@ -111,7 +111,7 @@ Note: this example requires babashka v1.0.168 or higher.
 This reads the command's stdout in a streaming fashion, making the approach suitable for large files. However, if you know you're not going to deal with large files, it's easier to read the file into memory:
 
 ``` clojure
-(require '[babashka.process :as p :refer [shell]]
+(require '[babashka.process :refer [shell]]
          '[clojure.java.io :as io])
 
 (let [p (shell {:out :string} "cat" "/etc/hosts")]
