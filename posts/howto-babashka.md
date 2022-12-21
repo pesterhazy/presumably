@@ -209,7 +209,7 @@ The modern java.time API is available in Babashka. For the common "YYYY-MM-DD" p
   (-> (java.time.LocalDateTime/now)
       (.format (java.time.format.DateTimeFormatter/ISO_LOCAL_DATE))))
 
-(str "backup-" (iso-date) ".zip")
+(def fname (str "backup-" (iso-date) ".zip"))
 ```
 
 Bash equivalent:
@@ -226,7 +226,7 @@ If you need more control, you can specify your own [DateTimeFormatter](https://d
   (-> (java.time.LocalDateTime/now)
       (.format (java.time.format.DateTimeFormatter/ofPattern "yyyy-MM-dd---kk-mm"))))
 
-(str "backup-" (iso-date-hm) ".zip")
+(def fname (str "backup-" (iso-date-hm) ".zip"))
 ```
 
 Bash equivalent:
