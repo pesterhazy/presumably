@@ -234,3 +234,26 @@ Bash equivalent:
 ``` shell
 fname="backup-$(date '+%Y-%m-%d---%H-%M').zip"
 ```
+
+## Read standard input (stdin)
+
+Like Clojure, Babashka makes standard input available via the dynamic var [`*in*`](https://clojuredocs.org/clojure.core/*in*), which is a java.io.Reader. Often you just want to read the whole input into memory:
+
+``` clojure
+(println (clojure.string/upper-case (slurp *in*)))
+```
+
+Alternatively, you can process the input line by line:
+
+``` clojure
+;; For line-seq, we need a java.io.BufferedReader
+
+(doseq [line (line-seq (clojure.java.io/reader *in*))]
+  (println (clojure.string/upper-case line)))
+```
+
+Bash equivalent (note that this is not unicode-aware):
+
+``` shell
+tr a-z A-Z
+```
