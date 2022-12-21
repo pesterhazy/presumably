@@ -113,7 +113,7 @@ wait "$pid"
 This reads the command's stdout in a streaming fashion, making the approach suitable for large files. However, if you know you're not going to deal with large files, it's easier to read the file into memory:
 
 ``` clojure
-(require '[babashka.process :as p :refer [shell destroy-tree]]
+(require '[babashka.process :as p :refer [shell]]
          '[clojure.java.io :as io])
 
 (let [p (shell {:out :string} "cat" "/etc/hosts")]
